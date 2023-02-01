@@ -1,23 +1,24 @@
-# Advanced Folder Code Organization
+# Advanced 文件夹代码组织
 
-Folders are listed in alphabetical order, not in the order they are taught in the course.
+文件夹按字母顺序列出，而非课程中教授的顺序。
 
-## Button Interrupt
+## 按键中断
 
-`button-interrupt/exercise/src/main.rs` contains the project code skeleton
-`button-interrupt/solution/src/main.rs` contains the solution for the first step of the exercise.
-`button-interrupt/solution/src/main_led.rs` contains the solution for the second step of the exercise. 
-## I2C Driver exercise (WIP)
+`button-interrupt/exercise/src/main.rs` 包含项目代码框架。
+`button-interrupt/solution/src/main.rs` 包含练习第一步的解答。
+`button-interrupt/solution/src/main_led.rs` 包含练习第二步的解答。
 
-`i2c-driver/exercise/src/icm42670p.rs` will be gap text of a very basic i2c IMU sensor driver. The task is to complete the file, so that running `main.rs` will log the device ID of the driver. The this gap text driver is based on the version of the same name that lives in common, but provides a little bit more functionality.
+## I2C 驱动练习 (WIP)
 
-`i2c-driver/exercise/src/main.rs` will contain working code. Running it without modifying the driver file will yield errors. 
+`i2c-driver/exercise/src/icm42670p.rs` 将会是一个非常基础的 i2c IMU 传感器驱动的填空版本。任务是补全这个文件，使得运行 `main.rs` 可以记录驱动的设备 ID。这个驱动基于 common 中的同名版本，但是提供了更多功能。
 
-`i2c-driver/solution/src/icm42670p.rs` provides a solution to the task. 
+`i2c-driver/exercise/src/main.rs` 将包含可以运行的代码。在不修改驱动文件的情况下运行它会产生错误。
 
-## I2C Sensor Reading Exercise (WIP)
+`i2c-driver/solution/src/icm42670p.rs` 提供任务的一个解答。
 
- `i2c-sensor-reading/exercise/src/main.rs` will be an exercise skeleton that will build. The task is to use an existing driver from crates.io to read out the temperature and humidity sensor over i2c. After that, a second sensor will be read out over the same i2c bus using `shared-bus`. The driver for the second sensor is available locally in `common/`.
+## I2C 传感器读取练习 (WIP)
 
-`i2c-sensor-reading/solution/src/main.rs` contains a working solution.
+ `i2c-sensor-reading/exercise/src/main.rs` 是一个将要建立的练习框架。任务是使用一个已存在于 crates.io 中的驱动，通过 i2c 读取温度和湿度传感器。之后，通过 `shared-bus` 在同一条 i2c 总线上读取第二个传感器。第二个传感器的驱动在 `common/` 中。
+
+`i2c-sensor-reading/solution/src/main.rs` 包含一个可以运行的解答。
 

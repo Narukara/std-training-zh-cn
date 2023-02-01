@@ -1,26 +1,25 @@
-# Introductory Examples
+# 入门示例
 
-This folder contains the intro-level examples for Rust on the ESP32-C3.
+这个文件夹包含在 ESP32-C3 上运行 Rust 的入门级示例。
 
-You probably want to look at [the book](http://espressif-trainings.ferrous-systems.com) for the teaching material to go with them.
+您可能想查看 [这本书](http://espressif-trainings.ferrous-systems.com) 以获取与它们配套的教材。
 
-## List of examples
+## 示例列表
 
-Each example has an 'exercise', which is unfinished and for you to complete, and a 'solution' which is fully completed.
+每个示例都有一份“练习”，包含未完成的代码，需要您来补全。同时也有一份“解答”。
 
 ### hardware-check [(link)](./hardware-check)
 
-This is just to help check that your hardware is working correctly.
+仅仅用于帮您检查硬件是否正常工作。
 
 ### http-client [(link)](./http-client)
 
-This is a basic HTTP client, capable of fetching web pages over HTTP or HTTPS.
+这是一个基本的 HTTP 客户端，能够通过 HTTP 或 HTTPS 获取网页。
 
 ### http-server [(link)](./http-server)
 
-This is a basic HTTP server, which you can access using a web-browser on your PC.
+这是一个基本的 HTTP 服务器，可以使用 PC 上的浏览器访问它。
 
 ### mqtt [(link)](./mqtt)
 
-This starts an MQTT client, using some configuration to provide the host IP address and port. You will probably want to run an MQTT Server on your PC.
-
+这将启动一个 MQTT 客户端，使用一些配置来提供主机 IP 地址和端口。您可能希望在您的 PC 上运行一个 MQTT 服务器。

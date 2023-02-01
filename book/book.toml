@@ -1,6 +1,6 @@
 [book]
 authors = ["Anatol Ulrich"]
-language = "en"
+language = "zh-CN"
 multilingual = false
 src = "src"
 title = "Embedded Rust on Espressif"
