@@ -1,10 +1,10 @@
 # Summary
 
 - [介绍](./01_intro.md)
-- [准备](./02_0_preparations.md)
+- [准备工作](./02_0_preparations.md)
     - [硬件](./02_1_hardware.md)
     - [软件](./02_2_software.md)
-    - [Workshop repository](./02_3_repository.md)
+    - [项目仓库](./02_3_repository.md)
     - [Hello, board!](./02_4_hello_board.md)
 - [入门](./03_0_intro_workshop.md)
     - [项目结构](./03_1_project_orga.md)

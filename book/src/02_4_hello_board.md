@@ -1,18 +1,18 @@
 # Hello, board!
 
-You're now ready to do a consistency check.
+现在您已准备好进行一致性检查了。
 
-✅ Connect the USB-C port of the board to your computer and enter the hardware check directory in the workshop repository:
+✅ 将开发板的 USB-C 口连接到电脑，进入项目仓库中的 hardware check 目录：
 
 ```console
 espressif-trainings$ cd intro/hardware-check
 ```
 
-To test Wi-Fi connectivity, you will have to provide your network name (SSID) and password (PSK). These credentials are stored in a dedicated `cfg.toml` file (which is `.gitignore`d) to prevent accidental disclosure by sharing source code or doing pull requests. An example is provided. 
+为了测试 Wi-Fi 连接，您需要提供您的网络名称（SSID）和密码（PSK）。这些凭据存储在专用的 `cfg.toml` 文件中（已被 `.gitignore`），以防因共享源代码或执行 pull request 而意外泄露。项目里已经提供了一个例子。
 
-✅ Copy `cfg.toml.example` to `cfg.toml` (in the same directory) and edit it to reflect your actual credentials:
+✅ 将 `cfg.toml.example` 复制到 `cfg.toml`（在同一目录中），将实际的 SSID 和 PSK 写入其中：
 
-❗️The 5GHz band is not supported according to [ESP32-C3 documentation](https://www.espressif.com/en/news/ESP32-C3_Wi-Fi_Certified#:~:text=ESP32%2DC3%20is%20a%20safe,wide%20range%20of%20IoT%20applications), you need to ensure you are using a WiFi with active 2.4GHz band.
+❗️ 根据 [ESP32-C3 文档](https://www.espressif.com/en/news/ESP32-C3_Wi-Fi_Certified#:~:text=ESP32%2DC3%20is%20a%20safe,wide%20range%20of%20IoT%20applications)，它不支持 5GHz 频段，您需要确保您使用的 WiFi 具有可用的 2.4GHz 频段。
 
 ```console
 $ cp cfg.toml.example cfg.toml
@@ -25,7 +25,7 @@ wifi_psk = "Your Wifi password"
 ```
 
 
-✅ Build, run and monitor the project, substituting the actual serial device name for `/dev/SERIAL_DEVICE`:
+✅ 构建、运行并 monitor 这个项目，将 `/dev/SERIAL_DEVICE` 替换为实际的串行设备名称：
 
 ```console
 $ cargo espflash --release --monitor /dev/SERIAL_DEVICE
@@ -49,23 +49,23 @@ rst:0x1 (POWERON),boot:0xc (SPI_FAST_FLASH_BOOT)
 I (4427) bsc::wifi: Wifi connected!
 ```
 
-The board LED should turn yellow on startup, and then, depending on whether a Wifi connection could be established, either turn red (error) or blink, alternating green and blue. In case of a Wifi error, a diagnostic message will also show up at the bottom, e.g.:
+板上的 LED 应在启动时变为黄色，然后根据是否成功建立 Wifi 连接，变为红色（错误），或交替闪烁绿色和蓝色。如果出现 Wifi 错误，诊断消息也会显示在下面，例如：
 
 ```console
 Error: could not connect to Wi-Fi network: ESP_ERR_TIMEOUT
 ```
 
-## Extra information about building, flashing and monitoring
+## 关于构建、烧写和 monitor 的额外信息
 
-If you want to try to build without flashing, you can run:
+如果您想尝试在不烧写的情况下构建，可以运行：
 
  ```console
  cargo build --target riscv32imc-esp-espidf
  ```
-This can save a lot of time as you do not need to re-flash the program in its entirety and flashing can take up quit some time.
+这可以节省很多时间，因为您不需要重新烧写整个程序，并且烧写可能会占用不少时间。
 
 
-If `cargo espflash --release --monitor /dev/YOUR_SERIAL_DEVICE` has been successful, you can exit with `ctrl+C`, and run the monitor the device without flashing anew with the following command:
+如果 `cargo espflash --release --monitor /dev/YOUR_SERIAL_DEVICE` 已经运行成功，您可以用 `ctrl+C` 退出，并使用以下命令 monitor 设备而不重新烧写程序：
 
 ```console
 espmonitor /dev/YOUR_SERIAL_DEVICE
@@ -74,15 +74,14 @@ espmonitor /dev/YOUR_SERIAL_DEVICE
 
 # Troubleshooting
 
-## Build errors
+## 构建错误
 
 ```console
 error[E0463]: can't find crate for `core`
 = note: the `riscv32imc-esp-espidf` target may not be installed
 ```
 
-You're trying to build with a `stable` Rust - you need to use `nightly`.
-this error message is slightly misleading - this target *cannot* be installed. It needs to be built from source, using `build-std`, which is a feature available on nightly only.
+这说明您在尝试用 `stable` Rust 构建——您需要使用 `nightly`。这个错误信息有一些误导性——这个目标无法安装。它需要使用 `build-std` 从源码构建，这是一个仅在 nightly 版本可用的特性。
 
 ---
 
@@ -90,7 +89,7 @@ this error message is slightly misleading - this target *cannot* be installed. I
 error: cannot find macro `llvm_asm` in this scope
 ```
 
-You're using an incompatible version of nightly - configure a suitable one using `rust-toolchain.toml` or  `cargo override`.
+您使用的 nightly 版本不兼容——用 `rust-toolchain.toml` 或 `cargo override` 配置一个合适的。
 
 ---
 
@@ -98,7 +97,7 @@ You're using an incompatible version of nightly - configure a suitable one using
 CMake Error at .../Modules/CMakeDetermineSystem.cmake:129 (message):
 ```
 
-Your Espressif toolchain installation might be damaged. Delete it and rerun the build to trigger a fresh download:
+您的 Espressif 工具链可能被损坏了。删除它，然后重新构建来触发新的下载：
 
 ```console
 $ rm -rf ~/.espressif
@@ -117,16 +116,17 @@ Error: espflash::connection_failed
 × Error while connecting to device
 ╰─▶ Failed to connect to the device
 help: Ensure that the device is connected and the reset and boot pins are not being held down
-```
+ ```
 
-The board is not accessible with USB-C cable. A typical connection error looks like this:
+无法通过 USB-C 线缆连接到开发板。典型的连接错误如上面所示。
 
-   
-Workarounds: 
-1. press and hold boot button on the board, start flash command, release boot button after flashing process starts
-2. use a hub.
 
-[Source](https://georgik.rocks/unable-to-flash-esp32-with-these-usb-c-cables/).
-## Connecting to Wifi
+解决方法：
+1. 按住板子上的 boot 按钮，启动烧写命令，开始烧写后松开按钮
+2. 使用集线器（hub）
 
-- You will get an `ESP_ERR_TIMEOUT` error also in case your network name or password are incorrect, so double-check those.
+[来源](https://georgik.rocks/unable-to-flash-esp32-with-these-usb-c-cables/)
+
+## 连接 Wifi
+
+- 如果网络名称或密码错误，也会出现 `ESP_ERR_TIMEOUT`，所以请仔细检查。

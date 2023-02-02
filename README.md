@@ -1,5 +1,12 @@
 https://github.com/ferrous-systems/espressif-trainings 的中文翻译
 
+目前进度：跟踪 [这个仓库](https://github.com/Narukara/espressif-trainings)
+
+- [x] 介绍
+- [x] 准备工作
+- [ ] 入门
+- [ ] 高级
+
 ---
 
 # Embedded Rust Trainings for Espressif

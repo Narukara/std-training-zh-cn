@@ -1,15 +1,15 @@
-# Workshop repository
+# 项目仓库
 
-The entire material can be found at <https://github.com/ferrous-systems/espressif-trainings>.
+完整的材料可以在 <https://github.com/ferrous-systems/espressif-trainings> 找到。
 
-✅ Clone and change into the workshop repository:
+✅ 克隆并进入项目仓库：
 
 ```console
 $ git clone "https://github.com/ferrous-systems/espressif-trainings.git"
 $ cd espressif-trainings
 ```
 
-❗ Windows users may have problems with long path names. Follow these steps to substitute the path:
+❗ Windows 用户可能会遇到长路径名的问题。请按照以下步骤替换路径：
 
 ```console
 git clone https://github.com/ferrous-systems/espressif-trainings.git
@@ -17,23 +17,23 @@ subst r:\ espressif-trainings
 cd r:\
 ```
 
-## Repository contents
+## 仓库内容
 
-- `advanced/` - code examples and exercises for the advanced course
-- `book/` - markdown sources of this book
-- `common/` - code shared between both courses
-- `common/lib/` - support crates
-- `common/lib/esp32-c3-dkc02-bsc` - board support crate (bsc) for the `ESP32-C3-DevKitC-02` board
-- `common/vendor/` - third party crates that have been forked to add required support, pending upstream merges 
-- `extra/` - tools not required for this training which might still be useful
-- `intro/` - code examples and exercises for the introduction course
+- `advanced/` - 高级课程的代码示例和练习
+- `book/` - 本书的 markdown 源码
+- `common/` - 入门和高级课程共用的代码
+- `common/lib/` - 基础 crates
+- `common/lib/esp32-c3-dkc02-bsc` - `ESP32-C3-DevKitC-02` 的板级支持 crate（bsc）
+- `common/vendor/` - 第三方 crates，已被 fork 以添加必要的支持，等待上游合并
+- `extra/` - 并非本课程必须的工具，但可能很有用
+- `intro/` - 入门课程的代码示例和练习
 
 
-## A word on configuration
+## 关于配置的说明
 
-We use [toml-cfg](https://github.com/jamesmunns/toml-cfg) throughout this workshop as a more convenient and secure alternative to putting credentials or other sensitive information directly in source code: the settings are stored in a file called `cfg.toml` in the respective package root instead
+比起将证书或其他敏感信息直接放在源代码中，在本课程中，我们会使用 [toml-cfg](https://github.com/jamesmunns/toml-cfg) 作为一种更方便、更安全的替代方法。配置信息会存储在相应包的根目录中名为 `cfg.toml` 的文件中
 
-This configuration contains exactly one section header which has the same name as your package (`name = "your-package"` in `Cargo.toml`), and the concrete settings will differ between projects:
+该配置中只包含一个与包同名的 section header（`Cargo.toml` 中的 `name = "your-package"`），具体设置因项目而异：
 
 ```toml
 [your-package]
@@ -41,4 +41,5 @@ user = "example"
 password = "h4ckm3"
 ```
 
-If you copy a `cfg.toml` to a new project, remember to change the header to `[name-of-new-package]`.
+如果您复制 `cfg.toml` 到另一个项目，记得将 header 改为 `[另一个包的 name]`。
+

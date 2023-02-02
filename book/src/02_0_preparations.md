@@ -1,32 +1,32 @@
-# Preparations
+# 准备工作
 
-This chapter contains informations about the course material, the required hardware and an installation guide.
+本章包含了有关课程材料、所需硬件的信息，以及一个安装指南。
 
-## Icons and Formatting we use
+## 我们使用的图标和格式
 
-We use Icons to mark different kinds of information in the book:
-* ✅ Call for action
-* ❗️ Warnings, Details that require special attention
-* 🔎 Knowledge that dives deeper into a subject, but which you are not required to understand to proceed.
+我们使用图标来标记书中不同种类的信息：
+* ✅ 需要采取行动
+* ❗️ 警告，需要特别关注的细节
+* 🔎 深入某个主题的知识，但您不需要了解这些知识即可继续
 * 💬 Descriptions for Accessibility
 
-> Example note: Notes like this one contain helpful information
+> 注释示例：像这样的注释包含了有用的信息
 
-## Required Hardware
+## 需要的硬件
 
-- Rust ESP Board, available on Mouser, Aliexpress. [Full list of vendors](https://github.com/esp-rs/esp-rust-board).
-- USB-C cable suitable to connect the board to your development computer
-- Wi-Fi access point connected to the Internet
+- Rust ESP 开发板，可以在 Mouser、Aliexpress 上购买。[完整的供应商名单](https://github.com/esp-rs/esp-rust-board)。
+- 用于连接开发板和 PC 的 USB-C 线缆
+- 联入互联网的 Wi-Fi 接入点
 
-No additional debugger/probe hardware is required.
+不需要额外的调试器硬件。
 
-## Ensuring a working setup
-❗️ As of March 2022 we are not providing complete setup instructions for MS Windows.
+## 确保工作配置
+❗️ 自 2022 年 3 月起，我们不会为 MS Windows 提供完整的设置说明。
 
-❗️ If you are participating in a training led by Ferrous Systems, we urge you to do prepare for the workshop by following the instructions in this chapter least one business day in advance to verify you're ready to go by the time it starts. Please [contact us](training@ferrous-systems.com) should you encounter any issues or require any kind of support.
+❗️ 如果您正在参加由 Ferrous Systems 开展的培训，我们强烈建议您至少提前一个工作日按照本章中的说明为培训做好准备。如果您遇到任何问题或需要任何类型的支持，请联系[我们](training@ferrous-systems.com)。
 
-❗️ If you are using a [ESP32-C3-DevKitC-02](https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/hw-reference/esp32c3/user-guide-devkitc-02.html) a few pins and slave adresses are different, since the board is similar but not the same. This is relevant for the solutions in [advanced/i2c-sensor-reading/](/advanced/i2c-sensor-reading/solution/src/) and [advanced/i2c-driver/](/advanced/i2c-driver/solution/src/), where the pins and slave addresses for the ESP32-C3-DevKitC-02 are commented out.
+❗️ 如果您正在使用 [ESP32-C3-DevKitC-02](https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/hw-reference/esp32c3/user-guide-devkitc-02.html)，一些引脚和从机地址会有所不同。这与 [advanced/i2c-sensor-reading/](/advanced/i2c-sensor-reading/solution/src/) 和 [advanced/i2c-driver/](/advanced/i2c-driver/solution/src/) 中的解答有关，其中用于 ESP32-C3-DevKitC-02 的引脚和从机地址已被注释。
 
-## Companion material
+## 配套材料
 
-- [Official esp-rs book](https://esp-rs.github.io/book/introduction.html) 
+- [官方 esp-rs book](https://esp-rs.github.io/book/introduction.html) 
