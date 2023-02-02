@@ -13,7 +13,7 @@ https://github.com/ferrous-systems/espressif-trainings 的中文翻译
 
 这个仓库包含了在 Espressif ESP32-C3 上使用嵌入式 Rust 的学习材料。
 
-我们推荐你通过阅读 [这本书](https://espressif-trainings.ferrous-systems.com) 来开始学习。
+我们推荐你通过阅读 [这本书](https://narukara.github.io/espressif-trainings-cn/) 来开始学习。
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ferrous-systems/espressif-trainings)
 
@@ -21,18 +21,18 @@ https://github.com/ferrous-systems/espressif-trainings 的中文翻译
 
 包括：
 
-* 一本你可以通读的书 - ([Source](./book)) ([Published](https://espressif-trainings.ferrous-systems.com))
+* 一本你可以通读的书 - ([源代码](./book)) ([网页](https://narukara.github.io/espressif-trainings-cn/))
 * 一些入门级的例子：
-   * 基础的硬件检查 ([Source](./intro/hardware-check))
-   * 一个 HTTP 客户端 ([Source](./intro/http-client))
-   * 一个 HTTP 服务器 ([Source](./intro/http-server))
-   * 一个 MQTT 客户端 ([Source](./intro/mqtt))
+   * 基础的硬件检查 ([源代码](./intro/hardware-check))
+   * 一个 HTTP 客户端 ([源代码](./intro/http-client))
+   * 一个 HTTP 服务器 ([源代码](./intro/http-server))
+   * 一个 MQTT 客户端 ([源代码](./intro/mqtt))
 * 一些高级例子：
    * 底层 GPIO
    * 中断
-   * I2c 驱动 ([Source](./advanced/i2c-driver))
-   * I2c 传感器的读取 ([Source](./advanced/i2c-sensor-reading))
-   * GPIO/按钮中断 ([Source](./advanced/button-interrupt))
+   * I2c 驱动 ([源代码](./advanced/i2c-driver))
+   * I2c 传感器的读取 ([源代码](./advanced/i2c-sensor-reading))
+   * GPIO/按钮中断 ([源代码](./advanced/button-interrupt))
    * 驱动一个 RGB LED
 * 一些有用的常见 crates：
    * [`esp32-c3-dkc02-bsc`](./common/lib/esp32-c3-dkc02-bsc) - ESP32-C3-DKC02 的板级支持

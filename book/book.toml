@@ -3,4 +3,4 @@ authors = ["Anatol Ulrich"]
 language = "zh-CN"
 multilingual = false
 src = "src"
-title = "Embedded Rust on Espressif"
+title = "Embedded Rust on Espressif 简体中文版"
