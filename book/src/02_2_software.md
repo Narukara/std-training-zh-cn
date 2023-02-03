@@ -2,11 +2,11 @@
 
 按照以下步骤完成 ESP32-C3 平台工具的默认安装。
 
-🔎 如果您想要自定义安装（例如，从源码构建组件，或者添加对 Xtensa/ESP32-S3 的支持），请参阅 *Rust on ESP* 一书的 [Installing Rust](https://esp-rs.github.io/book/dependencies/installing-rust.html) 章节。
+🔎 如果想要自定义安装（例如，从源码构建组件，或者添加对 Xtensa/ESP32-S3 的支持），请参阅 *Rust on ESP* 一书的 [Installing Rust](https://esp-rs.github.io/book/dependencies/installing-rust.html) 章节。
 
 ## Rust 工具链
 
-✅ 如果您的电脑上还没有安装 Rust，从 <https://rustup.rs/> 获取它
+✅ 如果你的电脑上还没有安装 Rust，从 <https://rustup.rs/> 获取它
 
 此外，对于 ESP32-C3，目前需要特定的 Rust 工具链 *nightly* 版本。
 
@@ -75,13 +75,13 @@ $ brew install llvm
     . ./export.sh
     ```
 
-    如果更换了终端，您需要 source `export.sh` 文件：
+    如果更换了终端，你需要 source `export.sh` 文件：
 
     ```console
     source ~/esp/esp-idf-v4.4/export.sh 
     ```
 
-    4. 在 Ubuntu 上，您可能需要将内核更改为 `5.19`。运行 `uname -r` 以获取您的内核版本。
+    4. 在 Ubuntu 上，可能需要将内核更改为 `5.19`。运行 `uname -r` 以获取你的内核版本。
 
 
 ## Docker
@@ -90,7 +90,7 @@ $ brew install llvm
 
 **编译** Rust 练习的另一种环境是使用 Docker。本仓库里有一个 `Dockerfile`，其中包含安装 Rust 工具链和所有需要的包的指令。这个虚拟化环境仅用于为 espressif 目标编译二进制文件。其他命令，例如 `cargo-espflash`，仍然需要在主机系统上执行。
 
-✅ 为您的操作系统安装 [`Docker`](https://docs.docker.com/get-docker/)。
+✅ 为你的操作系统安装 [`Docker`](https://docs.docker.com/get-docker/)。
 
 要构建 Docker 镜像，请在根目录下运行以下命令：
 

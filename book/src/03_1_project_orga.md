@@ -1,9 +1,8 @@
-# Project organization
+# 项目结构
 
-## The esp-rs crates
+## esp-rs crates
 
-Unlike most other embedded platforms, Espressif supports the Rust standard library. Most notably this means you'll have arbitrary-sized collections like `Vec` or `HashMap` at your disposal, as well as generic heap storage using `Box`. You're also free to spawn new threads, and use synchronization primitives like `Arc` and `Mutex` to safely share data between them.
-Still, memory is a scarce resource on embedded systems, and so you need to take care not to run out of it - threads in particular can become rather expensive.
+不像大多数其他嵌入式平台，Espressif 支持 Rust 标准库。其中最值得关注的是，你可以任意使用大小可变的集合，例如 `Vec` 或 `HashMap`，以及基于 `Box` 的通用堆存储。你还可以自由地创建新线程，并使用 `Arc` 和 `Mutex` 等同步原语在它们之间安全地共享数据。尽管如此，内存在嵌入式系统上仍然是一种稀缺资源，因此需要注意不要耗尽它——尤其是，使用线程的代价可能会很高。
 
 Services like WiFi, HTTP client/server, MQTT, OTA updates, logging etc. are exposed via Espressif's open source IoT Development Framework, [esp-idf](https://github.com/espressif/esp-idf). It is mostly written in C and as such is exposed to Rust in the canonical split crate style: 
 - a `sys` crate to provide the actual `unsafe` bindings ([esp-idf-sys](https://github.com/esp-rs/esp-idf-sys))

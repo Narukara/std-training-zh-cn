@@ -41,5 +41,5 @@ user = "example"
 password = "h4ckm3"
 ```
 
-如果您复制 `cfg.toml` 到另一个项目，记得将 header 改为 `[另一个包的 name]`。
+如果你把 `cfg.toml` 复制到了另一个项目，记得将 header 改为 `[另一个包的 name]`。
 

@@ -1,6 +1,6 @@
 # 检查硬件
 
-将 Espressif Rust 开发板连接到您的电脑。确认一个红色的小 LED 被点亮了。
+将 Espressif Rust 开发板连接到你的电脑。确认一个红色的小 LED 被点亮了。
 
 此设备应当通过 USB 提供了一个 UART 串口：
 
@@ -20,7 +20,7 @@ $ ls -l /dev/serial/by-id
 lrwxrwxrwx 1 root root .... usb-Espressif_USB_JTAG_serial_debug_unit_60:55:F9:C0:27:18-if00 -> ../../ttyACM0
 ```
 
-（如果您在使用 ESP32-C3-DevKitC-02，使用 `$ ls /dev/ttyUSB*` 命令）
+（如果你在使用 ESP32-C3-DevKitC-02，使用 `$ ls /dev/ttyUSB*` 命令）
 
 **macOS**：此设备将显示为 `system_profiler` 中 USB 树的一部分：
 

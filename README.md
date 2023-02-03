@@ -1,4 +1,4 @@
-https://github.com/ferrous-systems/espressif-trainings 的中文翻译
+这里是 https://github.com/ferrous-systems/espressif-trainings 的中文翻译
 
 目前进度：跟踪 [这个仓库](https://github.com/Narukara/espressif-trainings)
 
@@ -42,7 +42,7 @@ https://github.com/ferrous-systems/espressif-trainings 的中文翻译
 * 一些额外的东西：
    * [`mqtt-python-client`](./extra/mqtt-python-client) 一个 Python MQTT 客户端，测试用
 
-请注意，这些材料的大部分仍在编写中！
+请注意，这些材料的大部分内容仍在编写中！
 
 ## 开发
 
