@@ -4,7 +4,7 @@
 - [准备工作](./02_0_preparations.md)
     - [硬件](./02_1_hardware.md)
     - [软件](./02_2_software.md)
-    - [项目仓库](./02_3_repository.md)
+    - [课程仓库](./02_3_repository.md)
     - [Hello, board!](./02_4_hello_board.md)
 - [入门](./03_0_intro_workshop.md)
     - [项目结构](./03_1_project_orga.md)

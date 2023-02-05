@@ -1,8 +1,8 @@
-# 项目仓库
+# 课程仓库
 
 完整的材料可以在 <https://github.com/ferrous-systems/espressif-trainings> 找到。
 
-✅ 克隆并进入项目仓库：
+✅ 克隆并进入课程仓库：
 
 ```console
 $ git clone "https://github.com/ferrous-systems/espressif-trainings.git"

@@ -1,29 +1,28 @@
-# Generating new projects
+# 创建新项目
 
-We're now going to use [`cargo-generate`](https://github.com/cargo-generate/cargo-generate) (a generic project wizard) to set up our first application.
+现在让我们用 [`cargo-generate`](https://github.com/cargo-generate/cargo-generate) （一个通用的项目生成向导）来配置我们的第一个项目。
 
-> Most other exercises in this workshop already provide a project skeleton and don't require using `cargo-generate`.
+> 本课程中的其他大多数练习都已经提供了项目框架，不需要使用 `cargo-generate`。
 
-✅ Change to the `intro` directory and run `cargo generate` with the `esp-idf` template:
+✅ 进入 `intro` 目录并运行 `cargo generate`，使用 `esp-idf` 模板：
 
 ```shell
 $ cd intro
 $ cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
 ```
 
-You'll be prompted for details regarding your new project. When given a choice between several options, navigate using cursor up/down and select with the Return key.
+`cargo-generate` 将提示有关新项目的详细信息。当在多个选项中进行选择时，可以使用光标向上/向下，并使用回车键确定。
 
-The first message you see will be:
-`⚠️Unable to load config file: /home/$USER/.cargo/cargo-generate.toml`. You see this error because you do not have a favorite config file, but you don't need one and you can ignore this warning.
+你看到的第一条消息会是：`⚠️Unable to load config file: /home/$USER/.cargo/cargo-generate.toml`。出现这个错误是因为没有偏好的配置文件。但这不是必须的，你可以忽略这个警告。
 
-🔎 You can create a [favorite config file](https://cargo-generate.github.io/cargo-generate/favorites.html) that will be placed in `$CARGO_HOME/cargo-generate`, and override it with `-c, --config <config-file>`. 
+🔎 你可以创建一个 [偏好的配置文件](https://cargo-generate.github.io/cargo-generate/favorites.html)，放在 `$CARGO_HOME/cargo-generate`。可以使用 `-c, --config <config-file>` 覆盖它。 
 
 
-> If you make a mistake, hit `Ctrl+C` and start anew.
+> 如果误操作了，按下 `Ctrl+C` 然后重新开始。
 
-✅ Configure your project:
+✅ 配置你的项目：
 
-(These items may appear in a different order)
+（这些项可能以不同的顺序出现）
 
 * Project Name: `hello-world`
 * Rust toolchain: `nightly`
@@ -31,7 +30,7 @@ The first message you see will be:
 * ESP-IDF native build version: `4.4`
 * STD support: `true`
 
-We're going to build using the `native` variant of the Espressif build system.
+我们将使用 Espressif 构建系统的 `native` 变体进行构建。
 
 ✅ Enable the native build system by opening `Cargo.toml` in your new `hello-world` project and adding `"native"` as default feature:
 
