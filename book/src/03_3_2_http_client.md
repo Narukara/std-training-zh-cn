@@ -1,58 +1,56 @@
-# HTTP client
+# HTTP 客户端
 
-The goal of this exercise is to write a small HTTP client that connects to a website.
+本练习的目标是编写一个能够连接网站的小型 HTTP 客户端。
 
-## Setup
+## 配置
 
-✅ Go to `intro/http-client` directory.
+✅ 进入 `intro/http-client` 目录。
 
-✅ Open the prepared project skeleton in `intro/http-client`. 
+✅ 打开 `intro/http-client` 中已准备好的项目框架。
 
-✅ Add your [network credentials](02_4_hello_board.md) to the `cfg.toml` as in the hardware test. 
+✅ 将你的[网络凭据](02_4_hello_board.md)加到 `cfg.toml` 中，就像在硬件测试中做的那样。
 
-✅ Open the docs for this project with the following command:
+✅ 用下面的命令打开此项目的文档：
 
 ```
 $ cargo doc --open
 ```
 
-`intro/http-client/examples/http_client.rs` contains the solution. you can run it with the following command:
+`intro/http-client/examples/http_client.rs` 包含解答。你可以用下面的命令运行它：
 
 ```
 cargo espflash --release --example http_client --monitor $SERIALDEVICE
 ```
-## Making a connection
+## 建立连接
 
-By default only unencrypted HTTP is available, which rather limits our options of hosts to connect to. We're going to use `http://neverssl.com/`.
+目前只能使用未加密的 HTTP，这限制了我们能连接到的主机（host）。我们将使用 `http://neverssl.com/`。
 
-In `esp-idf`, HTTP client connections are managed by `http::client::EspHttpClient` in the `esp-idf-svc` crate. It implements the `http::client::Client` trait from `embedded-svc`, which defines functions for [HTTP request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) like `GET` or `POST`. This is a good time to have a look at the documentation you opened with `cargo doc --open` for `http::client::EspHttpClient` and see instantiation methods at your disposal.
+在 `esp-idf` 中，HTTP 客户端连接由 `esp-idf-svc` crate 中的 `http::client::EspHttpClient` 管理。它实现了 `embedded-svc` 中的 `http::client::Client` trait，定义了 [HTTP 请求方法](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods)（如 `GET` 或 `POST`）使用的函数。现在正是使用 `cargo doc --open` 打开 `http::client::EspHttpClient` 的文档，并查看其中实例化方法的好时机。
 
-✅ Add the url `http://neverssl.com/` to the main function. This is the address we will query.
+✅ 把 URL `http://neverssl.com/` 添加到 `main` 函数。这是我们要访问的地址。
 
-✅ Create a new `EspHttpClient` with default values. Look for a suitable constructor in the documentation.
+✅ 用默认值创建一个 `EspHttpClient`。到文档里找一个合适的构造方法。
 
+在这个 `Client` 上调用 HTTP 函数（例如 `get(url)`）会返回一个 `EspHttpRequest`，必须先将其转换为 `Writer`，因为客户端在请求时可以选择发送一些数据。
 
-Calling HTTP functions (e.g. `get(url)`) on this client returns an `EspHttpRequest`, which must be turned into a `Writer` to reflect the client's option to send some data alongside its request. 
+在这个可选的数据发送步骤之后，`Writer` 就可以变成一个 `Response`，从中可以读取从服务器接收到的数据：
 
-After this optional send step the `Writer` can be turned into a `Response` from which the received server output can be read:
-
-The `get` function uses [as_ref()](https://doc.rust-lang.org/std/convert/trait.AsRef.html). This means that instead of being restricted to one specific type like just `String` or just `&str`, the function can accept anything that implements the `AsRef<str>` trait - that is, any type where a call to `.as_ref()` will produce an `&str`. This works for `String` and `&str`, but also the `Cow<str>` enum type which contains either of the previous two.
+`get` 函数使用 [as_ref()](https://doc.rust-lang.org/std/convert/trait.AsRef.html)。这意味着该函数可以接受任何实现 `AsRef<str>` trait 的类型，即任何可以调用 `.as_ref()` 产生 `&str` 的类型，而不是仅限于某种特定类型，例如 `String` 或 `&str`。这适用于 `String` 和 `&str`，也适用于包含前两种类型的 `Cow<str>` 枚举类型。
 
 
 ```Rust
 let request = client.get(url.as_ref())?;
-// the parameter passed to `into_writer` is the number of bytes
-// the client intends to send
+// 传递给 `into_writer` 的参数是客户端要发送的字节数
 let writer = request.into_writer(0)?;
 let response = writer.submit()?;
 ```
-The parameter passed to `into_writer` is the number of bytes the client intends to send. Here we are not trying to send anything. 
+传递给 `into_writer` 的参数是客户端要发送的字节数。这里我们不打算发送任何东西。
 
-A successful response has [a status code in the 2xx range](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). Followed by the raw html of the website.
+成功的响应具有 [2xx 范围内的状态码](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)。紧跟其后的是网站的原始 html。
 
-✅ Verify the connection was successful.
+✅ 检验连接是否成功。
 
-✅ Return an Error if the status is not in the 2xx range.
+✅ 如果状态码不在 2xx 范围内，返回一个错误。
 
 ```rust
 match status {
@@ -61,25 +59,24 @@ match status {
         _ => anyhow::bail!("unexpected response code: {}", status),
     }
 ```
-The status error can be returned with the [Anyhow](https://docs.rs/anyhow/latest/anyhow/index.html), crate which contains various functionality to simplify application-level error handling. It supplies a universal `anyhow::Result<T>`, wrapping the success (`Ok`) case in T and removing the need to specify the Err type, as long as every error you return implements `std::error::Error`.
+状态码错误可以用 [Anyhow](https://docs.rs/anyhow/latest/anyhow/index.html) crate 返回。`Anyhow` 常被用于简化应用程序级错误处理，它提供了一个通用的 `anyhow::Result<T>`，将成功（`Ok`）情况包装在 T 中，而且无需指定 Err 类型，只要求你返回的每个错误都实现了 `std::error::Error`。
 
+✅ 通过调用 `response.reader()` 将 `response` 转换为 `embedded_svc::io::Read` reader，并使用 `reader.do_read(&mut buf)` 将接收到的数据逐块地读取到 `u8` 缓冲区中。`do_read` 会返回读取的字节数——当这个值为 `0` 时就完成了读取。
 
-✅ Turn your `response` into a `embedded_svc::io::Read` reader by calling `response.reader()` and read the received data chunk by chunk into a `u8` buffer using `reader.do_read(&mut buf)`. `do_read` returns the number of bytes read - you're done when this value is `0`.
+✅ 报告读取的总字节数。
 
-✅ Report the total number of bytes read.
+✅ 把接收到的数据记录到控制台上。提示：响应数据以字节的形式存储在缓冲区内，所以你可能需要[一个方法](https://doc.rust-lang.org/std/str/fn.from_utf8.html)来把字节转换为 `&str`。
 
-✅ Log the received data to the console. Hint, the response in the buffer is in bytes, so you might need [a method](https://doc.rust-lang.org/std/str/fn.from_utf8.html) to convert from bytes to `&str`.
+## 额外的任务
 
-## Extra Tasks
+✅ 在 match 分支里分别处理 3xx、4xx 和 5xx 状态码
 
-✅ Handle 3xx, 4xx and 5xx status codes each in a separate match arm
-
-✅ Write a custom `Error` enum to represent these errors. Implement the `std::error::Error` trait for your error.
+✅ 编写一个自定义的 `Error` 枚举来表示这些错误。为这个错误实现 `std::error::Error` trait。
 
 
 ## Troubleshooting
 
-- `missing WiFi name/password`: ensure that you've configured `cfg.toml` according to `cfg.toml.example` - a common problem is that package name and config section name don't match. 
+- `missing WiFi name/password`：确保你已根据 `cfg.toml.example` 配置了 `cfg.toml`。一个常见的问题是包名和配置中的 section 名称不匹配。
 
 ```toml
 # Cargo.toml
@@ -95,4 +92,4 @@ wifi_psk = "..."
 ```
 
 - `Guru Meditation Error: Core 0 panic'ed (Load access fault). Exception was unhandled.`
-    This may caused by an `.unwrap()` in your code. Try replacing those by question marks.
+    这可能是由你的代码中的 `.unwrap()` 引起的。试试用问号运算符替代它们。

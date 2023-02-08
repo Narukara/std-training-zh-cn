@@ -1,4 +1,3 @@
-# HTTP and HTTPS client
+# HTTP 和 HTTPS 客户端
 
-In this exercise, we'll write a small client that retrieves data over a HTTP connection to the internet.
-Then we will upgrade it into an HTTPS client.
+在本练习中，我们将编写一个小型客户端，通过 HTTP 连接到互联网以获取数据。然后我们将其升级为 HTTPS 客户端。

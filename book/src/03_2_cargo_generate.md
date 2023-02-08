@@ -22,7 +22,7 @@ $ cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
 
 ✅ 配置你的项目：
 
-（这些项可能以不同的顺序出现）
+（这些选项可能以不同的顺序出现）
 
 * Project Name: `hello-world`
 * Rust toolchain: `nightly`
@@ -32,45 +32,44 @@ $ cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
 
 我们将使用 Espressif 构建系统的 `native` 变体进行构建。
 
-✅ Enable the native build system by opening `Cargo.toml` in your new `hello-world` project and adding `"native"` as default feature:
+✅ 在新创建的 `hello-world` 项目中打开 `Cargo.toml`，添加 `"native"` 作为默认 feature 来启用 native 构建系统：
 
 ```toml
 [features]
-default = ["native"] # add this line
+default = ["native"] # 添加这一行
 native = ["esp-idf-sys/native"]
 ```
 
-🔎 `.cargo/config.toml` contains local settings ([list of all settings](https://doc.rust-lang.org/cargo/reference/config.html)) for your package. 
-`Cargo.toml` contains dependencies [import all your dependencies](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html).
+🔎 `.cargo/config.toml` 包含你的 package 的本地设置（[全部设置列表](https://doc.rust-lang.org/cargo/reference/config.html)）。
+`Cargo.toml` 包含依赖项 [导入所有依赖项](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html)。
+
+可选，但是推荐：为了节省硬盘空间和下载时间，把工具链路径设置为全局（global）——否则每一个新项目/工作空间（workspace）都会安装一个自己的工具链实例。
 
 
-Optional, but recommended: To save disk space and download time, set the toolchain directory to global - otherwise each new project/workspace will have its own instance of the toolchain installed on your computer.
-
-
-✅ Open `hello-world/.cargo/config.toml` and add the following line to the bottom of the `[env]` section. Leave everything else unchanged.
+✅ 打开 `hello-world/.cargo/config.toml` 并添加下面几行到 `[env]` section 的底部。保持其他内容不变。
 
 ```toml
 [env]
 # ... 
-ESP_IDF_TOOLS_INSTALL_DIR = { value = "global" } # add this line
+ESP_IDF_TOOLS_INSTALL_DIR = { value = "global" } # 添加这一行
 ```
 
-✅ Open `hello-world/rust-toolchain.toml` and change the file to look like this:
+✅ 打开 `hello-world/rust-toolchain.toml` 并将文件修改为如下所示：
 
 ```toml
 [toolchain]
 
-channel = "nightly-2022-03-10" # change this line
+channel = "nightly-2022-03-10" # 修改这一行
 ```
 
-✅ Run your project by using the following command out of the `hello_world` directory.
+✅ 在 `hello_world` 目录中用下面的命令来运行项目：
 
 ```shell
 $ cd hello-world
 $ cargo espflash --release --monitor /dev/SERIAL_DEVICE
 ```
 
-✅ The last lines of your output should look like this:
+✅ 输出的最后几行应当如下所示：
 
 ```shell
 (...)
@@ -78,14 +77,14 @@ I (268) cpu_start: Starting scheduler.
 Hello, world!
 ```
 
-## Extra tasks
-- If your main function exits, you have to reset the microcontroller to start it again. What happens when you put an infinite loop at the end instead? Test your theory by flashing a looping program.
-- Can you think of a way to prevent what you're now seeing? (click for hint:[^hint])
+## 额外的任务
+- 如果 `main` 函数退出了，你只能通过复位微控制器来再次启动它。如果在其末尾放置一个死循环会怎么样？下载一个死循环程序来验证你的猜想。
+- 你能想出一种办法来避免你看到的现象吗？（提示[^hint]）
 
 ## Troubleshooting
-- `⛔ Git Error: authentication required`: your git configuration is probably set to override `https` github URLs to `ssh`. Check your global `~/.git/config` for `insteadOf` sections and disable them.
-- `Error: Failed to generate bindings`: add `default = ["native"]` to `Cargo.toml`
-- if you're using the deprecated `pio` build system, an [initial git commit of your project](https://github.com/espressif/esp-idf/issues/3920) will be required for a successful build.
-- if `cargo espflash` is stuck on `Connecting...`, you might have another monitor process still running (e.g. from the initial `hardware-check` test). Try finding and terminating it. If this doesn't help, disconnect and reconnect the board's USB cable.
+- `⛔ Git Error: authentication required`：你的 git 可能被配置为将 `https` github URL 替换成 `ssh`。检查全局 `~/.git/config` 中的 `insteadOf` 部分并禁用它们。
+- `Error: Failed to generate bindings`：添加 `default = ["native"]` 到 `Cargo.toml`
+- 如果要使用 `pio` 构建系统（已弃用），为了成功构建，需要 [创建一个初始 git 提交](https://github.com/espressif/esp-idf/issues/3920)。
+- 如果 `cargo espflash` 卡在了 `Connecting...`，可能是有另一个 monitor 进程仍在运行（例如，`hardware-check` 的那个）。尝试找到并终止它。如果不起作用，断开并重新连接 USB 线缆。
 
-[^hint]: yield control back to the underlying operating system by `sleep`ing in a loop instead of busy waiting. (use `use std::thread::sleep`)
+[^hint]: 通过在循环中`休眠`而不是忙等待，将控制权交还给底层操作系统。（使用 `std::thread::sleep`）
