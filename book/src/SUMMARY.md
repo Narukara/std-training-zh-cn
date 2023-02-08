@@ -12,7 +12,7 @@
     - [HTTP 和 HTTPS 客户端](./03_3_1_http_https_client.md)
       - [Http 客户端](./03_3_2_http_client.md)
       - [Https 客户端](./03_3_3_https_client.md)
-    - [一个简单的 HTTP 服务器](./03_4_http_server.md)
+    - [简单的 HTTP 服务器](./03_4_http_server.md)
     - [基于 MQTT 的 IoT](./03_5_0_mqtt.md)
       - [MQTT 是如何工作的](./03_5_1_mqtt.md)
       - [MQTT 练习：发送消息](./03_5_2_mqtt.md)

@@ -1,75 +1,78 @@
-# A simple HTTP server
+# 简单的 HTTP 服务器
 
-We're now turning our board into a tiny web server that upon receiving a `GET` request serves data from the internal temperature sensor. 
+现在让我们把开发板变成一个微型网络服务器，在收到 `GET` 请求后，它会提供来自内部温度传感器的数据。
 
-## Setup
+## 配置
 
-You can find a prepared project skeleton in `intro/http-server/`. It includes establishing a WiFi connection, but you must configure it to use your network's credentials in `cfg.toml`.
+`intro/http-server/` 中有已准备好的项目框架。它会建立 WiFi 连接，但你需要将其配置为使用 `cfg.toml` 中的网络凭据。
 
-`intro/http-server/examples/https-server.rs` contains a solution. You can run it with the following command:
+
+
+`intro/http-server/examples/https-server.rs` 包含一个解答。你可以用下面的命令运行它：
 
 ```
 cargo espflash --release --example http_serve --monitor $SERIALDEVICE
 ```
 
-## Serving requests
+## 处理请求
 
-To connect to your board with your browser, you need to know the board's IP address. 
+为了用浏览器访问开发板，你需要知道板子的 IP 地址。
 
 
-✅ Run the skeleton code in `intro/http-server`. The output should yield the board's IP address like this:
+✅ 运行 `intro/http-server` 中的框架代码。输出应该包含板子的 IP 地址，类似这样：
 
 ```console
 I (3862) esp_netif_handlers: sta ip: 192.168.178.54, mask: ..
 server awaiting connection
 ```
 
-The `sta ip` is the "station", the WiFi term for an interface connected to an access point. This is the address you'll put in your browser (or other http client like `curl`).
+`sta ip` 指的是 WiFi 术语站点（station），代表连接到接入点（access point）的设备。这就是你需要输入浏览器的地址（或其他 http 客户端，如 `curl`）。
 
-> esp-idf tries to register the hostname `espressif` in your local network, so often `http://espressif/` instead of `http://<sta ip>/` will also work.
+> esp-idf 会尝试在本地网络中注册主机名 `espressif`，因此通常使用 `http://espressif/` 代替 `http://<sta ip>/` 也可以。
 >
-> You can change the hostname by setting `CONFIG_LWIP_LOCAL_HOSTNAME` in `sdkconfig.defaults`, e.g.: `CONFIG_LWIP_LOCAL_HOSTNAME="esp32c3"`
+> 你可以通过设置 `sdkconfig.defaults` 中的 `CONFIG_LWIP_LOCAL_HOSTNAME` 来更改主机名，例如 `CONFIG_LWIP_LOCAL_HOSTNAME="esp32c3"`。
 
-Sending HTTP data to a client involves:
-- creating an an instance of `EspHttpServer`
-- looping in the main function so it doesn't terminate - termination would result in the server going out of scope and subsequently shutting down
-- setting a separate request `handler` function for each requested path you want to serve content. Any unconfigured path will result in a `404` error. These handler functions are realized inline as Rust closures via:
+向客户端发送 HTTP 数据包括：
+
+- 创建一个 `EspHttpServer` 实例
+- 在主函数中循环，这样它就不会终止——终止会导致服务器离开作用域然后关闭
+- 为需要提供内容的每个路径设置单独的请求处理（`handler`）函数。任何未配置的路径都会导致 `404` 错误。这些处理函数以 Rust 闭包的形式内联实现，如下所示：
 
 ```rust
 server.handle_get(path, |request, response| {
-    // the `response` needs to write data to the client
+    // 向 `response` 写入要发送给客户端的数据
     let mut writer = response.into_writer(request);
 
-    // construct a response
+    // 构造一个响应
     let some_buf = ...;
 
-    // now you can write your desired data
+    // 写入期望的数据
     writer.write_all(&some_buf);
 
-    // once you're done the handler expects a `Completion` as result,
-    // this is achieved via:
+    // 如果完成了处理，处理函数期望一个 `Completion` 作为结果
+    // 这是通过它实现的：
     Ok(())
 });
 
 ```
- 
 
-✅ Create a `EspHttpServer` instance using a default `esp_idf_svc::http::server::Configuration`. The default configuration will cause it to listen on port 80 automatically. 
 
-✅ Verify that a connection to `http://<sta ip>/` yields a `404` (not found) error stating `This URI does not exist`.
+✅ 使用默认的 `esp_idf_svc::http::server::Configuration` 创建一个 `EspHttpServer` 实例。默认配置将使它自动监听 80 端口。
 
-✅ Write a request handler for requests to the root path (`"/"`). The request handler sends a greeting message at `http://<sta ip>/`, using the provided `index_html()` function to generate the HTML String.
+✅ 验证与 `http://<sta ip>/` 的连接是否会产生 `404`（not found）错误，表明 `This URI does not exist`。
 
-## Dynamic data
+✅ 为根路径（`"/"`）编写请求处理函数。处理函数会在 `http://<sta ip>/` 上发送问候消息，使用已提供的 `index_html()` 函数来生成 HTML 字符串。
 
-We can also report dynamic information to a client. The skeleton includes a configured `temp_sensor` that measures the board's internal temperature. 
+## 动态数据
 
-✅ Write a second handler that reports the chip temperature at `http://<sta ip>/temperature`, using the provided `temperature(val: f32)` function to generate the HTML String.
-## Hints
-- If you want to send a response string, it needs to be converted into a `&[u8]` slice via `a_string.as_bytes()`
-- The temperature sensor needs exclusive (mutable) access. Passing it as owned value into the handler will not work (since it would get dropped after the first invocation) - you can fix this by making the handler a `move ||` closure, wrapping the sensor in an `Arc<Mutex<_>>`, keeping one `clone()` of this `Arc` in your main function and moving the other into the closure.
+我们还可以向客户端发送动态信息。该框架包含一个已配置好的 `temp_sensor`，用于测量开发板的内部温度。
+
+✅ 在 `http://<sta ip>/temperature` 上编写第二个请求处理函数，用于报告芯片的温度。使用已提供的 `temperature(val: f32)` 函数来生成 HTML 字符串。
+## 提示
+- 如果要发送响应字符串，需要通过 `a_string.as_bytes()` 将其转换为 `&[u8]` slice。
+- 温度传感器需要独占（可变）访问。将它作为有所有权的值传递给请求处理函数是行不通的（因为它会在第一次调用后被丢弃）——你可以通过把处理函数变成 `move ||` 闭包来解决这个问题。将传感器包裹在 `Arc<Mutex<_>>` 中，将此 `Arc` 的一个 `clone()` 保留在主函数中，并将另一个移动到闭包中。
 
 ## Troubleshooting
 
-- `httpd_txrx: httpd_resp_send_err` can be solved by restarting, or `cargo clean` if nothing happens.
-- Make sure computer and rust board are using the same wifi network.
+- `httpd_txrx: httpd_resp_send_err` 可以通过重启解决。如果不起作用，可以使用 `cargo clean`。
+- 确保计算机和开发板使用的是相同的 wifi 网络。
