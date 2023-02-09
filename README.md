@@ -13,7 +13,7 @@
 
 这个仓库包含了在 Espressif ESP32-C3 上使用嵌入式 Rust 的学习材料。
 
-我们推荐你通过阅读 [这本书](https://narukara.github.io/espressif-trainings-cn/) 来开始学习。
+我们推荐你通过阅读 [这本书](https://narukara.github.io/espressif-trainings-zh-cn/) 来开始学习。
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ferrous-systems/espressif-trainings)
 
@@ -21,7 +21,7 @@
 
 包括：
 
-* 一本你可以通读的书 - ([源代码](./book)) ([网页](https://narukara.github.io/espressif-trainings-cn/))
+* 一本你可以通读的书 - ([源代码](./book)) ([网页](https://narukara.github.io/espressif-trainings-zh-cn/))
 * 一些入门级的例子：
    * 基础的硬件检查 ([源代码](./intro/hardware-check))
    * 一个 HTTP 客户端 ([源代码](./intro/http-client))
