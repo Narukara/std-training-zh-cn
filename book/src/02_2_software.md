@@ -31,7 +31,7 @@ $ rustup component add rust-src --toolchain nightly-2022-03-10
 $ cargo install cargo-espflash ldproxy
 ```
 
-## 工具链依赖
+## 工具链依赖项
 
 ### Debian/Ubuntu
 
@@ -86,7 +86,7 @@ $ brew install llvm
 
 ## Docker
 
-> ❗️ 请**注意**，Docker 容器提供了一个**编译** Rust 练习的替代选项。它适用于有虚拟化环境经验的用户。请注意，我们无法在培训期间为 Docker 特定的问题提供帮助。
+> ❗️ 请**注意**，Docker 容器提供了一个**编译** Rust 练习的替代选项。它适用于有虚拟化环境经验的用户。另外，我们无法在培训期间为 Docker 特定的问题提供帮助。
 
 **编译** Rust 练习的另一种环境是使用 Docker。本仓库里有一个 `Dockerfile`，其中包含安装 Rust 工具链和所有需要的包的指令。这个虚拟化环境仅用于为 espressif 目标编译二进制文件。其他命令，例如 `cargo-espflash`，仍然需要在主机系统上执行。
 

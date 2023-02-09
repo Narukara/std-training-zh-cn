@@ -1,6 +1,6 @@
 # Summary
 
-- [介绍](./01_intro.md)
+- [引言](./01_intro.md)
 - [准备工作](./02_0_preparations.md)
     - [硬件](./02_1_hardware.md)
     - [软件](./02_2_software.md)
