@@ -1,15 +1,15 @@
-# Advanced Workshop
+# 高级部分
 
-In this course we're going to dive deeper into topics that are embedded-only and/or close to the hardware, especially focussing on lower level i/o. Unlike in the first part, we'll not just use the higher level abstractions where for example something like pin configurations are hidden away. Instead you'll learn how to configure them yourself. You're also going to learn how to write directly into registers and how to find out which register is needed in the first place. We'll talk about ownership issues and memory safety issues in the context of exercises.
+在高级课程中，我们将深入探讨嵌入式和/或贴近硬件的主题，尤其是关注较底层的 i/o。与第一部分不同，我们不会只使用较高级别的抽象，它们隐藏了引脚配置之类的东西。相反，我们将学习如何自己配置它们。我们还将学习如何直接写入寄存器，以及如何先找出要用哪些寄存器。我们将在练习中讨论所有权问题和内存安全问题。
 
- This part consists of three exercises: 
+这部分包含三个练习：
 
- In the first one you'll learn how to handle a button interrupt, in the second you'll read sensor values from sensors via the I²C bus. Once you have used the drivers we have prepared, you'll learn how to get started writing your own. This is a necessary skill as Rust drivers are usually not provided by manufacturers. 
+在第一个练习中，你将学习如何处理按钮中断。在第二个练习中，你将通过 I²C 总线从传感器读取数据。在使用了我们准备的驱动程序之后，你将学习如何编写你自己的驱动程序。这是一项必要的技能，因为制造商通常不提供 Rust 驱动程序。
 
- ## Preparations
- 
- Please go through the [preparations](./02_0_preparations.md) chapter to prepare for this workshop.
+ ## 准备工作
 
- ## Reference
+请阅读[准备工作](./02_0_preparations.md)章节，为本课程做好准备。
 
- If you're new to embedded programming read our [reference](./04_7_reference.md) where we explain some terms in a basic manner. 
+ ## 参考
+
+如果你不熟悉嵌入式编程，请阅读我们的[参考资料](./04_7_reference.md)，在那里我们以简单的方式解释了一些术语。

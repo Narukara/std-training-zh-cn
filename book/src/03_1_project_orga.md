@@ -6,7 +6,7 @@
 
 Espressif 的开源物联网开发框架 [esp-idf](https://github.com/espressif/esp-idf) 提供了 WiFi、HTTP 客户端/服务器、MQTT、OTA 更新、日志记录等服务。esp-idf 主要是用 C 编写的，因此将它以规范的、分离的 crate 的形式提供给 Rust：
 
-- 一个 `sys` crate 提供了实际的 `unsafe` bindings（[esp-idf-sys](https://github.com/esp-rs/esp-idf-sys)）
+- 一个 `sys` crate 提供了实际的 `unsafe` 绑定（[esp-idf-sys](https://github.com/esp-rs/esp-idf-sys)）
 - 一个高级的 crate 提供了安全易用的 Rust 抽象（[esp-idf-svc](https://github.com/esp-rs/esp-idf-svc/)）
 
 最后一部分是底层硬件访问，仍以分离的形式提供：

@@ -1,39 +1,39 @@
-# Lower level I/O: How to manipulate Registers
+# 底层 I/O：如何操作寄存器
 
-In general there are two ways to write firmware for the ESP32-C3. One is the bare-metal using only `[no_std]` Rust, and the other using `[std]` Rust and C-Bindings to the esp-idf.
-`[no_std]` Rust refers to Rust not using the standard library, only the core library, which is a subset of the standard library that does not depend on the existence of an operating system. 
+ESP32-C3 的开发方式一般有两种。一种是仅使用 `[no_std]` Rust 的裸机编程，另一种是使用 `[std]` Rust 和 esp-idf 的 C 绑定。`[no_std]` Rust 是指不使用标准库，只使用核心库（core library），它是标准库的一个子集，不依赖于操作系统。
 
-## What do the ecosystems look like?
+## 生态系统是什么样的？
 
-### `[std]` Rust and the esp-idf
+### `[std]` Rust 和 esp-idf
 
-The most established way to use Rust on ESP32-C3 is using C bindings to the esp-idf. We can use Rust's standard library when going this route, as we can use an operating system: FreeRTOS. Being able to use the standard library comes with benefits: We can use all types no matter if they are stack or heap allocated. We can use threads, Mutexes and other synchronization primitives.
+在 ESP32-C3 上使用 Rust 的最成熟的方法是使用 esp-idf 的 C 绑定。走这条路时，我们可以使用 Rust 的标准库，因为我们可以使用操作系统：FreeRTOS。能够使用标准库带来了很多好处：我们可以使用所有类型，无论它们是在栈上分配的还是在堆上分配的。我们可以使用线程、互斥量和其他同步原语。
 
- The esp-idf is mostly written in C and as such is exposed to Rust in the canonical split crate style: 
-- a `sys` crate to provide the actual `unsafe` bindings ([esp-idf-sys](https://github.com/esp-rs/esp-idf-sys))
-- a higher level crate offering safe and comfortable Rust abstractions ([esp-idf-svc](https://github.com/esp-rs/esp-idf-svc/))
+esp-idf 主要是用 C 编写的，因此将它以规范的、分离的 crate 的形式提供给 Rust：
 
-The final piece of the puzzle is low-level hardware access, which is again provided in a split fashion:
-- [esp-idf-hal](https://github.com/esp-rs/esp-idf-hal) implements the hardware-independent [embedded-hal](https://github.com/rust-embedded/embedded-hal) traits like analog/digital conversion, digital I/O pins, or SPI communication - as the name suggests, it also uses `esp-idf` as a foundation
+- 一个 `sys` crate 提供了实际的 `unsafe` 绑定（[esp-idf-sys](https://github.com/esp-rs/esp-idf-sys)）
+- 一个高级的 crate 提供了安全易用的 Rust 抽象（[esp-idf-svc](https://github.com/esp-rs/esp-idf-svc/)）
 
-More information is available in the [ecosystem chapter](https://esp-rs.github.io/book/overview/using-the-standard-library.html) of the `esp-rs` book.
+最后一部分是底层硬件访问，仍以分离的形式提供：
 
-This is the way that currently allows the most possibilities on Espressif chips if you want to use Rust. Everything in this course is based on this approach. 
+- [esp-idf-hal](https://github.com/esp-rs/esp-idf-hal) 实现了硬件无关的 [embedded-hal](https://github.com/rust-embedded/embedded-hal) traits，例如模数转换、数字 I/O 引脚、SPI 通信。正如它的名字所暗示的，它依赖于 `esp-idf`。
 
-We're going to look at how to write values into Registers in this ecosystem in the context of the Interrupt exercise. 
+`esp-rs` book 的 [ecosystem 章节](https://esp-rs.github.io/book/overview/using-the-standard-library.html) 提供了更多信息。
 
-### Bare metal Rust with `[no_std]`
+如果你想使用 Rust，这就是目前在 Espressif 芯片上提供了最大可能性的开发方式。本课程中的所有内容都基于这种方法。
 
-As the name bare metal implies, we don't use an operating system. Because of this, we can't use language features that rely on one. The core library is a subset of the standard library that excludes features like heap allocated types and threads. Code that uses only the core library is labelled with `#[no_std]`. `#[no_std]` code can always run in a `std` environment, but the reverse is not true.
-In Rust the mapping from Registers to Code works like this:
+我们将在中断练习中研究，在此生态系统中如何直接将值写入寄存器。
 
-Registers and their fields on a device are described in _System View Description_ (SVD) files. `svd2rust` is used to generate _Peripheral Access Crates_ (PACs) from these SVD files. The PACs provide a thin wrapper over the various memory-mapped registers defined for the particular model of micro-controller you are using.
+### `[no_std]` 的 Rust 裸机编程
 
-Whilst it is possible to write firmware with a PAC alone, some of it would prove unsafe or otherwise inconvenient as it only provides the most basic access to the peripherals of the microcontroller. So there is another layer, the _Hardware Abstraction Layer_ (HAL). HALs provide a more user friendly API for the chip, and often implement common traits defined in the generic [`embedded-hal`](https://github.com/rust-embedded/embedded-hal).
+顾名思义，裸机就是不使用操作系统。正因为如此，我们无法使用依赖于操作系统的语言特性。核心库是标准库的一个子集，它不包括堆分配类型和线程等功能。仅使用核心库的代码标有 `#[no_std]`。`#[no_std]` 代码总能在 `std` 环境下运行，反之则不然。在 Rust 中，从寄存器到代码的映射是这样工作的：
 
-Microcontrollers are usually soldered to some _Printed Circuit Board_ (or just _Board_), which defines the connections that are made to each pin. A _Board Support Crate_ (BSC, also known as a _Board Support Package_ or BSP) may be written for a given board. This provides yet another layer of abstraction and might, for example, provide an API to the various sensors and LEDs on that board - without the user necessarily needing to know which pins on your microcontroller are connected to those sensors or LEDs.
+设备上的寄存器及其字段由系统视图描述（System View Description，SVD）文件说明。`svd2rust` 用于从这些 SVD 文件生成外设访问 crate（Peripheral Access Crate，PAC）。PAC 为特定型号微控制器中的各个内存映射寄存器提供了一个很薄的封装。
 
-Although a [PAC](https://github.com/esp-rs/esp-pacs/tree/main/esp32c3) for the ESP32-C3 exists, bare-metal Rust is highly experimental on ESP32-C3 chips, so for now we will not work with it on the microcontroller directly. We will write a partial sensor driver in this approach as driver's should be platform agnostic.
+虽然可以单独使用 PAC 编写固件，但这可能不安全或不太方便，因为它只提供了对微控制器外设的最基本的访问。所以还有另一层封装，即硬件抽象层（Hardware Abstraction Layer，HAL）。HAL 为芯片提供了更加用户友好的 API，并且通常实现了 [`embedded-hal`](https://github.com/rust-embedded/embedded-hal) 中定义的通用 trait。
+
+微控制器通常焊接到一些 PCB 板上，这决定了每个引脚的连接情况。因此可以为给定的电路板编写板级支持 crate（Board Support Crate，BSC，也称为板级支持包或 BSP）。这提供了另一个抽象层，例如，可以为板上的各种传感器和 LED 提供 API——用户无需知道微控制器上的哪些引脚连接到这些传感器或 LED。
+
+尽管存在用于 ESP32-C3 的 [PAC](https://github.com/esp-rs/esp-pacs/tree/main/esp32c3)，但裸机 Rust 在 ESP32-C3 芯片上的实验性很强，所以目前我们不会直接在微控制器上使用它。我们将用这种方法编写部分传感器的驱动程序，因为驱动程序应该与平台无关。
 
 
 
