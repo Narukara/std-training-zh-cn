@@ -4,3 +4,6 @@ language = "zh-CN"
 multilingual = false
 src = "src"
 title = "Embedded Rust on Espressif 简体中文版"
+
+[output.html]
+git-repository-url = "https://github.com/Narukara/espressif-trainings-zh-cn"
