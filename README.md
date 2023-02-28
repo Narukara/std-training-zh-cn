@@ -1,11 +1,11 @@
-这里是 https://github.com/ferrous-systems/espressif-trainings 的简体中文翻译
+这里是 https://github.com/esp-rs/espressif-trainings 的简体中文翻译
 
 目前进度：跟踪 1ec7fd7
 
 - [x] 介绍（1/1）
 - [x] 准备工作（5/5）
 - [ ] 入门（7/11）
-- [ ] 高级（3/11）
+- [ ] 高级（5/11）
 
 ---
 
