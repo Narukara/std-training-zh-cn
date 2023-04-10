@@ -1,6 +1,6 @@
 这里是 https://github.com/esp-rs/espressif-trainings 的简体中文翻译
 
-目前进度：跟踪 1ec7fd7
+目前进度：跟踪 f6dba37
 
 - [x] 介绍（1/1）
 - [x] 准备工作（5/5）
@@ -14,8 +14,6 @@
 这个仓库包含了在 Espressif ESP32-C3 上使用嵌入式 Rust 的学习材料。
 
 我们推荐你通过阅读 [这本书](https://narukara.github.io/espressif-trainings-zh-cn/) 来开始学习。
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ferrous-systems/espressif-trainings)
 
 ## 内容
 
@@ -34,15 +32,12 @@
    * I2c 传感器的读取 ([源代码](./advanced/i2c-sensor-reading))
    * GPIO/按钮中断 ([源代码](./advanced/button-interrupt))
    * 驱动一个 RGB LED
-* 一些有用的常见 crates：
-   * [`esp32-c3-dkc02-bsc`](./common/lib/esp32-c3-dkc02-bsc) - ESP32-C3-DKC02 的板级支持
+* 一些有用且常见的 crates：
    * [`get-uuid`](./common/lib/get-uuid) - 提供一个编译期生成的 UUID
    * [`mqtt-messages`](./common/lib/mqtt-messages) - MQTT 辅助函数
-   * [`icm42670p`](./common/lib/icm42670p) - 基本的传感器驱动
-* 一些额外的东西：
-   * [`mqtt-python-client`](./extra/mqtt-python-client) 一个 Python MQTT 客户端，测试用
+   * [`rgb-led`](./common/lib/rgb-led) - 提供对 RGB LED（WS2812）的支持
+   * [`wifi`](./common/lib/wifi) - Wifi 辅助函数
 
-请注意，这些材料的大部分内容仍在编写中！
 
 ## 开发
 
@@ -52,7 +47,7 @@
 
 ```console
 ~ $ cargo install mdbook
-~ $ git clone https://github.com/ferrous-systems/espressif-trainings.git
+~ $ git clone https://github.com/Narukara/espressif-trainings-zh-cn.git
 ~ $ cd espressif-trainings/book
 ~/espressif-trainings/book $ mdbook serve
 ```
@@ -79,7 +74,7 @@ __Share Alike__.
 
 In addition, the source code contained within this repository (either in the
 book, or as separate examples) is made available under either the
-[MIT](./LICENSE-MIT.txt) or [Apache-2.0](./LICENSE_APACHE.txt) licenses, at
+[MIT](./LICENSE-MIT.txt) or [Apache-2.0](./LICENSE-APACHE.txt) licenses, at
 your option.
 
 ## Contribution
@@ -92,7 +87,5 @@ conditions.
 ## Code of Conduct
 
 Contribution to this crate is organized under the terms of the [Rust Code of
-Conduct][CoC], and the maintainer of this crate, Ferrous Systems GmbH, promises
-to intervene to uphold that code of conduct.
-
-[CoC]: CODE_OF_CONDUCT.md
+Conduct](https://www.rust-lang.org/policies/code-of-conduct), and the maintainers of this crate promises to intervene to
+uphold that code of conduct.

@@ -1,18 +1,18 @@
 # 课程仓库
 
-完整的材料可以在 <https://github.com/ferrous-systems/espressif-trainings> 找到。
+完整的材料可以在 <https://github.com/esp-rs/espressif-trainings> 找到。
 
 ✅ 克隆并进入课程仓库：
 
 ```console
-$ git clone "https://github.com/ferrous-systems/espressif-trainings.git"
+$ git clone "https://github.com/esp-rs/espressif-trainings.git"
 $ cd espressif-trainings
 ```
 
 ❗ Windows 用户可能会遇到长路径名的问题。请按照以下步骤替换路径：
 
 ```console
-git clone https://github.com/ferrous-systems/espressif-trainings.git
+git clone https://github.com/esp-rs/espressif-trainings.git
 subst r:\ espressif-trainings
 cd r:\
 ```
@@ -23,8 +23,6 @@ cd r:\
 - `book/` - 本书的 markdown 源码
 - `common/` - 入门和高级课程共用的代码
 - `common/lib/` - 基础 crates
-- `common/lib/esp32-c3-dkc02-bsc` - `ESP32-C3-DevKitC-02` 的板级支持 crate（bsc）
-- `common/vendor/` - 第三方 crates，已被 fork 以添加必要的支持，等待上游合并
 - `extra/` - 并非本课程必须的工具，但可能很有用
 - `intro/` - 入门课程的代码示例和练习
 
@@ -41,5 +39,4 @@ user = "example"
 password = "h4ckm3"
 ```
 
-如果你把 `cfg.toml` 复制到了另一个项目，记得将 header 改为 `[另一个包的 name]`。
-
+❗ 如果你把 `cfg.toml` 复制到了另一个项目，记得将 header 改为 `[另一个包的 name]`。

@@ -27,4 +27,4 @@
       - [基本的中断处理程序](./04_4_1_interrupts.md)
       - [随机 LED 颜色](./04_4_2_interrupts.md)
       - [解答](./04_4_3_interrupts.md)
-    - [参考](./04_7_reference.md)
+- [参考](./05_reference.md)

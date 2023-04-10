@@ -1,9 +1,14 @@
 [book]
-authors = ["Anatol Ulrich"]
+authors = ["Anatol Ulrich", "Sergio Gasquez"]
+description = "Ferrous Systems' Embedded Rust on Espressif training material"
 language = "zh-CN"
 multilingual = false
 src = "src"
 title = "Embedded Rust on Espressif 简体中文版"
+
+[rust]
+edition = "2021"
+
 
 [output.html]
 git-repository-url = "https://github.com/Narukara/espressif-trainings-zh-cn"

@@ -12,39 +12,34 @@
 
 ✅ 用下面的命令打开此项目的文档：
 
-```
+```console
 $ cargo doc --open
 ```
 
 `intro/http-client/examples/http_client.rs` 包含解答。你可以用下面的命令运行它：
 
-```
-cargo espflash --release --example http_client --monitor $SERIALDEVICE
+```console
+cargo run --example http_client
 ```
 ## 建立连接
 
-目前只能使用未加密的 HTTP，这限制了我们能连接到的主机（host）。我们将使用 `http://neverssl.com/`。
+默认只能使用未加密的 HTTP，这限制了我们能连接到的主机。我们将使用 `http://neverssl.com/`。
 
-在 `esp-idf` 中，HTTP 客户端连接由 `esp-idf-svc` crate 中的 `http::client::EspHttpClient` 管理。它实现了 `embedded-svc` 中的 `http::client::Client` trait，定义了 [HTTP 请求方法](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods)（如 `GET` 或 `POST`）使用的函数。现在正是使用 `cargo doc --open` 打开 `http::client::EspHttpClient` 的文档，并查看其中实例化方法的好时机。
+在 ESP-IDF 中，HTTP 客户端连接由 `esp-idf-svc` crate 中的 `http::client::EspHttpClient` 管理。它实现了 `embedded-svc` 中的 `http::client::Client` trait，定义了 [HTTP 请求方法](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods)（如 `GET` 或 `POST`）使用的函数。现在正是查看你用 `cargo doc --open` 打开的文档的好时机，查看其中 `esp_idf_svc::http::client::EspHttpConnection` 和 `embedded_svc::http::client::Client` 相关的内容，以及可以使用的实例化方法。
 
-✅ 把 URL `http://neverssl.com/` 添加到 `main` 函数。这是我们要访问的地址。
+✅ 用默认配置创建一个 `EspHttpConnection`。到文档里找一个合适的构造方法。
 
-✅ 用默认值创建一个 `EspHttpClient`。到文档里找一个合适的构造方法。
+✅ Get a client from the connection you just made.
 
-在这个 `Client` 上调用 HTTP 函数（例如 `get(url)`）会返回一个 `EspHttpRequest`，必须先将其转换为 `Writer`，因为客户端在请求时可以选择发送一些数据。
-
-在这个可选的数据发送步骤之后，`Writer` 就可以变成一个 `Response`，从中可以读取从服务器接收到的数据：
+Calling HTTP functions (e.g. `get(url)`) on this client returns an `embedded_svc::http::client::Request`, which must be submitted to reflect the client's option to send some data alongside its request.
 
 `get` 函数使用 [as_ref()](https://doc.rust-lang.org/std/convert/trait.AsRef.html)。这意味着该函数可以接受任何实现 `AsRef<str>` trait 的类型，即任何可以调用 `.as_ref()` 产生 `&str` 的类型，而不是仅限于某种特定类型，例如 `String` 或 `&str`。这适用于 `String` 和 `&str`，也适用于包含前两种类型的 `Cow<str>` 枚举类型。
 
 
-```Rust
+```rust
 let request = client.get(url.as_ref())?;
-// 传递给 `into_writer` 的参数是客户端要发送的字节数
-let writer = request.into_writer(0)?;
-let response = writer.submit()?;
+let response = request.submit()?;
 ```
-传递给 `into_writer` 的参数是客户端要发送的字节数。这里我们不打算发送任何东西。
 
 成功的响应具有 [2xx 范围内的状态码](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)。紧跟其后的是网站的原始 html。
 
@@ -56,16 +51,17 @@ let response = writer.submit()?;
 match status {
         200..=299 => {
         }
-        _ => anyhow::bail!("unexpected response code: {}", status),
+        _ => bail!("Unexpected response code: {}", status),
     }
 ```
 状态码错误可以用 [Anyhow](https://docs.rs/anyhow/latest/anyhow/index.html) crate 返回。`Anyhow` 常被用于简化应用程序级错误处理，它提供了一个通用的 `anyhow::Result<T>`，将成功（`Ok`）情况包装在 T 中，而且无需指定 Err 类型，只要求你返回的每个错误都实现了 `std::error::Error`。
 
-✅ 通过调用 `response.reader()` 将 `response` 转换为 `embedded_svc::io::Read` reader，并使用 `reader.do_read(&mut buf)` 将接收到的数据逐块地读取到 `u8` 缓冲区中。`do_read` 会返回读取的字节数——当这个值为 `0` 时就完成了读取。
+✅ 使用 `Read::read(&mut reader,&mut buf)` 将接收到的数据逐块地读取到 `u8` 缓冲区中。`Read::read` 会返回读取的字节数——当这个值为 `0` 时就完成了读取。
 
 ✅ 报告读取的总字节数。
 
-✅ 把接收到的数据记录到控制台上。提示：响应数据以字节的形式存储在缓冲区内，所以你可能需要[一个方法](https://doc.rust-lang.org/std/str/fn.from_utf8.html)来把字节转换为 `&str`。
+✅ 把接收到的数据记录到控制台上。
+💡 响应数据以字节的形式存储在缓冲区内，所以你可能需要[一个方法](https://doc.rust-lang.org/std/str/fn.from_utf8.html)来把字节转换为 `&str`。
 
 ## 额外的任务
 

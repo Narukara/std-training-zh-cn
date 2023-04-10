@@ -1,9 +1,7 @@
 use mqtt_messages::{hello_topic, temperature_data_topic, ColorData, RGB8};
 use rand::Rng;
 use rumqttc::{Client, MqttOptions, Packet, QoS};
-use std::error::Error;
-use std::thread;
-use std::time::Duration;
+use std::{error::Error, thread, time::Duration};
 
 const UUID: &'static str = get_uuid::uuid();
 
@@ -38,15 +36,10 @@ fn main() -> Result<(), Box<dyn Error>> {
             let g = rng.gen();
             let b = rng.gen();
             let color = RGB8::new(r, g, b);
-            println!("setting new color: {}", color);
+            println!("Setting new color: {}", color);
             let color = ColorData::BoardLed(color);
             client
-                .publish(
-                    color.topic(UUID),
-                    QoS::AtLeastOnce,
-                    false,
-                    color.data(),
-                )
+                .publish(color.topic(UUID), QoS::AtLeastOnce, false, color.data())
                 .unwrap();
             thread::sleep(Duration::from_secs(1));
         }
@@ -59,7 +52,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         if let Ok(rumqttc::Event::Incoming(Packet::Publish(publish_data))) = notification {
             if publish_data.topic == hello_topic(UUID) {
-                println!("board says hi!");
+                println!("Board says hi!");
             }
 
             if publish_data.topic == temperature_data_topic(UUID) {
@@ -68,7 +61,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
                 if let Ok(data) = data {
                     let temp: f32 = f32::from_be_bytes(data);
-                    println!("board temperature: {:.2}°C", temp)
+                    println!("Board temperature: {:.2}°C", temp)
                 }
             }
         }
