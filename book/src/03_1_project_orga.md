@@ -27,7 +27,7 @@ Rust on ESP Book 的 [ecosystem 章节](https://esp-rs.github.io/book/overview/u
 
 ### `Cargo.toml`
 
-本课程是围绕 `native` 构建系统编写的。另外也可以使用 `PlatformIO`/`pio`，但目前已弃用。
+本课程是围绕 [`native` 构建系统](https://github.com/esp-rs/esp-idf-sys#native)编写的。另外也可以使用 [`PlatformIO`/`pio`](https://github.com/esp-rs/esp-idf-sys#pio)，但目前已弃用。
 
 ```toml
 [features]

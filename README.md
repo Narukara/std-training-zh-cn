@@ -61,7 +61,7 @@ changes to our `main` branch.
 
 This work is continually updated and as such there are no 'releases'. Every
 commit to `main` gets published to
-<https://espressif-trainings.ferrous-systems.com> automatically.
+<https://esp-rs.github.io/espressif-trainings> automatically.
 
 ## Licence
 

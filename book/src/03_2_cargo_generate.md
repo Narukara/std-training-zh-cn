@@ -17,7 +17,7 @@ cd intro
 cargo generate https://github.com/esp-rs/esp-idf-template cargo
 ```
 
-[`cargo-generate` 将提示有关新项目的详细信息]](https://github.com/esp-rs/esp-idf-template#generate-the-project)。当在多个选项中进行选择时，可以使用光标向上/向下，并使用回车键确定。
+[`cargo-generate` 将提示有关新项目的详细信息](https://github.com/esp-rs/esp-idf-template#generate-the-project)。当在多个选项中进行选择时，可以使用光标向上/向下，并使用回车键确定。
 
 你看到的第一条消息会是：
 `⚠️Unable to load config file: /home/$USER/.cargo/cargo-generate.toml`。出现这个错误是因为没有偏好的配置文件。但这不是必须的，你可以忽略这个警告。

@@ -5,8 +5,8 @@
 ✅ 克隆并进入课程仓库：
 
 ```console
-$ git clone "https://github.com/esp-rs/espressif-trainings.git"
-$ cd espressif-trainings
+git clone "https://github.com/esp-rs/espressif-trainings.git"
+cd espressif-trainings
 ```
 
 ❗ Windows 用户可能会遇到长路径名的问题。请按照以下步骤替换路径：

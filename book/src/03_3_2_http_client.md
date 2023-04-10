@@ -13,7 +13,7 @@
 ✅ 用下面的命令打开此项目的文档：
 
 ```console
-$ cargo doc --open
+cargo doc --open
 ```
 
 `intro/http-client/examples/http_client.rs` 包含解答。你可以用下面的命令运行它：

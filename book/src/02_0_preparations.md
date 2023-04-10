@@ -23,9 +23,9 @@
 ## 确保有一个可用的环境
 <!-- TODO: Update this comments -->
 
-⚠ 如果你正在参加由 Ferrous Systems 开展的培训，我们强烈建议你至少提前一个工作日按照本章中的说明为培训做好准备。如果你遇到任何问题或需要任何类型的支持，请[联系我们](https://ferrous-systems.com/contact/)。
+⚠️ 如果你正在参加由 Ferrous Systems 开展的培训，我们强烈建议你至少提前一个工作日按照本章中的说明为培训做好准备。如果你遇到任何问题或需要任何类型的支持，请[联系我们](https://ferrous-systems.com/contact/)。
 
-⚠ 如果你正在使用 [ESP32-C3-DevKitC-02](https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/hw-reference/esp32c3/user-guide-devkitc-02.html)，一些引脚和从机地址会有所不同，因为两块板子不完全相同。这与 [advanced/i2c-sensor-reading/](/advanced/i2c-sensor-reading/examples) 和 [advanced/i2c-driver/](/advanced/i2c-driver/src/) 中的解答有关，其中用于 ESP32-C3-DevKitC-02 的引脚和从机地址已被注释。
+⚠️ 如果你正在使用 [ESP32-C3-DevKitC-02](https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/hw-reference/esp32c3/user-guide-devkitc-02.html)，一些引脚和从机地址会有所不同，因为两块板子不完全相同。这与 [advanced/i2c-sensor-reading/](/advanced/i2c-sensor-reading/examples) 和 [advanced/i2c-driver/](/advanced/i2c-driver/src/) 中的解答有关，其中用于 ESP32-C3-DevKitC-02 的引脚和从机地址已被注释。
 
 ## 配套材料
 

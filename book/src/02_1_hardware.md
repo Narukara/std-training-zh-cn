@@ -14,7 +14,7 @@ $ lsusb | grep USB
 Bus 006 Device 035: ID 303a:1001 Espressif USB JTAG/serial debug unit
 ```
 
-另一个查看设备的方法是检查 `/by-id` 目录：
+另一个查看设备，以及相关权限和端口的方法是检查 `/by-id` 目录：
 
 ``` console
 $ ls -l /dev/serial/by-id

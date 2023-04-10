@@ -8,11 +8,11 @@
 cd intro/hardware-check
 ```
 
-为了测试 Wi-Fi 连接，你需要提供你的网络名称（SSID）和密码（PSK）。这些凭据存储在专用的 `cfg.toml` 文件中（已被 `.gitignore`），以防因共享源代码或执行 pull request 而意外泄露。项目里已经提供了一个例子。
+为了测试 Wi-Fi 连接，你需要提供你的网络名称（SSID）和密码（PSK）。这些凭据存储在专用的 `cfg.toml` 文件中（已被 `.gitignore` 忽略），以防因共享源代码或执行 pull request 而意外泄露。项目里已经提供了一个例子。
 
 ✅ 将 `cfg.toml.example` 复制到 `cfg.toml`（在同一目录中），将实际的 SSID 和 PSK 写入其中：
 
-> ⚠ [ESP32-C3 不支持 5GHz 频段](https://www.espressif.com/en/news/ESP32-C3_Wi-Fi_Certified#:~:text=ESP32%2DC3%20is%20a%20safe,wide%20range%20of%20IoT%20applications)，你需要确保你使用的 WiFi 具有可用的 2.4GHz 频段。
+> ⚠️ [ESP32-C3 不支持 5GHz 频段](https://www.espressif.com/en/news/ESP32-C3_Wi-Fi_Certified#:~:text=ESP32%2DC3%20is%20a%20safe,wide%20range%20of%20IoT%20applications)，你需要确保你使用的 WiFi 具有可用的 2.4GHz 频段。
 
 ```console
 $ cp cfg.toml.example cfg.toml
@@ -25,7 +25,7 @@ wifi_psk = "Your Wifi password"
 ```
 
 
-✅ 构建、烧写并 monitor 这个项目:
+✅ 构建、烧写并监视这个项目:
 
 ```console
 $ cargo run
@@ -63,14 +63,14 @@ Error: could not connect to Wi-Fi network: ESP_ERR_TIMEOUT
 ```
 > ⚠️ You will get an `ESP_ERR_TIMEOUT` error also in case your network name or password are incorrect, so double-check those.
 
-## 关于构建、烧写和 monitor 的额外信息
+## 关于构建、烧写和监视的额外信息
 
 如果想尝试在不烧写的情况下构建，可以运行：
 
  ```console
  cargo build
  ```
-也可以使用以下命令 monitor 设备而不重新烧写程序：
+也可以使用以下命令监视设备而不重新烧写程序：
 
 ```console
 espflash monitor
