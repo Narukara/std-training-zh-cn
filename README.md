@@ -1,6 +1,6 @@
 这里是 https://github.com/esp-rs/espressif-trainings 的简体中文翻译
 
-目前进度：跟踪 f6dba37
+目前进度：跟踪 9e76a6c
 
 - [x] 介绍（1/1）
 - [x] 准备工作（5/5）

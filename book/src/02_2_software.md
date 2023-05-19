@@ -73,7 +73,9 @@ brew install llvm
 An alternative environment, is to use Docker. The repository contains a `Dockerfile`
 with instructions to install the Rust toolchain, and all required packages. **This virtualized environment is designed
 to compile the binaries for the Espressif target. Flashing binaries from containers is not possible**, hence there are two options:
-- Execute flashing commands, e.g., `cargo-espflash`, on the host system.
+- Execute flashing commands, e.g., `cargo-espflash`, on the host system. If proceeding with this option, it's recommended to keep two terminals open:
+    - In the container: compile the project
+    - On the host: use the `cargo-espflash` sub-command to flash the program onto the embedded hardware
 - Use [`web-flash`](https://github.com/esp-rs/esp-web-flash-server) crate to flash the resulting binaries from the container. The container already includes `web-flash`. Here is how you would flash the build output of [`hardware-check` project](./02_4_hello_board.md):
    ```console
    web-flash --chip esp32c3 target/riscv32imc-esp-espidf/debug/hardware-check
@@ -81,28 +83,23 @@ to compile the binaries for the Espressif target. Flashing binaries from contain
 
 ✅ 为你的操作系统安装 [`Docker`](https://docs.docker.com/get-docker/)。
 
-要构建 Docker 镜像，请在根目录下运行以下命令：
-
+✅ Get the docker image: There are 2 ways of getting the Docker image:
+- Build the Docker image from the `Dockerfile`:
+    ```console
+    docker image build --tag rust-std-training --file .devcontainer/Dockerfile .
+    ```
+    构建镜像需要一段时间，具体取决于操作系统和硬件（20-30 分钟）。
+- Donwload it from [Dockerhub](https://hub.docker.com/r/espressif/rust-std-training):
+    ```console
+    docker pull espressif/rust-std-training
+    ```
+✅ Start the new Docker container:
 ```console
-docker image build --tag esp --file .devcontainer/Dockerfile .
-```
-
-构建镜像需要一段时间，具体取决于操作系统和硬件（20-30 分钟）。
-
-要启动新的 Docker 容器，运行：
-
-```console
-docker run --mount type=bind,source="$(pwd)",target=/workspace,consistency=cached -it esp /bin/bash
+docker run --mount type=bind,source="$(pwd)",target=/workspace,consistency=cached -it rust-std-training /bin/bash
 ```
 
 这将在 Docker 容器中启动一个交互式 shell。
 它还将本地存储库挂载到容器内名为 `/workspace` 的文件夹中。对主机系统上项目的更改会反映在容器内，反之亦然。
-
-使用此 Docker 配置需要把某些命令放在容器内执行，而其他命令必须在主机系统上执行。
-建议保持开启两个终端，一个连接到 Docker 容器，一个在主机系统上。
-
-* 容器内的终端：编译项目
-* 主机系统的终端：使用 `cargo-espflash` 子命令来向嵌入式硬件烧写程序
 
 ## 附加软件
 
@@ -124,18 +121,3 @@ docker run --mount type=bind,source="$(pwd)",target=/workspace,consistency=cache
 有助于在 Docker 容器内开发的一个 VS Code 扩展是 [`Remote Containers`](https://github.com/Microsoft/vscode-remote-release)。
 它使用与 [Docker 配置](#docker)相同的 Dockerfile，构建镜像并从 VS Code 中建立连接。
 安装扩展后，VS Code 会识别 `.devcontainer` 文件夹中的配置。使用 `Remote Containers - Reopen in Container` 命令将 VS Code 连接到容器。
-
-## Gitpod
-
-[Gitpod](https://www.gitpod.io) can provide fully initialized, perfectly set-up developer environments for this training with no installation required
-on the host system, other than a [Gitpod-compatible browser](https://www.gitpod.io/docs/configure/user-settings/browser-settings).
-
-✅ Open a Gitpod Workspace:
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/esp-rs/espressif-trainings)
-
-> It may take a few minutes to build the container and setup the environment.
-
-> Note that flashing from the Gitpod workspace is only available using [`web-flash`](https://github.com/esp-rs/esp-web-flash-server). The Gitpod workspace already includes `web-flash`. Here is how you would flash the build output of [`hardware-check` project](./02_4_hello_board.md):
->   ```console
->   web-flash --chip esp32c3 target/riscv32imc-esp-espidf/debug/hardware-check
->   ```
