@@ -1,19 +1,19 @@
-# 入门部分
+# 入门教程
 
-This workshop guides you through the basics of embedded development, at the end of
-the workshop we will be able to interact with the outside world, including sending and receiving commands to/from the board sensors. The content includes:
-- Overview of a project
-- Setting up a project with cargo generate.
-- Writing an HTTP client.
-- Writing an HTTP server.
-- Writing an MQTT client that:
-  - Publishes sensor data
-  - Receives commands via a subscribed topic.
+入门教程包含基础的嵌入式开发教学。
+在此教程的结尾，我们将能够与外界环境交互，包括与板上的传感器通讯。入门教程的内容包括：
+- 项目概览
+- 用 cargo generate 生成一个项目。
+- 编写一个 HTTP 客户端。
+- 编写一个 HTTP 服务器。
+- 编写一个 MQTT 客户端，它能够：
+  - 发布传感器数据
+  - 通过订阅的 topic 接收命令。
 
- ## Preparations
+ ## 准备工作
 
- Please go through the [preparations](./02_0_preparations.md) chapter to prepare for this workshop.
+ 请阅读[准备工作](./02_0_preparations.md)章节，为本课程做好准备。
 
- ## Reference
+ ## 参考资料
 
- If you're new to embedded programming, read our [reference](./05_reference.md), where we explain some terms in a basic manner.
+ 如果你不熟悉嵌入式编程，请阅读我们的[参考资料](./05_reference.md)，我们在那里以简单易懂的方式解释了一些术语。

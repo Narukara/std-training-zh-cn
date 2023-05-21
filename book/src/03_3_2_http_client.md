@@ -29,9 +29,9 @@ cargo run --example http_client
 
 ✅ 用默认配置创建一个 `EspHttpConnection`。到文档里找一个合适的构造方法。
 
-✅ Get a client from the connection you just made.
+✅ 从刚刚创建的 connection 里获取一个 client。
 
-Calling HTTP functions (e.g. `get(url)`) on this client returns an `embedded_svc::http::client::Request`, which must be submitted to reflect the client's option to send some data alongside its request.
+在 client 上调用 HTTP 函数（例如 `get(url)`）会返回一个 `embedded_svc::http::client::Request`。你需要提交（submit）它来表示 client 在发送请求附带的选项。
 
 `get` 函数使用 [as_ref()](https://doc.rust-lang.org/std/convert/trait.AsRef.html)。这意味着该函数可以接受任何实现 `AsRef<str>` trait 的类型，即任何可以调用 `.as_ref()` 产生 `&str` 的类型，而不是仅限于某种特定类型，例如 `String` 或 `&str`。这适用于 `String` 和 `&str`，也适用于包含前两种类型的 `Cow<str>` 枚举类型。
 

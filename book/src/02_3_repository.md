@@ -19,9 +19,9 @@ cd r:\
 
 ## 仓库内容
 
-- `advanced/` - 高级课程的代码示例和练习
+- `advanced/` - 进阶课程的代码示例和练习
 - `book/` - 本书的 markdown 源码
-- `common/` - 入门和高级课程共用的代码
+- `common/` - 入门和进阶课程共用的代码
 - `common/lib/` - 基础 crates
 - `extra/` - 并非本课程必须的工具，但可能很有用
 - `intro/` - 入门课程的代码示例和练习

@@ -1,10 +1,10 @@
 # 底层 I/O：如何操作寄存器
 
-There are [two ways to write firmware for the ESP32-C3](https://esp-rs.github.io/book/overview/index.html):
- - One is the bare-metal using only `[no_std]` Rust.
- - The other using `[std]` Rust and C-Bindings to ESP-IDF.
+有[两种方法为 ESP32-C3 编写固件](https://esp-rs.github.io/book/overview/index.html)：
+ - 一种是裸机编程，仅使用 `[no_std]` Rust。
+ - 另一种是使用 `[std]` Rust 以及 ESP-IDF 的 C 绑定。
 
-> [`[no_std]` Rust](https://docs.rust-embedded.org/book/intro/no-std.html) refers to Rust not using the standard library, only the [core library](https://doc.rust-lang.org/core/), which is a subset of the [standard library](https://doc.rust-lang.org/std/) that does not depend on the existence of an operating system.
+> [`[no_std]` Rust](https://docs.rust-embedded.org/book/intro/no-std.html) 是指不使用标准库的 Rust——仅使用[核心库](https://doc.rust-lang.org/core/)，它是[标准库](https://doc.rust-lang.org/std/)的子集，不依赖于操作系统。
 
 ## 生态系统是什么样的？
 

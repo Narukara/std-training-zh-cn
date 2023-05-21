@@ -70,30 +70,30 @@ brew install llvm
 
 ## Docker
 
-An alternative environment, is to use Docker. The repository contains a `Dockerfile`
-with instructions to install the Rust toolchain, and all required packages. **This virtualized environment is designed
-to compile the binaries for the Espressif target. Flashing binaries from containers is not possible**, hence there are two options:
-- Execute flashing commands, e.g., `cargo-espflash`, on the host system. If proceeding with this option, it's recommended to keep two terminals open:
-    - In the container: compile the project
-    - On the host: use the `cargo-espflash` sub-command to flash the program onto the embedded hardware
-- Use [`web-flash`](https://github.com/esp-rs/esp-web-flash-server) crate to flash the resulting binaries from the container. The container already includes `web-flash`. Here is how you would flash the build output of [`hardware-check` project](./02_4_hello_board.md):
+另一种可选的环境是使用 Docker。本仓库包含一个 `Dockerfile`，
+其中包含用于安装 Rust 工具链（和所有依赖的包）的指令。**此虚拟化环境旨在
+为 Espressif 目标编译二进制文件，在容器内烧录二进制文件是不可行的**。因此，有两种选择：
+- 在主机系统上执行烧写命令，例如 `cargo-espflash`。 如果采用这个选项，建议开启两个终端：
+    - 一个在容器内，用于编译项目
+    - 一个在主机上，用 `cargo-espflash` 子命令来烧写程序
+- 在容器内使用 [`web-flash`](https://github.com/esp-rs/esp-web-flash-server) crate 来烧写程序。容器已经包含了 `web-flash`。烧写 [`hardware-check` 项目](./02_4_hello_board.md) 的命令是：
    ```console
    web-flash --chip esp32c3 target/riscv32imc-esp-espidf/debug/hardware-check
    ```
 
 ✅ 为你的操作系统安装 [`Docker`](https://docs.docker.com/get-docker/)。
 
-✅ Get the docker image: There are 2 ways of getting the Docker image:
-- Build the Docker image from the `Dockerfile`:
+✅ 获取 docker 镜像： 有两种方法来获取 Docker 镜像：
+- 用 `Dockerfile` 构建镜像：
     ```console
     docker image build --tag rust-std-training --file .devcontainer/Dockerfile .
     ```
     构建镜像需要一段时间，具体取决于操作系统和硬件（20-30 分钟）。
-- Donwload it from [Dockerhub](https://hub.docker.com/r/espressif/rust-std-training):
+- 从 [Dockerhub](https://hub.docker.com/r/espressif/rust-std-training) 下载：
     ```console
     docker pull espressif/rust-std-training
     ```
-✅ Start the new Docker container:
+✅ 启动新的 Docker 容器：
 ```console
 docker run --mount type=bind,source="$(pwd)",target=/workspace,consistency=cached -it rust-std-training /bin/bash
 ```

@@ -4,9 +4,9 @@
 
 ## 本材料的内容
 
-这是 Ferrous Systems 的 *Embedded Rust on Espressif* 培训材料。它分为两个部分：入门和高级。入门部分将向你介绍嵌入式开发的基础知识，以及如何使开发板与外界交互——对命令做出反应并发送传感器数据。
+这是 Ferrous Systems 的 *Embedded Rust on Espressif* 培训材料。它分为两个部分：入门和进阶。入门部分将向你介绍嵌入式开发的基础知识，以及如何使开发板与外界交互——对命令做出反应并发送传感器数据。
 
-高级部分将深入探讨中断处理、低级外设访问和编写你自己的驱动程序等主题。
+进阶部分将深入探讨中断处理、低级外设访问和编写你自己的驱动程序等主题。
 
 你可以加入 Matrix 上的 [esp-rs 社区](https://matrix.to/#/#esp-rs:matrix.org) 来探讨任何技术问题！社区对所有人开放。
 
@@ -26,5 +26,5 @@
 - 基本的 Rust 知识：[The Rust Book](https://doc.rust-lang.org/book/) 第 1 到第 6 章，第4章“所有权”不需要完全理解。
 - [The Rust on ESP Book](https://esp-rs.github.io/book/) 不是必须的，但是强烈推荐。因为它能帮助你理解 Rust on ESP 生态系统和许多将在本教程中讨论到的概念。
 
-[^note]: 可以使用 [ESP32-C3-DevKitC-02](https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/hw-reference/esp32c3/user-guide-devkitc-02.html) 学习入门部分，但我们不推荐它。使用本书要求的硬件会更易学。
+[^note]: 也可以使用 [ESP32-C3-DevKitC-02](https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/hw-reference/esp32c3/user-guide-devkitc-02.html) 学习入门部分，但并不推荐。使用本书要求的硬件学起来更简单。
 

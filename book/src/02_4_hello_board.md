@@ -25,7 +25,7 @@ wifi_psk = "Your Wifi password"
 ```
 
 
-✅ 构建、烧写并监视这个项目:
+✅ 构建、烧写并监视（monitor）这个项目:
 
 ```console
 $ cargo run
@@ -49,19 +49,19 @@ rst:0x1 (POWERON),boot:0xc (SPI_FAST_FLASH_BOOT)
 I (4427) wifi::wifi: Wifi connected!
 ```
 
->🔎 If `cargo run` has been successful, you can exit with `ctrl+C`.
+>🔎 如果成功运行了 `cargo run`，你可以通过 `ctrl+C` 退出。
 
-> 🔎 `cargo run` is [configured to use `espflash`](https://github.com/esp-rs/espressif-trainings/blob/main/intro/hardware-check/.cargo/config.toml#L6) as [custom runner](https://doc.rust-lang.org/cargo/reference/config.html#target). The same output can be achieved via:
-> - Using `cargo-espflash`: `cargo espflash flash --release --monitor`
-> - Building your project and flashing it with `espflash`: `cargo build --release && espflash target/riscv32imc-esp-espidf/release/hardware-check`
-> This modification is applied to all the projects in the training for convenience.
+> 🔎 `cargo run` 被[配置为使用 `espflash`](https://github.com/esp-rs/espressif-trainings/blob/main/intro/hardware-check/.cargo/config.toml#L6) 作为[自定义 runner](https://doc.rust-lang.org/cargo/reference/config.html#target)。以下方法也会得到相同的输出：
+> - 使用 `cargo-espflash`：`cargo espflash flash --release --monitor`
+> - 用 `espflash` 构建项目并烧写：`cargo build --release && espflash target/riscv32imc-esp-espidf/release/hardware-check`
+> 为方便起见，这个改动已经应用于本教程的所有项目。
 
 板上的 LED 应在启动时变为黄色，然后根据是否成功建立 Wifi 连接，变为红色（错误），或交替闪烁绿色和蓝色（成功）。如果出现 Wifi 错误，诊断消息也会显示在下面，例如：
 
 ```console
 Error: could not connect to Wi-Fi network: ESP_ERR_TIMEOUT
 ```
-> ⚠️ You will get an `ESP_ERR_TIMEOUT` error also in case your network name or password are incorrect, so double-check those.
+> ⚠️ 如果你的网络名或密码不正确，也会得到 `ESP_ERR_TIMEOUT`。所以请仔细检查它们。
 
 ## 关于构建、烧写和监视的额外信息
 
