@@ -17,17 +17,17 @@ Rust on ESP Book 的 [ecosystem 章节](https://esp-rs.github.io/book/overview/u
 
 ### 构建工具链
 
-🔎 作为项目构建的一部分，`esp-idf-sys` 会下载基于 C 的 Espressif 工具链 [ESP-IDF](https://github.com/espressif/esp-idf)。下载位置是可配置的，为了节省硬盘空间和下载时间，本课程中的所有示例和练习都被设置为使用一个单一的`全局`工具链，安装在 `~/.espressif` 中（对于 Windows，是`%USERPROFILE%\.espressif`）。 关于其他可选的配置，请参阅 `esp-idf-sys` 的 [README](https://github.com/esp-rs/esp-idf-sys#configuration) 中的 `ESP_IDF_TOOLS_INSTALL_DIR` 参数。
+🔎 作为项目构建的一部分，`esp-idf-sys` 会下载基于 C 的 Espressif 工具链 [ESP-IDF](https://github.com/espressif/esp-idf)。下载位置是可配置的，为了节省硬盘空间和下载时间，本教程中的所有示例和练习都被设置为使用一个单一的`全局`工具链，安装在 `~/.espressif` 中（对于 Windows，是`%USERPROFILE%\.espressif`）。 关于其他可选的配置，请参阅 `esp-idf-sys` 的 [README](https://github.com/esp-rs/esp-idf-sys#configuration) 中的 `ESP_IDF_TOOLS_INSTALL_DIR` 参数。
 
 ## Package 布局
 
-与使用 `cargo new` 创建的常规 Rust 项目相比，我们还需要一些额外的文件和参数。本课程中的示例和练习都已经配置好，要创建新项目，建议使用基于 [cargo-generate](./03_2_cargo_generate.md) 向导的方法。
+与使用 `cargo new` 创建的常规 Rust 项目相比，我们还需要一些额外的文件和参数。本教程中的示例和练习都已经配置好，要创建新项目，建议使用基于 [cargo-generate](./03_2_cargo_generate.md) 向导的方法。
 
 🔎 本页的其余部分是可选知识，在你希望更改项目的某些方面时可以派上用场。
 
 ### `Cargo.toml`
 
-本课程是围绕 [`native` 构建系统](https://github.com/esp-rs/esp-idf-sys#native)编写的。另外也可以使用 [`PlatformIO`/`pio`](https://github.com/esp-rs/esp-idf-sys#pio)，但目前已弃用。
+本教程是围绕 [`native` 构建系统](https://github.com/esp-rs/esp-idf-sys#native)编写的。另外也可以使用 [`PlatformIO`/`pio`](https://github.com/esp-rs/esp-idf-sys#pio)，但目前已弃用。
 
 ```toml
 [features]

@@ -21,7 +21,7 @@ ESP-IDF 主要是用 C 编写的，因此将它以规范的、分离的 crate �
 
 _The Rust on ESP Book_ 的 [ecosystem 章节](https://esp-rs.github.io/book/overview/using-the-standard-library.html) 提供了更多信息。
 
-如果你想使用 Rust，这就是目前在 Espressif 芯片上提供了最大可能性的开发方式。**本课程中的所有内容都基于这种方法。**
+如果你想使用 Rust，这就是目前在 Espressif 芯片上提供了最大可能性的开发方式。**本教程中的所有内容都基于这种方法。**
 
 我们将在中断练习中研究，在此生态系统中如何直接将值写入寄存器。
 

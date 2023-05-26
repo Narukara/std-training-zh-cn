@@ -2,7 +2,7 @@
 
 将 Espressif Rust 开发板连接到你的电脑。确认一个红色的小 LED 被点亮了。
 
-此设备应当通过 USB 提供了一个 UART 串口：
+开发板应当通过 USB 提供了一个 UART 串口：
 
 **Windows**：一个 USB 串行设备（COM 端口），在设备管理器的“端口”部分。
 

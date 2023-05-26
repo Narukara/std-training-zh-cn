@@ -2,7 +2,7 @@
 
 现在让我们用 [`cargo-generate`](https://github.com/cargo-generate/cargo-generate) （一个通用的项目生成向导）来配置我们的第一个项目。
 
-> 本课程中的其他大多数练习都已经提供了项目框架，不需要使用 `cargo-generate`。
+> 本教程中的其他大多数练习都已经提供了项目框架，不需要使用 `cargo-generate`。
 >
 ✅ 安装 `cargo-generate`：
 
@@ -80,7 +80,7 @@ Hello, world!
 - 你能想出一种办法来避免你看到的现象吗？（提示[^hint]）
 
 ## Troubleshooting
-- if `cargo run` is stuck on `Connecting...`, you might have another monitor process still running (e.g. from the initial `hardware-check` test). Try finding and terminating it. If this doesn't help, disconnect and reconnect the board's USB cable.
+- 如果 `cargo run` 卡在了 `Connecting...` 上，可能是因为有另一个监视进程在运行（例如，在刚刚的 `hardware-check` 中打开的）。尝试找到并终止它。如果还是不行，尝试重新连接板子的 USB 线缆。
 - `⛔ Git Error: authentication required`：你的 git 可能被配置为将 `https` github URL 替换成 `ssh`。检查全局 `~/.git/config` 中的 `insteadOf` 部分并禁用它们。
 
 [^hint]: 通过在循环中`休眠`而不是忙等待，将控制权交还给底层操作系统。（使用 `std::thread::sleep`）

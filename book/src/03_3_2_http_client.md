@@ -23,7 +23,7 @@ cargo run --example http_client
 ```
 ## 建立连接
 
-默认只能使用未加密的 HTTP，这限制了我们能连接到的主机。我们将使用 `http://neverssl.com/`。
+默认只能使用未加密的 HTTP，这限制了我们能连接到的主机。因此我们将使用 `http://neverssl.com/`。
 
 在 ESP-IDF 中，HTTP 客户端连接由 `esp-idf-svc` crate 中的 `http::client::EspHttpClient` 管理。它实现了 `embedded-svc` 中的 `http::client::Client` trait，定义了 [HTTP 请求方法](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods)（如 `GET` 或 `POST`）使用的函数。现在正是查看你用 `cargo doc --open` 打开的文档的好时机，查看其中 `esp_idf_svc::http::client::EspHttpConnection` 和 `embedded_svc::http::client::Client` 相关的内容，以及可以使用的实例化方法。
 
@@ -41,7 +41,7 @@ let request = client.get(url.as_ref())?;
 let response = request.submit()?;
 ```
 
-成功的响应具有 [2xx 范围内的状态码](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)。紧跟其后的是网站的原始 html。
+成功的响应具有 [2xx 范围内的状态码](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)。紧随其后的是网站的原始 html。
 
 ✅ 检验连接是否成功。
 
@@ -54,7 +54,7 @@ match status {
         _ => bail!("Unexpected response code: {}", status),
     }
 ```
-状态码错误可以用 [Anyhow](https://docs.rs/anyhow/latest/anyhow/index.html) crate 返回。`Anyhow` 常被用于简化应用程序级错误处理，它提供了一个通用的 `anyhow::Result<T>`，将成功（`Ok`）情况包装在 T 中，而且无需指定 Err 类型，只要求你返回的每个错误都实现了 `std::error::Error`。
+状态码错误可以用 [Anyhow](https://docs.rs/anyhow/latest/anyhow/index.html) crate 返回。`Anyhow` 常被用于简化应用程序中的错误处理，它提供了一个通用的 `anyhow::Result<T>`，将成功（`Ok`）情况包装在 T 中，而且无需指定 Err 类型，只要求你返回的每个错误都实现了 `std::error::Error`。
 
 ✅ 使用 `Read::read(&mut reader,&mut buf)` 将接收到的数据逐块地读取到 `u8` 缓冲区中。`Read::read` 会返回读取的字节数——当这个值为 `0` 时就完成了读取。
 

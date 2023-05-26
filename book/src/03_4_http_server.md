@@ -27,14 +27,14 @@ Server awaiting connection
 
 `sta ip` 指的是 WiFi 术语站点（station），代表连接到接入点（access point）的接口。这就是你需要输入浏览器的地址（或其他 HTTP 客户端，如 `curl`）。
 
-> 🔎 ESP-IDF 会尝试在本地网络中注册主机名 `espressif`，因此通常使用 `http://espressif/` 代替 `http://<sta ip>/` 也可以。
+> 🔎 ESP-IDF 会尝试在本地网络中注册主机名 `espressif`，因此使用 `http://espressif/` 代替 `http://<sta ip>/` 通常也可以。
 >
 > 你可以通过设置 `sdkconfig.defaults` 中的 `CONFIG_LWIP_LOCAL_HOSTNAME` 来更改主机名，例如 `CONFIG_LWIP_LOCAL_HOSTNAME="esp32c3"`。
 
 向客户端发送 HTTP 数据包括：
 - 创建一个 `EspHttpServer` 实例
 - 在主函数中循环，这样它就不会终止——终止会导致服务器离开作用域然后关闭
-- 为需要提供内容的每个路径设置单独的请求处理（`handler`）函数。任何未配置的路径都会导致 `404` 错误。这些处理函数以 Rust 闭包的形式内联实现，如下所示：
+- 为需要提供内容的每个路径设置单独的请求处理（`handler`）函数。任何未配置的路径都会产生 `404` 错误。这些处理函数以 Rust 闭包的形式内联实现，如下所示：
 
 ```rust
 server.fn_handler(path, Method::Get, |request| {

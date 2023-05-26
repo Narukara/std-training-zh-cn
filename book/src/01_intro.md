@@ -19,7 +19,7 @@
 
 如果你订阅了其中一项培训，乐鑫将直接为你提供一块开发板。
 
-我们的重点主要在 [ESP32-C3](https://www.espressif.com/en/products/socs/esp32-c3) 平台，一个基于 [RISC-V](https://riscv.org/) 的，具有强大物联网功能的微控制器，集成 Wi-Fi 和 Bluetooth 5 (LE) 功能，以及适用于复杂应用的大容量 RAM 和 Flash。 本课程的大部分内容也适用于 Espressif 使用的其他架构（Xtensa），特别是 [ESP32-S3](https://www.espressif.com/en/products/socs/esp32-s3)。 对于底层访问，原理上是一样的，但实际的硬件访问会各有不同——请根据需要参阅技术参考手册（[C3](https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_en.pdf)，[S3](https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_en.pdf)）或[其他可用的技术文档](https://www.espressif.com/en/support/documents/technical-documents)。
+我们的重点主要在 [ESP32-C3](https://www.espressif.com/en/products/socs/esp32-c3) 平台，一个基于 [RISC-V](https://riscv.org/) 的，具有强大物联网功能的微控制器，集成 Wi-Fi 和 Bluetooth 5 (LE) 功能，以及适用于复杂应用的大容量 RAM 和 Flash。 本教程的大部分内容也适用于 Espressif 使用的其他架构（Xtensa），特别是 [ESP32-S3](https://www.espressif.com/en/products/socs/esp32-s3)。 对于底层访问，原理上是一样的，但实际的硬件访问会各有不同——请根据需要参阅技术参考手册（[C3](https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_en.pdf)，[S3](https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_en.pdf)）或[其他可用的技术文档](https://www.espressif.com/en/support/documents/technical-documents)。
 
 ## Rust 知识
 

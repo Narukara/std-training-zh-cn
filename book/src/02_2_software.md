@@ -8,7 +8,7 @@
 
 ✅ 如果你的电脑上还没有安装 Rust，从 <https://rustup.rs/> 获取它
 
-此外，对于 ESP32-C3，目前需要 Rust 工具链的 [*nightly* 版本](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust)。本课程中我们将使用 `nightly-2023-02-28` 版本。
+此外，对于 ESP32-C3，目前需要 Rust 工具链的 [*nightly* 版本](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust)。本教程中我们将使用 `nightly-2023-02-28` 版本。
 
 ✅ 用以下命令安装 *nightly* Rust，并添加对目标架构的支持：
 
@@ -55,7 +55,7 @@ brew install llvm
 - 报错 `failed to run custom build command for libudev-sys vX.X.X` 或 `esp-idf-sys vX.X.X`：
 
     在撰写本文时，可以通过以下方法解决：
-    1. 运行这一行：
+    1. 运行这一行命令：
 
     `apt-get update \
     && apt-get install -y vim nano git curl gcc ninja-build cmake libudev-dev python3 python3-pip libusb-1.0-0 libssl-dev \
