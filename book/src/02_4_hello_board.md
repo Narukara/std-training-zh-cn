@@ -51,7 +51,7 @@ I (4427) wifi::wifi: Wifi connected!
 
 >🔎 如果成功运行了 `cargo run`，你可以通过 `ctrl+C` 退出。
 
-> 🔎 `cargo run` 被[配置为使用 `espflash`](https://github.com/esp-rs/espressif-trainings/blob/main/intro/hardware-check/.cargo/config.toml#L6) 作为[自定义 runner](https://doc.rust-lang.org/cargo/reference/config.html#target)。以下方法也会得到相同的输出：
+> 🔎 `cargo run` 被[配置为使用 `espflash`](https://github.com/esp-rs/std-training/blob/main/intro/hardware-check/.cargo/config.toml#L6) 作为[自定义 runner](https://doc.rust-lang.org/cargo/reference/config.html#target)。以下方法也会得到相同的输出：
 > - 使用 `cargo-espflash`：`cargo espflash flash --release --monitor`
 > - 用 `espflash` 构建项目并烧写：`cargo build --release && espflash target/riscv32imc-esp-espidf/release/hardware-check`
 > 为方便起见，这个改动已经应用于本教程的所有项目。

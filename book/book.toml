@@ -11,4 +11,4 @@ edition = "2021"
 
 
 [output.html]
-git-repository-url = "https://github.com/Narukara/espressif-trainings-zh-cn"
+git-repository-url = "https://github.com/Narukara/std-training-zh-cn"

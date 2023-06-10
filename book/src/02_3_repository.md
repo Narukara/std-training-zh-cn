@@ -1,19 +1,19 @@
 # 教程仓库
 
-完整的材料可以在 <https://github.com/esp-rs/espressif-trainings> 找到。
+完整的材料可以在 <https://github.com/esp-rs/std-training> 找到。
 
 ✅ 克隆并进入教程仓库：
 
 ```console
-git clone "https://github.com/esp-rs/espressif-trainings.git"
-cd espressif-trainings
+git clone "https://github.com/esp-rs/std-training.git"
+cd std-training
 ```
 
 ❗ Windows 用户可能会遇到长路径名的问题。请按照以下步骤替换路径：
 
 ```console
-git clone https://github.com/esp-rs/espressif-trainings.git
-subst r: espressif-trainings
+git clone https://github.com/esp-rs/std-training.git
+subst r: std-training
 cd r:\
 ```
 

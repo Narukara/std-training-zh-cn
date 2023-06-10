@@ -2,7 +2,7 @@
 
 这个文件夹包含在 ESP32-C3 上运行 Rust 的入门级示例。
 
-你可能想查看 [这本书](http://espressif-trainings.ferrous-systems.com) 以获取与它们配套的教材。
+你可能想查看 [这本书](https://github.com/esp-rs/std-training/) 以获取与它们配套的教材。
 
 ## 示例列表
 
