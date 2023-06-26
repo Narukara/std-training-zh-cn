@@ -39,8 +39,8 @@ native = ["esp-idf-sys/native"]
 
 ```toml
 [build-dependencies]
-embuild = "=0.31.1"
-anyhow = "=1.0.69"
+embuild = "=0.31.2"
+anyhow = "=1.0.71"
 ```
 
 ### 额外的配置文件

@@ -11,7 +11,7 @@ cargo run --example https_client
 创建一个自定义的客户端配置，由此使用启用了证书的`esp_idf_svc::http::client::EspHttpConnection`，而其他值保持默认。
 
 ```rust
-let mut client = EspHttpClient::new(&EspHttpClientConfiguration {
+let connection = EspHttpConnection::new(&Configuration {
         use_global_ca_store: true,
         crt_bundle_attach: Some(esp_idf_sys::esp_crt_bundle_attach),
         ..Default::default()
