@@ -10,6 +10,12 @@
 
 你可以加入 Matrix 上的 [esp-rs 社区](https://matrix.to/#/#esp-rs:matrix.org) 来探讨任何技术问题！社区对所有人开放。
 
+## 翻译
+
+这里是本书的简体中文译本。原书（英文版）及其他译本如下：
+
+- [English](https://esp-rs.github.io/std-training/) ([仓库](https://github.com/esp-rs/std-training/))
+
 ## 开发板
 
 本书要求使用 [Rust ESP 开发板](https://github.com/esp-rs/esp-rust-board)[^note]——不支持像 QEMU 这样的模拟器。
