@@ -1,34 +1,33 @@
-# Interrupts
+# 中断
 
-An interrupt is a request for the processor to interrupt currently executing code, so that the event can be processed in a timely manner. If the request is accepted, the processor will suspend its current activities, save its state, and execute a function called an interrupt handler to deal with the event. Interrupts are commonly used by hardware devices to indicate electronic or physical state changes that require time-sensitive attention, for example, pushing a button.
+中断就是请求处理器中断当前执行的代码，以便及时处理某些事件。如果中断请求被接受，处理器就会暂停当前的活动，保存其状态，然后执行一个称作中断处理程序（interrupt handler）的函数，来处理某事件。中断常被硬件设备用于指示需要及时关注的电气或物理状态，例如，按钮被按下。
 
-The fact that interrupt handlers can be called at any time provides a challenge in embedded Rust: It requires the existence of statically allocated mutable memory that both the interrupt handler and the main code can refer to, and it also requires that this memory is always accessible.
+中断处理程序可能随时被调用，这为嵌入式 Rust 带来了一些挑战：需要有静态分配的、可变的内存，中断处理程序和主程序都可以引用它，而且这段内存必须随时是可用的。
 
-## Challenges
+## 挑战
 
-### Flash Memory
+### Flash 存储器
 
-Flash memory does not fulfill this requirement as it is out of action for example during write operations. Interrupts that occur during this time will go unnoticed. In our example, this would result in no reaction when the button is pushed. We solve this by moving the interrupt handler into RAM.
-### Statically Mutable Memory
+Flash 存储器不满足上面的要求，因为它在写入操作时是不可用的。在此期间发生的中断不会得到响应。在我们的例子中，这会导致按下按钮没有任何反应。我们通过将中断处理程序移动到 RAM 中来解决这个问题。
+### 静态可变内存
 
-In Rust, such memory can be declared by defining a `static mut`. But reading and writing to such variables is always unsafe, as without precautions race conditions can be triggered.
+在 Rust 中，这种内存可以用 `static mut` 来声明。但是读写此类变量总是 unsafe 的，如果不采取保护措施，可能会产生竞态条件。
 
-How do we handle this problem?
+如何处理这种问题？
 
-In our example, the ESP-IDF framework provides a `Queue` type which handles the shared-mutable state for us. We simply get a `QueueHandle` which unique identifies the particular `Queue` being used. However, the main thread is given this `QueueHandle_t` at run-time, and so we still need a small amount of shared-mutable state in order to share the `QueueHandle_t` with the interrupt routine. We use an `Option<QueueHandle_t>`, which we statically initialize to `None`, and later replace with `Some(queue_handle)` when the queue has been created by ESP-IDF.
+在我们的例子中，ESP-IDF 框架提供了一个 `Queue` 类型，用于处理共享-可变的状态。我们只需获取一个 `QueueHandle` 来唯一标识一个正在使用的 `Queue`。然而，主线程是在运行时得到这个 `QueueHandle_t` 的，因此我们仍然需要少量的共享-可变状态，以便与中断处理程序共享 `QueueHandle_t`。我们使用 `Option<QueueHandle_t>`，将其静态初始化为 `None`，然后在 ESP-IDF 把队列创建出来时，再将它替换成 `Some(queue_handle)`。
 
-In the interrupt routine, Rust forces us to handle the case where the `static mut` is still `None`. If this happens, we can either return early, or we can `unwrap()` the value, which will exit the program with an error if the value was not previously set to `Some(queue_handle)`.
+在中断处理程序中，Rust 强制我们处理 `static mut` 仍然为 `None` 的情形。如果发生了这种情况，我们可以提前返回，或者直接 `unwrap()` 该值，如果它没有被提前设置为 `Some(queue_handle)`，就会产生错误，使程序退出。
 
-There is still a risk that `main()` might be in the processing of changing the value of the variable (i.e. changing the `QueueHandle_t` value) just as the interrupt routine fires, leaving it in an inconsistent or invalid state. We mitigate this by making sure we only set the value once, and we do so before the interrupt is enabled. The compiler cannot check that this is safe, and so we must use the `unsafe` keyword when we read or write the value.
+仍然存在这样的风险：在中断处理程序触发时，`main()` 可能正在更改这个变量的值（即更改 `QueueHandle_t` 的值），从而使其处于不一致或无效状态。我们通过确保只设置一次该值来缓解这种情况，并且仅在使能中断之前设置。编译器无法检查这是否安全，因此我们在读取或写入该值时必须使用 `unsafe` 关键字。
 
 <!-- An alternative to the `static mut` variable is to convert the `QueueHandle_t` to an integer, and store it in an `AtomicU32` or similar. These atomic types guarantee they can never be read in an intermediate or invalid state. However, they require special hardware support which is not available on the ESP32-C3. You would also still need to distinguish between a valid `QueueHandle_t` and some value that indicates the queue has not yet been created (perhaps `0xFFFF_FFFF`).
 Yet another option is to use a special data structure which disables interrupts automatically when the value is being access. This guarantees that no code can interrupt you when reading or writing the value. This does however increase interrupt latency and in this case because the `QueueHandle_t` is only written once, this is not necessary. -->
 
-Read more about this in the [Embedded Rust Book](https://docs.rust-embedded.org/book/concurrency/index.html)
+更多的信息可以参考 [Embedded Rust Book](https://docs.rust-embedded.org/book/concurrency/index.html)
 
-## `unsafe {}` blocks:
+## `unsafe {}` 块：
 
-This code contains a lot of `unsafe {}` blocks. As a general rule, `unsafe` does not mean that the contained code is not memory safe, it means, that Rust can't make safety guarantees in this place and that it is in the responsibility of the programmer to ensure memory safety. For example, Calling C Bindings is per se unsafe, as Rust can't make any safety guarantees for the underlying C Code.
-
+此代码包含许多的 `unsafe {}` 块。一般来说，`unsafe` 并不意味着所包含的代码不是内存安全的，而是意味着 Rust 无法在这个地方做出安全保证，并且程序员有责任确保内存安全。例如，调用 C 绑定本身就是不安全的，因为 Rust 无法为底层的 C 代码提供任何安全保证。
 
 
