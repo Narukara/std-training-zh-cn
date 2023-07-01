@@ -1,20 +1,20 @@
-# Random LED color on pushing a button
+# 按钮随机设置 LED 颜色
 
-✅ Modify the code so the RGB LED light changes to a different random color upon each button press. The LED should not go out or change color if the button is not pressed for some time.
+✅ 修改代码，使 RGB LED 灯在每次按下按钮时变为随机颜色。如果一段时间内未按下按钮，LED 不应熄灭或改变颜色。
 
-Continue by adding to your previous solution or the code from `advanced/button-interrupt/src/main.rs`.
+你可以在先前的代码上继续修改，或者从 `advanced/button-interrupt/src/main.rs` 开始着手。
 
-You can find the solution for this exercise in `advanced/button-interrupt/examples/solution.rs`. You can run it with the following command:
+`advanced/button-interrupt/examples/solution.rs` 包含本练习的解答。可以用以下命令运行：
 
 ```console
 cargo run --example solution_led
 ```
 
-## 💡 Solving Help
+## 💡 帮助信息
 
-* The necessary imports are already made, if you enter `cargo --doc --open` you will get helping documentation regarding the LED.
-* The LED's part number is WS2812RMT.
-* It's a programmable RGB LED. This means there aren't single pins to set for red, green and blue, but that we need to instantiate it to be able to send `RGB8` type values to it with a method.
-* The board has a hardware random number generator. It can be called with `esp_random()`.
-* Calling functions from the `esp-idf-sys` is unsafe in Rust terms and requires an `unsafe()` block. You can assume that these functions are safe to use, so no other measures are required.
+* 必要的 crate 都已经导入，你可以用 `cargo --doc --open` 查看 LED 的帮助文档。
+* LED 的型号是 WS2812RMT。
+* 这是一个可编程的 RGB LED。这意味着不存在单独的，用于设置红、绿、蓝的引脚。我们需要实例化它，然后才能发送 `RGB8` 类型的值给它。
+* 这个板子有硬件随机数生成器，可以用 `esp_random()` 调用它。
+* 从 Rust 的角度来看，调用 `esp-idf-sys` 中的一些函数是 unsafe 的，并且需要 `unsafe()` 块。不过你可以假设这些功能可以安全使用，不需要其他保护措施。
 

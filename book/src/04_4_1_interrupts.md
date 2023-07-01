@@ -37,7 +37,7 @@ cargo run --example solution
 
 它们都是常数，其值代表需要在相应寄存器中设置的位。
 
-2.用 [`unsafe extern "C" fn gpio_config`](https://esp-rs.github.io/esp-idf-sys/esp_idf_sys/fn.gpio_config.html) 将这些配置写入相应寄存器。这些操作需要在 unsafe 块中进行。为了进行这些 FFI 调用，可以使用宏 `esp!($Cfunktion)`。
+2. 用 [`unsafe extern "C" fn gpio_config`](https://esp-rs.github.io/esp-idf-sys/esp_idf_sys/fn.gpio_config.html) 将这些配置写入相应寄存器。这些操作需要在 unsafe 块中进行。为了进行这些 FFI 调用，可以使用宏 `esp!($Cfunktion)`。
 
 3. 用 [`unsafe extern "C" fn gpio_install_isr_service`](https://esp-rs.github.io/esp-idf-sys/esp_idf_sys/fn.gpio_install_isr_service.html) 设置一个通用的 GPIO 中断处理程序。这个函数以 `ESP_INTR_FLAG_IRAM` 作为参数。
 

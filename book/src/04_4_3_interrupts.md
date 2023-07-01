@@ -1,12 +1,12 @@
-# Step by Step Guide to the Solution
+# 分步解答
 
-1. Initialize the LED peripheral and switch the LED on with an arbitrary value just to see that it works.
+1. 初始化 LED 外设并以任意颜色值启动它，看看它是否正常工作。
    ```rust
     let mut led = WS2812RMT::new(peripherals.pins.gpio2, peripherals.rmt.channel0)?;
 
     led.set_pixel(RGB8::new(20, 0, 20)).unwrap(); // Remove this line after you tried it once
    ```
-2. Light up the LED only when the button is pressed. You can do this for now by exchanging the print statement.
+2. 只在按钮按下后点亮 LED。可以把打印语句改成下面的代码来实现：
    ```rust
    1 => {
         led.set_pixel(arbitrary_color)?;
@@ -14,9 +14,9 @@
         },
     _ => {},
    ```
-3. Create random RGB values by calling `esp_random()`.
-   * This function is `unsafe`.
-   * It yields `u32`, so it needs to be cast as `u8`.
+3. 调用 `esp_random()` 来生成随机 RGB 颜色值。
+   * 这个函数是 `unsafe` 的。
+   * 它会生成 `u32`，因此需要将它转换成 `u8`。
 
     ```rust
     unsafe {
@@ -33,7 +33,7 @@
     _ => {},
    ```
 
-4. **Optional**: If you intend to reuse this code in another place, it makes sense to put it into its own function. This lets us explore, in detail, which parts of the code need to be in `unsafe` blocks.
+4. **可选**：如果你想在其他地方重用这些代码，可以考虑将其放入一个函数中。这也允许我们确认具体哪些代码需要用 `unsafe` 块包裹。
 
     ```rust
     // ...
@@ -42,7 +42,7 @@
             // ...
             match res {
                     1 => {
-                        // Generates random rgb values
+                        // 生成随机 RGB 值
                         random_light(&mut led);
 
                     },
