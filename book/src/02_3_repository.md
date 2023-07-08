@@ -23,7 +23,6 @@ cd r:\
 - `book/` - 本书的 markdown 源码
 - `common/` - 入门和进阶教程共用的代码
 - `common/lib/` - 基础 crates
-- `extra/` - 并非本教程必须的工具，但可能很有用
 - `intro/` - 入门教程的代码示例和练习
 
 

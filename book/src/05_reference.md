@@ -1,39 +1,39 @@
-# Reference
+# 参考资料
 
 ## GPIO
 
-GPIO is short for General Purpose Input Output. GPIOs are digital (or sometimes analogue) signal pins that can be used as interfaces to other systems or devices. Each pin can be in various states, but they will have a default state on power-up or after a system reset (usually a harmless one, like being a digital input). We can then write software to change them into the appropriate state for our needs.
+GPIO 是通用输入输出（General Purpose Input Output）的缩写。 GPIO 是数字（有时也是模拟）信号引脚，可用作其他系统或设备的接口。每个引脚可以处于多种状态，且在上电或系统复位时进入默认状态（通常是无害的状态，例如数字输入）。然后我们可以编写软件，将它们更改为我们需要的状态。
 
-We'll introduce a couple of concepts related to GPIOs:
+下面将介绍几个与 GPIO 相关的概念：
 
-### Pin Configurations
+### 引脚配置
 
-GPIOs can be configured one of several ways. The options available can vary depending on the design of the chip, but will usually include:
+GPIO 可以通过多种方式进行配置。可用的选项可能会根据芯片的设计而有所不同，但通常包括：
 
-Floating: A floating pin is neither connected VCC nor Ground. It just floats around at whatever voltage is applied. Note though, that your circuit should externally pull the pin either low or high, as CMOS silicon devices (such as microcontrollers) can be fail to work correctly if you leave a pin higher than the 'low voltage threshold' or `Vtl`, but lower than the 'high voltage threshold' or `Vth` for more than a few microseconds.
+浮空：浮空引脚既不连接 VCC，也不连接地。它的电平只取决于外部施加的电压。需要注意的是，引脚应从外部拉低或拉高，因为如果引脚电平高于“低电压阈值”（`Vtl`），但低于“高电压阈值”（`Vth`），持续超过几微秒，可能会导致 CMOS 硅器件（例如微控制器）无法正常工作。
 
-Push-Pull-Output: A pin that is configured as push–pull output can then be set to either drive a high voltage on to the pin (i.e. connect it to VCC), or a low voltage on to the pin (i.e. connect it to Ground). This is useful for LEDs, or buzzers or other devices that use small amounts of power.
+推挽输出：配置为推挽输出的引脚，可以将其驱动为高电平（即将其连接到 VCC），或将其驱动为低电平（即将其接地）。这对于 LED、蜂鸣器或其他耗电量较小的设备很有用。
 
-Open-Drain-Output: Open Drain outputs switch between "disconnected" and "connected to ground". It is expected that some external resistor will weakly pull the line up to VCC. This type of output is designed to allow multiple devices to be connected together - the line is 'low' if any of the devices connected to the line drive it low. If two or more devices drive it low at the same time, no damage occurs (connecting Ground to Ground is safe). If none of them drive it low, the resistor will pull it high by default.
+开漏输出：开漏输出的引脚可以在“断路”和“接地”之间切换。通常会外接电阻将线路弱上拉至 VCC。这种类型的输出旨在允许多个设备连接在一起——如果连接到这条线路的任一设备将其驱动为低电平，则整条线路为低电平。如果两个或多个设备同时将其驱动为低电平，也不会发生损坏（地与地连接是安全的）。如果所有设备都没有将其驱动为低电平，则默认情况下电阻会将其拉高。
 
-Floating-Input: A pin where the external voltage applied can be read, in software, as either a `1` (usually if the voltage is above some threshold voltage) or a `0` (if it isn't). The same warnings apply as per the 'Floating' state.
+浮空输入：引脚上施加外部电压，可以在软件中读取为 `1`（如果电压高于某个阈值）或 `0`（如果低于阈值）。前述“浮空”状态的注意事项也适用于这个状态。
 
-Pull-Up-Input: Like a Floating-Input, except an internal 'pull-up' resistor weakly pulls the line up to VCC when nothing external is driving it down to Ground. Useful for reading buttons and other switches, as it saves you from needing an external resistor.
+上拉输入：与浮空输入类似，不同之处在于存在一个内部的上拉电阻，它会在没有外部驱动器将线路下拉至地时，将线路弱上拉至 VCC。这对于读取按钮和其他开关的状态很有用，可以节省一个外部电阻。
 
-### Active high/low
+### 高有效/低有效
 
-A digital signal can be in two states: `high` and `low`. This is usually represented by the voltage difference between the signal and ground. It is arbitrary which of these voltage levels represents which logic states: So both `high` and `low` can be defined as an active state.
+数字信号有两种状态：“高”和“低”。这通常由信号与地之间的电压差来表示。哪种电平代表哪种状态是可以任意选定的，因此“高”和“低”都可以被定义为有效状态。
 
-For example: An active high pin has voltage when the logic level is active. And active low pin has voltage when the logic level is set to inactive.
+例如：一个高有效的引脚，在逻辑有效时应当是高电平。一个低有效的引脚，在逻辑无效时才是高电平。
 
-In embedded Rust, abstractions show the logic level and not the voltage level. So if you have an active low pin connected to an LED, you need to set it to inactive in order for the LED to light up.
+在嵌入式 Rust 的抽象中，我们看到的是逻辑状态，而不是电平。所以如果有一个连接 LED 的低有效的引脚，你需要将其设置为无效状态才能点亮 LED。
 
-### Chip Select
+### 片选
 
-Chip Select is a binary signal to another device that can switch that device on or off, either partially or entirely. It is frequently a signal line connected to a GPIO, and commonly used to allow multiple devices to be connected to the same SPI bus - each device only listens when its Chip Select line is active.
+片选是发送给一个设备的二进制信号，可以部分或全部地，打开或关闭该设备。它通常是连接到 GPIO 的一条信号线，常用于允许多个设备连接到同一 SPI 总线上 —— 每个设备仅在其片选线处于有效状态时监听总线。
 
 ### Bit Banging
 
-For protocols such as I2C or SPI we usually use peripherals within the MCU to convert the data we want to transmit into signals. In some cases, for example if the MCU does not support the protocol or if a non-standard form of the protocol is used, you need to write a program that turns the data into signals manually.  This is called bit-banging.
+对于 I2C 或 SPI 等协议，我们通常使用 MCU 内的外设将我们想要传输的数据转换为信号。在某些情况下，例如，如果 MCU 不支持该协议，或者想要使用非标准形式的协议，则需要编写一个程序来手动将数据转换为信号。这称为 Bit Banging。
 
 
