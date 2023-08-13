@@ -41,7 +41,7 @@ cargo generate https://github.com/esp-rs/esp-idf-template cargo
 `Cargo.toml` 包含依赖项 [导入所有依赖项](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html)。
 
 
-可选，但是推荐：为了节省硬盘空间和下载时间，把[工具链路径设置为全局（global）](https://github.com/esp-rs/esp-idf-sys#esp_idf_tools_install_dir-esp_idf_tools_install_dir)——否则每一个新项目/工作空间都会安装一个自己的工具链实例：
+可选，但是推荐：为了节省硬盘空间和下载时间，把[工具链路径设置为全局（global）](https://github.com/esp-rs/esp-idf-sys#esp_idf_tools_install_dir-esp_idf_tools_install_dir)。否则每一个新项目/工作空间都会安装一个自己的工具链实例：
 
 
 ✅ 打开 `hello-world/.cargo/config.toml` 并添加下面几行到 `[env]` section 的底部。保持其他内容不变。
@@ -81,6 +81,6 @@ Hello, world!
 
 ## Troubleshooting
 - 如果 `cargo run` 卡在了 `Connecting...` 上，可能是因为有另一个监视进程在运行（例如，在刚刚的 `hardware-check` 中打开的）。尝试找到并终止它。如果还是不行，尝试重新连接板子的 USB 线缆。
-- `⛔ Git Error: authentication required`：你的 git 可能被配置为将 `https` github URL 替换成 `ssh`。检查全局 `~/.git/config` 中的 `insteadOf` 部分并禁用它们。
+- `⛔ Git Error: authentication required`：你的 git 可能配置为将 `https` Github URL 替换成 `ssh`。检查全局 `~/.git/config` 中的 `insteadOf` 部分并禁用它们。
 
 [^hint]: 通过在循环中`休眠`而不是忙等待，将控制权交还给底层操作系统。（使用 `std::thread::sleep`）

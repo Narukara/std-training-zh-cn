@@ -22,7 +22,7 @@ Flash 存储器不满足上面的要求，因为它在写入操作时是不可�
 仍然存在这样的风险：在中断处理程序触发时，`main()` 可能正在更改这个变量的值（即更改 `QueueHandle_t` 的值），从而使其处于不一致或无效状态。我们通过确保只设置一次该值来缓解这种情况，并且仅在使能中断之前设置。编译器无法检查这是否安全，因此我们在读取或写入该值时必须使用 `unsafe` 关键字。
 
 <!-- An alternative to the `static mut` variable is to convert the `QueueHandle_t` to an integer, and store it in an `AtomicU32` or similar. These atomic types guarantee they can never be read in an intermediate or invalid state. However, they require special hardware support which is not available on the ESP32-C3. You would also still need to distinguish between a valid `QueueHandle_t` and some value that indicates the queue has not yet been created (perhaps `0xFFFF_FFFF`).
-Yet another option is to use a special data structure which disables interrupts automatically when the value is being access. This guarantees that no code can interrupt you when reading or writing the value. This does however increase interrupt latency and in this case because the `QueueHandle_t` is only written once, this is not necessary. -->
+Yet another option is to use a special data structure which disables interrupts automatically when the value is being access. This guarantees that no code can interrupt you when reading or writing the value. This does however increase interrupt latency and in this case, because the `QueueHandle_t` is only written once, this is not necessary. -->
 
 更多的信息可以参考 [Embedded Rust Book](https://docs.rust-embedded.org/book/concurrency/index.html)
 

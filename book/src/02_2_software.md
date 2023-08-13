@@ -2,7 +2,7 @@
 
 按照以下步骤完成 ESP32-C3 平台工具的默认安装。
 
-🔎 如果想要自定义安装（例如，从源码构建组件，或者添加对 Xtensa 目标的支持），请参阅 *Rust on ESP* 一书的 [Rust on ESP targets](https://esp-rs.github.io/book/installation/index.html) 章节。
+🔎 如果想要自定义安装（例如，从源码构建组件，或者添加对 `Xtensa` 目标的支持），请参阅 *Rust on ESP* 一书的 [Rust on ESP targets](https://esp-rs.github.io/book/installation/index.html) 章节。
 
 ## Rust 工具链
 
@@ -17,12 +17,12 @@ rustup toolchain install nightly-2023-02-28 --component rust-src
 ```
 
 🔎 Rust 能够交叉编译到任何支持的目标架构（参见 `rustup 目标列表`）。默认情况下，仅会安装本机的架构。
-从 2022 年 1 月起，如果要编译到 Xtensa 架构（不是本材料的一部分），需要一个 Rust 编译器的分支。
+从 2022 年 1 月起，如果要编译到 `Xtensa` 架构（不是本材料的一部分），需要一个 Rust 编译器的分支。
 
 ## Espressif 工具链
 
 需要几个工具：
-- [`cargo-espflash`](https://github.com/esp-rs/espflash/tree/main/cargo-espflash) - 上传固件到微控制器，打开串口监视器，cargo 集成
+- [`cargo-espflash`](https://github.com/esp-rs/espflash/tree/main/cargo-espflash) - 上传固件到微控制器，打开串口监视器，Cargo 集成
 - [`espflash`](https://github.com/esp-rs/espflash/tree/main/espflash) - 上传固件到微控制器，打开串口监视器
 - [`ldproxy`](https://github.com/esp-rs/embuild/tree/master/ldproxy) - Espressif 构建工具链的依赖
 
@@ -41,7 +41,7 @@ cargo install cargo-espflash espflash ldproxy
 ```console
 sudo apt install llvm-dev libclang-dev clang
 ```
-### macOS
+### `macOS`
 
 当使用 Homebrew 包管理器时，这也是我们推荐的方式：
 ```console
@@ -116,7 +116,7 @@ docker run --mount type=bind,source="$(pwd)",target=/workspace,consistency=cache
 * [`lldb`](https://github.com/vadimcn/vscode-lldb) 基于 LLDB 的本机调试器扩展
 * [`crates`](https://github.com/serayuzgur/crates) 帮助管理 Rust 依赖项
 
-### VS Code 和 Devcontainer
+### VS Code 和 Dev container
 
 有助于在 Docker 容器内开发的一个 VS Code 扩展是 [`Remote Containers`](https://github.com/Microsoft/vscode-remote-release)。
 它使用与 [Docker 配置](#docker)相同的 Dockerfile，构建镜像并从 VS Code 中建立连接。

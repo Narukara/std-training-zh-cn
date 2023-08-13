@@ -1,11 +1,11 @@
 # 项目结构
 
-## esp-rs crates
+## `esp-rs` Crate
 
 不像大多数其他嵌入式平台，Espressif 支持 Rust 标准库。其中最值得关注的是，你可以任意使用大小可变的集合，例如 `Vec` 或 `HashMap`，以及基于 `Box` 的通用堆存储。你还可以自由地创建新线程，并使用 `Arc` 和 `Mutex` 等同步原语在它们之间安全地共享数据。
 尽管如此，内存在嵌入式系统上仍然是一种稀缺资源，因此需要注意不要耗尽它——尤其是，使用线程的代价可能会很高。
 
-Espressif 的开源物联网开发框架 [ESP-IDF](https://github.com/espressif/esp-idf) 提供了 WiFi、HTTP 客户端/服务器、MQTT、OTA 更新、日志记录等服务。esp-idf 主要是用 C 编写的，因此将它以规范的、分离的 crate 的形式提供给 Rust：
+Espressif 的开源物联网开发框架 [ESP-IDF](https://github.com/espressif/esp-idf) 提供了 Wi-Fi、HTTP 客户端/服务器、MQTT、OTA 更新、日志记录等服务。esp-idf 主要是用 C 编写的，因此将它以规范的、分离的 crate 的形式提供给 Rust：
 - 一个 `sys` crate 提供了实际的 `unsafe` 绑定（[esp-idf-sys](https://github.com/esp-rs/esp-idf-sys)）
 - 一个高级的 crate 提供了安全易用的 Rust 抽象（[esp-idf-svc](https://github.com/esp-rs/esp-idf-svc/)）
 
@@ -21,7 +21,7 @@ Rust on ESP Book 的 [ecosystem 章节](https://esp-rs.github.io/book/overview/u
 
 ## Package 布局
 
-与使用 `cargo new` 创建的常规 Rust 项目相比，我们还需要一些额外的文件和参数。本教程中的示例和练习都已经配置好，要创建新项目，建议使用基于 [cargo-generate](./03_2_cargo_generate.md) 向导的方法。
+与使用 `cargo new` 创建的常规 Rust 项目相比，我们还需要一些额外的文件和参数。本教程中的示例和练习都已经配置好，要创建新项目，建议使用基于 [`cargo-generate`](./03_2_cargo_generate.md) 向导的方法。
 
 🔎 本页的其余部分是可选知识，在你希望更改项目的某些方面时可以派上用场。
 
@@ -47,4 +47,4 @@ anyhow = "=1.0.71"
 
 - `build.rs` - [Cargo 构建脚本](https://doc.rust-lang.org/cargo/reference/build-scripts.html)。这里设置构建所需的环境变量。
 - `.cargo/config.toml` - 设置目标架构、自定义 runner 来烧写和监视设备、控制构建细节。如果有需要的话，可以在此处覆盖 `ESP_IDF_TOOLS_INSTALL_DIR`。
-- `sdkconfig.defaults` - 覆盖 ESP-IDF 的特定参数，例如堆栈大小、日志级别……
+- `sdkconfig.defaults` - 覆盖 ESP-IDF 的特定参数，例如堆栈大小、日志级别等。

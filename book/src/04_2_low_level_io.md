@@ -17,7 +17,7 @@ ESP-IDF 主要是用 C 编写的，因此将它以规范的、分离的 crate �
 - 一个高级的 crate 提供了安全易用的 Rust 抽象（[esp-idf-svc](https://github.com/esp-rs/esp-idf-svc/)）
 
 最后一部分是底层硬件访问，仍以分离的形式提供：
-- [esp-idf-hal](https://github.com/esp-rs/esp-idf-hal) 实现了硬件无关的 [embedded-hal](https://github.com/rust-embedded/embedded-hal) traits，例如模数转换、数字 I/O 引脚、SPI 通信。正如它的名字所暗示的，它依赖于 ESP-IDF。
+- [`esp-idf-hal`](https://github.com/esp-rs/esp-idf-hal) 实现了硬件无关的 [`embedded-hal`](https://github.com/rust-embedded/embedded-hal) traits，例如模数转换、数字 I/O 引脚、SPI 通信。正如它的名字所暗示的，它依赖于 ESP-IDF。
 
 _The Rust on ESP Book_ 的 [ecosystem 章节](https://esp-rs.github.io/book/overview/using-the-standard-library.html) 提供了更多信息。
 

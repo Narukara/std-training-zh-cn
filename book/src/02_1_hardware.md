@@ -7,7 +7,7 @@
 **Windows**：一个 USB 串行设备（COM 端口），在设备管理器的“端口”部分。
 
 **Linux**：`lsusb` 下的一个 USB 设备。
-这个设备的 VID（vendor ID）为 `303a`，PID（product ID）为 `1001`——`lsusb` 的输出中会省略 `0x` 前缀：
+这个设备的 VID（Vendor ID）为 `303a`，PID（Product ID）为 `1001`——`lsusb` 的输出中会省略 `0x` 前缀：
 
 ``` console
 $ lsusb | grep USB

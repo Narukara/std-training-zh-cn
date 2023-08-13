@@ -1,4 +1,4 @@
-# Hello, board!
+# Hello, Board!
 
 现在我们已准备好进行一致性检查了！
 
@@ -12,7 +12,7 @@ cd intro/hardware-check
 
 ✅ 将 `cfg.toml.example` 复制到 `cfg.toml`（在同一目录中），将实际的 SSID 和 PSK 写入其中：
 
-> ⚠️ [ESP32-C3 不支持 5GHz 频段](https://www.espressif.com/en/news/ESP32-C3_Wi-Fi_Certified#:~:text=ESP32%2DC3%20is%20a%20safe,wide%20range%20of%20IoT%20applications)，你需要确保你使用的 WiFi 具有可用的 2.4GHz 频段。
+> ⚠️ [ESP32-C3 不支持 5 GHz 频段](https://www.espressif.com/en/news/ESP32-C3_Wi-Fi_Certified#:~:text=ESP32%2DC3%20is%20a%20safe,wide%20range%20of%20IoT%20applications)，你需要确保你使用的 Wi-Fi 具有可用的 2.4 GHz 频段。
 
 ```console
 $ cp cfg.toml.example cfg.toml
@@ -56,7 +56,7 @@ I (4427) wifi::wifi: Wifi connected!
 > - 用 `espflash` 构建项目并烧写：`cargo build --release && espflash target/riscv32imc-esp-espidf/release/hardware-check`
 > 为方便起见，这个改动已经应用于本教程的所有项目。
 
-板上的 LED 应在启动时变为黄色，然后根据是否成功建立 Wifi 连接，变为红色（错误），或交替闪烁绿色和蓝色（成功）。如果出现 Wifi 错误，诊断消息也会显示在下面，例如：
+板上的 LED 应在启动时变为黄色，然后根据是否成功建立 Wi-fi 连接，变为红色（错误），或交替闪烁绿色和蓝色（成功）。如果出现 Wi-fi 错误，诊断消息也会显示在下面，例如：
 
 ```console
 Error: could not connect to Wi-Fi network: ESP_ERR_TIMEOUT

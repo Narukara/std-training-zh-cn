@@ -28,7 +28,7 @@ cd r:\
 
 ## 关于配置的说明
 
-比起将证书或其他敏感信息直接放在源代码中，在本教程中，我们会使用 [toml-cfg](https://github.com/jamesmunns/toml-cfg) 作为一种更方便、更安全的替代方法。配置信息会存储在相应包的根目录中名为 `cfg.toml` 的文件中
+比起将证书或其他敏感信息直接放在源代码中，在本教程中，我们会使用 [`toml-cfg`](https://github.com/jamesmunns/toml-cfg) 作为一种更方便、更安全的替代方法。配置信息会存储在相应包的根目录中名为 `cfg.toml` 的文件中
 
 该配置中只包含一个与包同名（`Cargo.toml` 中的 `name = "your-package"`）的 section 标题，具体配置因项目而异：
 
