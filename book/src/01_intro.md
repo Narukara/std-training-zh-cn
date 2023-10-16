@@ -12,9 +12,9 @@
 
 ## 翻译
 
-这里是本书的简体中文译本。原书（英文版）及其他译本如下：
+本书已由慷慨的志愿者参与翻译。如果你希望在此处列出你的译本，请（向英文原版仓库）提交 PR。
 
-- [English](https://esp-rs.github.io/std-training/) ([仓库](https://github.com/esp-rs/std-training/))
+- [English](https://esp-rs.github.io/std-training/)（[仓库](https://github.com/esp-rs/std-training/)）
 
 ## 开发板
 
