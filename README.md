@@ -1,6 +1,6 @@
 这里是 https://github.com/esp-rs/std-training 的简体中文翻译
 
-目前进度：已经翻译完成，跟踪到 296a0e5
+目前进度：已经翻译完成，跟踪到 1043cd0
 
 ---
 
