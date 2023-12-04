@@ -8,12 +8,12 @@
 
 ✅ 如果你的电脑上还没有安装 Rust，从 <https://rustup.rs/> 获取它
 
-此外，对于 ESP32-C3，目前需要 Rust 工具链的 [*nightly* 版本](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust)。本教程中我们将使用 `nightly-2023-02-28` 版本。
+此外，对于 ESP32-C3，目前需要 Rust 工具链的 [*nightly* 版本](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust)。本教程中我们将使用 `nightly-2023-11-14` 版本。
 
 ✅ 用以下命令安装 *nightly* Rust，并添加对目标架构的支持：
 
 ```console
-rustup toolchain install nightly-2023-02-28 --component rust-src
+rustup toolchain install nightly-2023-11-14 --component rust-src
 ```
 
 🔎 Rust 能够交叉编译到任何支持的目标架构（参见 `rustup 目标列表`）。默认情况下，仅会安装本机的架构。
@@ -39,7 +39,7 @@ cargo install cargo-espflash espflash ldproxy
 ### Debian/Ubuntu
 
 ```console
-sudo apt install llvm-dev libclang-dev clang libuv-dev
+sudo apt install llvm-dev libclang-dev clang libuv-dev libuv1-dev pkgconf python3-venv python-is-python3
 ```
 ### `macOS`
 
@@ -83,7 +83,7 @@ brew install llvm libuv
 
 ✅ 为你的操作系统安装 [`Docker`](https://docs.docker.com/get-docker/)。
 
-✅ 获取 docker 镜像： 有两种方法来获取 Docker 镜像：
+✅ 获取 Docker 镜像： 有两种方法来获取 Docker 镜像：
 - 用 `Dockerfile` 构建镜像：
     ```console
     docker image build --tag rust-std-training --file .devcontainer/Dockerfile .

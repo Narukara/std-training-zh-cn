@@ -4,18 +4,14 @@
 
 `intro/http-client/examples/http_client.rs` 包含解答。你可以用下面的命令运行它：
 
-```shell
+```console
 cargo run --example https_client
 ```
 
 创建一个自定义的客户端配置，由此使用启用了证书的`esp_idf_svc::http::client::EspHttpConnection`，而其他值保持默认。
 
 ```rust
-let connection = EspHttpConnection::new(&Configuration {
-        use_global_ca_store: true,
-        crt_bundle_attach: Some(esp_idf_sys::esp_crt_bundle_attach),
-        ..Default::default()
-    }
+{{#include ../../intro/http-client/examples/https_client.rs:connection}}
 ```
 
 ✅ 用新的配置初始化 HTTP 客户端，通过下载一些 `https` 资源来验证 HTTPS 是否正常工作，例如 `https://espressif.com/`。下载的内容会在控制台中以原始 HTML 的形式显示出来。

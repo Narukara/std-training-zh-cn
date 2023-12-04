@@ -16,5 +16,5 @@ cargo run --example solution_led
 * LED 的型号是 WS2812RMT。
 * 这是一个可编程的 RGB LED。这意味着不存在单独的，用于设置红、绿、蓝的引脚。我们需要实例化它，然后才能发送 `RGB8` 类型的值给它。
 * 这个板子有硬件随机数生成器，可以用 `esp_random()` 调用它。
-* 从 Rust 的角度来看，调用 `esp-idf-sys` 中的一些函数是 unsafe 的，并且需要 `unsafe()` 块。不过你可以假设这些功能可以安全使用，不需要其他保护措施。
+* 从 Rust 的角度来看，调用 `esp-idf-svc::sys` 中的一些函数是 unsafe 的，并且需要 `unsafe()` 块。不过你可以假设这些功能可以安全使用，不需要其他保护措施。
 

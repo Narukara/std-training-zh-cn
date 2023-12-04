@@ -37,8 +37,7 @@ cargo run --example http_client
 
 
 ```rust
-let request = client.get(url.as_ref())?;
-let response = request.submit()?;
+{{#include ../../intro/http-client/examples/http_client.rs:request}}
 ```
 
 成功的响应具有 [2xx 范围内的状态码](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)。紧随其后的是网站的原始 html。
@@ -56,6 +55,7 @@ match status {
 ```
 状态码错误可以用 [Anyhow](https://docs.rs/anyhow/latest/anyhow/index.html) crate 返回。`Anyhow` 常被用于简化应用程序中的错误处理，它提供了一个通用的 `anyhow::Result<T>`，将成功（`Ok`）情况包装在 T 中，而且无需指定 Err 类型，只要求你返回的每个错误都实现了 `std::error::Error`。
 
+
 ✅ 使用 `Read::read(&mut reader,&mut buf)` 将接收到的数据逐块地读取到 `u8` 缓冲区中。`Read::read` 会返回读取的字节数——当这个值为 `0` 时就完成了读取。
 
 ✅ 报告读取的总字节数。
@@ -69,6 +69,18 @@ match status {
 
 ✅ 编写一个自定义的 `Error` 枚举来表示这些错误。为这个错误实现 `std::error::Error` trait。
 
+
+## Simulation
+
+This project is available for simulation through two methods:
+- Wokwi projects:
+  - [Exercise](https://wokwi.com/projects/360722140931768321?build-cache=disable)
+  - [Solution](https://wokwi.com/projects/333372159510446675?build-cache=disable)
+- Wokwi files are also present in the project folder to simulate it with Wokwi VS Code extension:
+   1. Press F1, select `Wokwi: Select Config File` and choose `intro/http-client/wokwi.toml`
+      - Edit the `wokwi.toml` file to select between exercise and solution simulation
+   2. Build you project
+   3. Press F1 again and select `Wokwi: Start Simulator`
 
 ## Troubleshooting
 

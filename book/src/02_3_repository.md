@@ -9,13 +9,9 @@ git clone "https://github.com/esp-rs/std-training.git"
 cd std-training
 ```
 
-❗ Windows 用户可能会遇到长路径名的问题。请按照以下步骤替换路径：
+❗ Windows 用户可能会遇到[长路径名问题][windows-long-path]。
 
-```console
-git clone https://github.com/esp-rs/std-training.git
-subst r: std-training
-cd r:\
-```
+[windows-long-path]: https://esp-rs.github.io/book/misc/troubleshooting.html#long-path-names
 
 ## 仓库内容
 

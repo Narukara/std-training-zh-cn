@@ -1,28 +1,26 @@
 use anyhow::{bail, Result};
 use core::str;
 use embedded_svc::{
-    http::{client::Client, Status},
+    http::{client::Client, Method},
     io::Read,
 };
-use esp_idf_hal::prelude::Peripherals;
 use esp_idf_svc::{
     eventloop::EspSystemEventLoop,
+    hal::prelude::Peripherals,
     http::client::{Configuration, EspHttpConnection},
 };
 use wifi::wifi;
-// If using the `binstart` feature of `esp-idf-sys`, always keep this module imported
-use esp_idf_sys as _;
 
 #[toml_cfg::toml_config]
 pub struct Config {
-    #[default("")]
+    #[default("Wokwi-GUEST")]
     wifi_ssid: &'static str,
     #[default("")]
     wifi_psk: &'static str,
 }
 
 fn main() -> Result<()> {
-    esp_idf_sys::link_patches();
+    esp_idf_svc::sys::link_patches();
     esp_idf_svc::log::EspLogger::initialize_default();
 
     let peripherals = Peripherals::take().unwrap();
@@ -47,11 +45,14 @@ fn main() -> Result<()> {
 fn get(url: impl AsRef<str>) -> Result<()> {
     // 1. Create a new EspHttpConnection with default Configuration. (Check documentation)
     let connection = EspHttpConnection::new(&Configuration::default())?;
-    // 2. Get a client using the Client::wrap method. (Check documentation)
+    // 2. Get a client using the embedded_svc Client::wrap method. (Check documentation)
     let mut client = Client::wrap(connection);
 
     // 3. Open a GET request to `url`
-    let request = client.get(url.as_ref())?;
+    let headers = [("accept", "text/plain")];
+    // ANCHOR: request
+    let request = client.request(Method::Get, url.as_ref(), &headers)?;
+    // ANCHOR_END: request
 
     // 4. Submit the request and check the status code of the response.
     // Successful http status codes are in the 200..=299 range.
@@ -95,7 +96,7 @@ fn get(url: impl AsRef<str>) -> Result<()> {
                             // print it and reset the offset to 0.
                             print!("{}", text);
                             offset = 0;
-                        },
+                        }
                         Err(error) => {
                             // The buffer contains incomplete UTF-8 data, we will
                             // print the valid part, copy the invalid sequence to

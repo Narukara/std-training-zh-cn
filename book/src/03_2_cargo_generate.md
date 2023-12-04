@@ -2,19 +2,21 @@
 
 现在让我们用 [`cargo-generate`](https://github.com/cargo-generate/cargo-generate) （一个通用的项目生成向导）来配置我们的第一个项目。
 
+More information on generating projects can be found in the [Writing Your Own Application](https://esp-rs.github.io/book/writing-your-own-application/index.html) chapter of The Rust on ESP Book.
+
 > 本教程中的其他大多数练习都已经提供了项目框架，不需要使用 `cargo-generate`。
 >
 ✅ 安装 `cargo-generate`：
 
-```shell
+```console
 cargo install cargo-generate
 ```
 
 ✅ 进入 `intro` 目录并运行 `cargo generate`，使用 [`esp-idf` 模板](https://github.com/esp-rs/esp-idf-template)：
 
-```shell
+```console
 cd intro
-cargo generate https://github.com/esp-rs/esp-idf-template cargo
+cargo generate esp-rs/esp-idf-template cargo
 ```
 
 [`cargo-generate` 将提示有关新项目的详细信息](https://github.com/esp-rs/esp-idf-template#generate-the-project)。当在多个选项中进行选择时，可以使用光标向上/向下，并使用回车键确定。
@@ -24,7 +26,6 @@ cargo generate https://github.com/esp-rs/esp-idf-template cargo
 
 🔎 你可以创建一个 [偏好的配置文件](https://cargo-generate.github.io/cargo-generate/favorites.html)，放在 `$CARGO_HOME/cargo-generate`。可以使用 `-c, --config <config-file>` 覆盖它。
 
-
 > 如果误操作了，按下 `Ctrl+C` 然后重新开始。
 
 ✅ 配置你的项目：
@@ -33,13 +34,10 @@ cargo generate https://github.com/esp-rs/esp-idf-template cargo
 
 * Project Name: `hello-world`
 * MCU: `esp32c3`
-* ESP-IDF native build version: `4.4`
-* STD support: `true`
-* Dev Containers support: `false`
+* Configure advanced template options?: `false`
 
 🔎 `.cargo/config.toml` 包含你的 package 的本地设置（[全部设置列表](https://doc.rust-lang.org/cargo/reference/config.html)）。
-`Cargo.toml` 包含依赖项 [导入所有依赖项](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html)。
-
+`Cargo.toml` 包含依赖项，`Cargo.lock` 会[导入所有依赖项](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html)。
 
 可选，但是推荐：为了节省硬盘空间和下载时间，把[工具链路径设置为全局（global）](https://github.com/esp-rs/esp-idf-sys#esp_idf_tools_install_dir-esp_idf_tools_install_dir)。否则每一个新项目/工作空间都会安装一个自己的工具链实例：
 
@@ -56,20 +54,19 @@ ESP_IDF_TOOLS_INSTALL_DIR = { value = "global" } # 添加这一行
 
 ```toml
 [toolchain]
-
-channel = "nightly-2023-02-28" # 修改这一行
+channel = "nightly-2023-11-14" # 修改这一行
 ```
 
 ✅ 在 `hello-world` 目录中用下面的命令来运行项目：
 
-```shell
+```console
 cd hello-world
 cargo run
 ```
 
 ✅ 输出的最后几行应当如下所示：
 
-```shell
+```console
 (...)
 I (268) cpu_start: Starting scheduler.
 Hello, world!
