@@ -94,9 +94,15 @@ brew install llvm libuv
     docker pull espressif/rust-std-training
     ```
 ✅ 启动新的 Docker 容器：
-```console
-docker run --mount type=bind,source="$(pwd)",target=/workspace,consistency=cached -it rust-std-training /bin/bash
-```
+
+- 对于本地 Docker 镜像：
+  ```console
+  docker run --mount type=bind,source="$(pwd)",target=/workspace,consistency=cached -it rust-std-training /bin/bash
+  ```
+- 对于从 Docker Hub 下载的：
+  ```console
+  docker run --mount type=bind,source="$(pwd)",target=/workspace,consistency=cached -it espressif/rust-std-training:latest /bin/bash
+  ```
 
 这将在 Docker 容器中启动一个交互式 shell。
 它还将本地存储库挂载到容器内名为 `/workspace` 的文件夹中。对主机系统上项目的更改会反映在容器内，反之亦然。
