@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>软件 - Embedded Rust on Espressif 简体中文版</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Ferrous Systems&#x27; Embedded Rust on Espressif training material">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="01_intro.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="02_0_preparations.html"><strong aria-hidden="true">2.</strong> 准备工作</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="02_1_hardware.html"><strong aria-hidden="true">2.1.</strong> 硬件</a></li><li class="chapter-item expanded "><a href="02_2_software.html" class="active"><strong aria-hidden="true">2.2.</strong> 软件</a></li><li class="chapter-item expanded "><a href="02_3_repository.html"><strong aria-hidden="true">2.3.</strong> 教程仓库</a></li><li class="chapter-item expanded "><a href="02_4_hello_board.html"><strong aria-hidden="true">2.4.</strong> Hello, board!</a></li></ol></li><li class="chapter-item expanded "><a href="03_0_intro_workshop.html"><strong aria-hidden="true">3.</strong> 入门教程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03_1_project_orga.html"><strong aria-hidden="true">3.1.</strong> 项目结构</a></li><li class="chapter-item expanded "><a href="03_2_cargo_generate.html"><strong aria-hidden="true">3.2.</strong> 创建新项目</a></li><li class="chapter-item expanded "><a href="03_3_1_http_https_client.html"><strong aria-hidden="true">3.3.</strong> HTTP 和 HTTPS 客户端</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03_3_2_http_client.html"><strong aria-hidden="true">3.3.1.</strong> HTTP 客户端</a></li><li class="chapter-item expanded "><a href="03_3_3_https_client.html"><strong aria-hidden="true">3.3.2.</strong> HTTPS 客户端</a></li></ol></li><li class="chapter-item expanded "><a href="03_4_http_server.html"><strong aria-hidden="true">3.4.</strong> 简单的 HTTP 服务器</a></li><li class="chapter-item expanded "><a href="03_5_0_mqtt.html"><strong aria-hidden="true">3.5.</strong> 基于 MQTT 的 IoT</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03_5_1_mqtt.html"><strong aria-hidden="true">3.5.1.</strong> MQTT 是如何工作的</a></li><li class="chapter-item expanded "><a href="03_5_2_mqtt.html"><strong aria-hidden="true">3.5.2.</strong> MQTT 练习：发送消息</a></li><li class="chapter-item expanded "><a href="03_5_3_mqtt.html"><strong aria-hidden="true">3.5.3.</strong> MQTT 练习：接收 LED 命令</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="04_0_advanced_workshop.html"><strong aria-hidden="true">4.</strong> 进阶教程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04_2_low_level_io.html"><strong aria-hidden="true">4.1.</strong> 底层 I/O</a></li><li class="chapter-item expanded "><a href="04_3_0_i2c.html"><strong aria-hidden="true">4.2.</strong> I2C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04_3_1_i2c.html"><strong aria-hidden="true">4.2.1.</strong> 读取传感器</a></li><li class="chapter-item expanded "><a href="04_3_2_i2c.html"><strong aria-hidden="true">4.2.2.</strong> 编写驱动 - 简单版</a></li><li class="chapter-item expanded "><a href="04_3_3_i2c.html"><strong aria-hidden="true">4.2.3.</strong> 编写驱动 - 困难版</a></li></ol></li><li class="chapter-item expanded "><a href="04_4_0_interrupts.html"><strong aria-hidden="true">4.3.</strong> 中断</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04_4_1_interrupts.html"><strong aria-hidden="true">4.3.1.</strong> 基本的中断处理程序</a></li><li class="chapter-item expanded "><a href="04_4_2_interrupts.html"><strong aria-hidden="true">4.3.2.</strong> 随机 LED 颜色</a></li><li class="chapter-item expanded "><a href="04_4_3_interrupts.html"><strong aria-hidden="true">4.3.3.</strong> 解答</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="05_reference.html"><strong aria-hidden="true">5.</strong> 参考资料</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust on Espressif 简体中文版</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Narukara/std-training-zh-cn" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="软件"><a class="header" href="#软件">软件</a></h1>
+<p>按照以下步骤完成 ESP32-C3 平台工具的默认安装。</p>
+<p>🔎 如果想要自定义安装（例如，从源码构建组件，或者添加对 <code>Xtensa</code> 目标的支持），请参阅 <em>Rust on ESP</em> 一书的 <a href="https://esp-rs.github.io/book/installation/index.html">Rust on ESP targets</a> 章节。</p>
+<h2 id="rust-工具链"><a class="header" href="#rust-工具链">Rust 工具链</a></h2>
+<p>✅ 如果你的电脑上还没有安装 Rust，从 <a href="https://rustup.rs/">https://rustup.rs/</a> 获取它</p>
+<p>此外，对于 ESP32-C3，目前需要 Rust 工具链的 <a href="https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust"><em>nightly</em> 版本</a>。本教程中我们将使用 <code>nightly-2023-11-14</code> 版本。</p>
+<p>✅ 用以下命令安装 <em>nightly</em> Rust，并添加对目标架构的支持：</p>
+<pre><code class="language-console">rustup toolchain install nightly-2023-11-14 --component rust-src
+</code></pre>
+<p>🔎 Rust 能够交叉编译到任何支持的目标架构（参见 <code>rustup 目标列表</code>）。默认情况下，仅会安装本机的架构。
+从 2022 年 1 月起，如果要编译到 <code>Xtensa</code> 架构（不是本材料的一部分），需要一个 Rust 编译器的分支。</p>
+<h2 id="espressif-工具链"><a class="header" href="#espressif-工具链">Espressif 工具链</a></h2>
+<p>需要几个工具：</p>
+<ul>
+<li><a href="https://github.com/esp-rs/espflash/tree/main/cargo-espflash"><code>cargo-espflash</code></a> - 上传固件到微控制器，打开串口监视器，Cargo 集成</li>
+<li><a href="https://github.com/esp-rs/espflash/tree/main/espflash"><code>espflash</code></a> - 上传固件到微控制器，打开串口监视器</li>
+<li><a href="https://github.com/esp-rs/embuild/tree/master/ldproxy"><code>ldproxy</code></a> - Espressif 构建工具链的依赖</li>
+</ul>
+<p>✅ 使用下面的指令安装他们：</p>
+<pre><code class="language-console">cargo install cargo-espflash espflash ldproxy
+</code></pre>
+<p>⚠️ 本书中列出的 <code>espflash</code> 和 <code>cargo-espflash</code> 命令假定版本 &gt;= 2</p>
+<h2 id="工具链依赖项"><a class="header" href="#工具链依赖项">工具链依赖项</a></h2>
+<h3 id="debianubuntu"><a class="header" href="#debianubuntu">Debian/Ubuntu</a></h3>
+<pre><code class="language-console">sudo apt install llvm-dev libclang-dev clang libuv-dev libuv1-dev pkgconf python3-venv python-is-python3
+</code></pre>
+<h3 id="macos"><a class="header" href="#macos"><code>macOS</code></a></h3>
+<p>当使用 Homebrew 包管理器时，这也是我们推荐的方式：</p>
+<pre><code class="language-console">brew install llvm libuv
+</code></pre>
+<h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
+<ul>
+<li>
+<p>Python 3 是必需的依赖项，它预装在 macOS 和大部分桌面 Linux 发行版上。<strong>Python 2</strong> 和指向它的 <code>virtualenv</code> 附加组件可能导致构建出现问题。</p>
+</li>
+<li>
+<p>报错 <code>failed to run custom build command for libudev-sys vX.X.X</code> 或 <code>esp-idf-sys vX.X.X</code>：</p>
+<p>在撰写本文时，可以通过以下方法解决：</p>
+<ol>
+<li>运行这一行命令：</li>
+</ol>
+<p><code>apt-get update \ &amp;&amp; apt-get install -y vim nano git curl gcc ninja-build cmake libudev-dev python3 python3-pip libusb-1.0-0 libssl-dev \ pkg-config libtinfo5</code></p>
+<ol start="2">
+<li>
+<p>重启终端。</p>
+</li>
+<li>
+<p>如果不起作用，尝试 <code>cargo clean</code>，删除 <code>~/.espressif</code> 目录（对于 Windows，是 <code>%USERPROFILE%\.espressif</code>），然后重新构建你的项目。</p>
+</li>
+<li>
+<p>在 Ubuntu 上，可能需要将内核更改为 <code>5.19</code>。运行 <code>uname -r</code> 以获取你的内核版本。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="docker"><a class="header" href="#docker">Docker</a></h2>
+<p>另一种可选的环境是使用 Docker。本仓库包含一个 <code>Dockerfile</code>，
+其中包含用于安装 Rust 工具链（和所有依赖的包）的指令。<strong>此虚拟化环境旨在
+为 Espressif 目标编译二进制文件，在容器内烧录二进制文件是不可行的</strong>。因此，有两种选择：</p>
+<ul>
+<li>在主机系统上执行烧写命令，例如 <code>cargo-espflash</code>。 如果采用这个选项，建议开启两个终端：
+<ul>
+<li>一个在容器内，用于编译项目</li>
+<li>一个在主机上，用 <code>cargo-espflash</code> 子命令来烧写程序</li>
+</ul>
+</li>
+<li>在容器内使用 <a href="https://github.com/esp-rs/esp-web-flash-server"><code>web-flash</code></a> crate 来烧写程序。容器已经包含了 <code>web-flash</code>。烧写 <a href="./02_4_hello_board.html"><code>hardware-check</code> 项目</a> 的命令是：
+<pre><code class="language-console">web-flash --chip esp32c3 target/riscv32imc-esp-espidf/debug/hardware-check
+</code></pre>
+</li>
+</ul>
+<p>✅ 为你的操作系统安装 <a href="https://docs.docker.com/get-docker/"><code>Docker</code></a>。</p>
+<p>✅ 获取 Docker 镜像： 有两种方法来获取 Docker 镜像：</p>
+<ul>
+<li>用 <code>Dockerfile</code> 构建镜像：
+<pre><code class="language-console">docker image build --tag rust-std-training --file .devcontainer/Dockerfile .
+</code></pre>
+构建镜像需要一段时间，具体取决于操作系统和硬件（20-30 分钟）。</li>
+<li>从 <a href="https://hub.docker.com/r/espressif/rust-std-training">Dockerhub</a> 下载：
+<pre><code class="language-console">docker pull espressif/rust-std-training
+</code></pre>
+</li>
+</ul>
+<p>✅ 启动新的 Docker 容器：</p>
+<ul>
+<li>对于本地 Docker 镜像：
+<pre><code class="language-console">docker run --mount type=bind,source=&quot;$(pwd)&quot;,target=/workspace,consistency=cached -it rust-std-training /bin/bash
+</code></pre>
+</li>
+<li>对于从 Docker Hub 下载的：
+<pre><code class="language-console">docker run --mount type=bind,source=&quot;$(pwd)&quot;,target=/workspace,consistency=cached -it espressif/rust-std-training:latest /bin/bash
+</code></pre>
+</li>
+</ul>
+<p>这将在 Docker 容器中启动一个交互式 shell。
+它还将本地存储库挂载到容器内名为 <code>/workspace</code> 的文件夹中。对主机系统上项目的更改会反映在容器内，反之亦然。</p>
+<h2 id="附加软件"><a class="header" href="#附加软件">附加软件</a></h2>
+<h3 id="vs-code"><a class="header" href="#vs-code">VS Code</a></h3>
+<p><a href="https://code.visualstudio.com/">VS Code</a> 是一个具有良好 Rust 支持的编辑器，在大多数平台上可用。
+使用 VS Code 时，我们推荐安装以下扩展：</p>
+<ul>
+<li><a href="https://rust-analyzer.github.io/"><code>Rust Analyzer</code></a> 提供代码补全和跳转等</li>
+<li><code>Even Better TOML</code> 用于编辑基于 TOML 的配置文件</li>
+</ul>
+<p>还有一些适用于高级用法的扩展</p>
+<ul>
+<li><a href="https://github.com/vadimcn/vscode-lldb"><code>lldb</code></a> 基于 LLDB 的本机调试器扩展</li>
+<li><a href="https://github.com/serayuzgur/crates"><code>crates</code></a> 帮助管理 Rust 依赖项</li>
+</ul>
+<h3 id="vs-code-和-dev-container"><a class="header" href="#vs-code-和-dev-container">VS Code 和 Dev container</a></h3>
+<p>有助于在 Docker 容器内开发的一个 VS Code 扩展是 <a href="https://github.com/Microsoft/vscode-remote-release"><code>Remote Containers</code></a>。
+它使用与 <a href="#docker">Docker 配置</a>相同的 Dockerfile，构建镜像并从 VS Code 中建立连接。
+安装扩展后，VS Code 会识别 <code>.devcontainer</code> 文件夹中的配置。使用 <code>Remote Containers - Reopen in Container</code> 命令将 VS Code 连接到容器。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="02_1_hardware.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="02_3_repository.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="02_1_hardware.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="02_3_repository.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
