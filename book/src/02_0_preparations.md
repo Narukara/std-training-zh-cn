@@ -12,16 +12,16 @@
 
 > 注释示例：像这样的注释包含了有用的信息
 
-## Code Annotations
+## 代码注释
 
-In some Rust files, you can find some anchor comments:
+在某些 Rust 源文件里，有类似这样的 anchor 注释：
 ```rust,ignore
 // ANCHOR: test
 let foo = 1;
 ...
 // ANCHOR_END: test
 ```
-Anchor comments can be ignored, they are only used to introduce those parts of code in this book. See [`mdBook` documentation](https://rust-lang.github.io/mdBook/format/mdbook.html#including-portions-of-a-file)
+你可以忽略 Anchor 注释，它们只是用于把包含的代码导入到本书中。详见 [`mdBook` 文档](https://rust-lang.github.io/mdBook/format/mdbook.html#including-portions-of-a-file)
 
 ## 需要的硬件
 
@@ -31,14 +31,14 @@ Anchor comments can be ignored, they are only used to introduce those parts of c
 
 > 不需要额外的调试器硬件。
 
-## Simulating Projects
+## 项目仿真
 
-Certain projects can be simulated with [Wokwi][wokwi]. Look for indications in the book to identify projects available for simulation. Simulation can be accomplished through two methods:
-- Using wokwi.com: Conduct the build process and code editing directly through the browser.
-- Using [Wokwi VS Code extension][wokwi-vscode]: Leverage VS Code to edit projects and perform builds. Utilize the Wokwi VS Code extension to simulate the resulting binaries.
-    - This approach requires some [installation][wokwi-installation]
-    - This approach assumes that the project is built in debug mode
-    - This approach allows [debugging the project][wokwi-debug]
+某些项目可以用 [Wokwi][wokwi] 仿真。寻找书中的指示来确认可以仿真的项目。仿真有两种方法实现：
+- 使用 wokwi.com：直接在浏览器中执行构建、编辑代码。
+- 使用 [Wokwi VS Code 扩展][wokwi-vscode]：用 VS Code 来编辑项目、执行构建。用 Wokwi VS Code 扩展对生成的二进制文件进行仿真。
+    - 这种方法需要一些[安装][wokwi-installation]
+    - 这种方法假定项目是在 debug 模式下构建的
+    - 这种方法允许[调试项目][wokwi-debug]
 
 [wokwi]: https://wokwi.com/
 [wokwi-vscode]: https://docs.wokwi.com/vscode/getting-started

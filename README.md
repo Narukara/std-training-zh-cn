@@ -1,6 +1,6 @@
 这里是 https://github.com/esp-rs/std-training 的简体中文翻译
 
-目前进度：已经翻译完成（部分更新的内容需要重新翻译），跟踪到 015cd3d
+目前进度：已经翻译完成，跟踪到 015cd3d
 
 ---
 
@@ -19,9 +19,9 @@
 * 一本你可以通读的书 - ([源代码](./book)) ([网页](https://narukara.github.io/std-training-zh-cn/))
 * 一些入门级的例子：
    * 基础的硬件检查 ([源代码](./intro/hardware-check))
-   * 一个 HTTP 客户端 ([源代码](./intro/http-client))
-   * 一个 HTTP 服务器 ([源代码](./intro/http-server))
-   * 一个 MQTT 客户端 ([源代码](./intro/mqtt))
+   * HTTP 客户端 ([源代码](./intro/http-client))
+   * HTTP 服务器 ([源代码](./intro/http-server))
+   * MQTT 客户端 ([源代码](./intro/mqtt))
 * 一些高级例子：
    * 底层 GPIO
    * 中断
@@ -29,7 +29,7 @@
    * I2c 传感器的读取 ([源代码](./advanced/i2c-sensor-reading))
    * GPIO/按钮中断 ([源代码](./advanced/button-interrupt))
    * 驱动一个 RGB LED
-* 一些有用且常见的 crates：
+* 一些通用 crates：
    * [`get-uuid`](./common/lib/get-uuid) - 提供一个编译期生成的 UUID
    * [`mqtt-messages`](./common/lib/mqtt-messages) - MQTT 辅助函数
    * [`rgb-led`](./common/lib/rgb-led) - 提供对 RGB LED（WS2812）的支持
