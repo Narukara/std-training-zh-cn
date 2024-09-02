@@ -11,7 +11,7 @@ cd std-training
 
 ❗ Windows 用户可能会遇到[长路径名问题][windows-long-path]。
 
-[windows-long-path]: https://esp-rs.github.io/book/misc/troubleshooting.html#long-path-names
+[windows-long-path]: https://docs.esp-rs.org/book/troubleshooting/index.html#long-path-names
 
 ## 仓库内容
 

@@ -8,12 +8,12 @@
 
 ✅ 如果你的电脑上还没有安装 Rust，从 <https://rustup.rs/> 获取它
 
-此外，对于 ESP32-C3，目前需要 Rust 工具链的 [*nightly* 版本](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust)。本教程中我们将使用 `nightly-2023-11-14` 版本。
+此外，对于 ESP32-C3，目前需要 Rust 工具链的 [*nightly* 版本](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust)。本教程中我们将使用 `nightly-2024-06-30` 版本。
 
 ✅ 用以下命令安装 *nightly* Rust，并添加对目标架构的支持：
 
 ```console
-rustup toolchain install nightly-2023-11-14 --component rust-src
+rustup toolchain install nightly-2024-06-30 --component rust-src
 ```
 
 🔎 Rust 能够交叉编译到任何支持的目标架构（参见 `rustup 目标列表`）。默认情况下，仅会安装本机的架构。
