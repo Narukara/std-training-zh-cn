@@ -2,7 +2,7 @@
 
 现在让我们用 [`cargo-generate`](https://github.com/cargo-generate/cargo-generate) （一个通用的项目生成向导）来配置我们的第一个项目。
 
-More information on generating projects can be found in the [Writing Your Own Application](https://esp-rs.github.io/book/writing-your-own-application/index.html) chapter of The Rust on ESP Book.
+关于生成项目的更多信息，请参阅 The Rust on ESP Book 的[编写自己的应用](https://narukara.github.io/rust-on-esp-book-zh-cn/writing-your-own-application/index.html)章节。
 
 > 本教程中的其他大多数练习都已经提供了项目框架，不需要使用 `cargo-generate`。
 >
