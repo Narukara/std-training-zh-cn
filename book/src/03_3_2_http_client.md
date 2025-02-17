@@ -69,19 +69,6 @@ match status {
 
 ✅ 编写一个自定义的 `Error` 枚举来表示这些错误。为这个错误实现 `std::error::Error` trait。
 
-
-## Simulation
-
-This project is available for simulation through two methods:
-- Wokwi projects:
-  - [Exercise](https://wokwi.com/projects/360722140931768321?build-cache=disable)
-  - [Solution](https://wokwi.com/projects/333372159510446675?build-cache=disable)
-- Wokwi files are also present in the project folder to simulate it with Wokwi VS Code extension:
-   1. Press F1, select `Wokwi: Select Config File` and choose `intro/http-client/wokwi.toml`
-      - Edit the `wokwi.toml` file to select between exercise and solution simulation
-   2. Build you project
-   3. Press F1 again and select `Wokwi: Start Simulator`
-
 ## Troubleshooting
 
 - `missing WiFi name/password`：确保你已根据 `cfg.toml.example` 配置了 `cfg.toml`。一个常见的问题是包名和配置中的 section 名称不匹配。

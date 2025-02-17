@@ -76,15 +76,6 @@ Error: could not connect to Wi-Fi network: ESP_ERR_TIMEOUT
 espflash monitor
 ```
 
-## Simulation
-
-This project is available for simulation through two methods:
-- [Wokwi project](https://wokwi.com/projects/360342886675214337?build-cache=disable)
-- Wokwi VS Code extension:
-  1. Press F1, select `Wokwi: Select Config File`, and choose `intro/hardware-check/wokwi.toml`.
-  2. Build your project.
-  3. Press F1 again and select `Wokwi: Start Simulator`.
-
 ## Troubleshooting
 
 ### 构建错误

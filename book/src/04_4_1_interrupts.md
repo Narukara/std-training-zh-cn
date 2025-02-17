@@ -30,16 +30,3 @@ cargo run --example solution
 🔎 在本练习中，我们使用通知（notification），它只会提供最新的值。
 因此如果在读取通知的值之前，中断被多次触发，你只能得到最新的值。
 另一方面，队列允许接收多个值。更多详细信息请参阅 `esp_idf_hal::task::queue::Queue`。
-
-## Simulation
-
-This project is available for simulation through two methods:
-- Wokwi projects
-  - [Exercise](https://wokwi.com/projects/360623288920412161?build-cache=disable)
-  - [Solution](https://wokwi.com/projects/333374799393849940?build-cache=disable)
-    - The Solution project contains solution for [Random LED Color on pushinig a Button](./04_4_2_interrupts.md)
-- Wokwi files are also present in the project folder to simulate it with Wokwi VS Code extension:
-   1. Press F1, select `Wokwi: Select Config File` and choose `advanced/button-interrupt/wokwi.toml`
-      - Edit the `wokwi.toml` file to select between exercise and solution simulation
-   2. Build you project
-   3. Press F1 again and select `Wokwi: Start Simulator`

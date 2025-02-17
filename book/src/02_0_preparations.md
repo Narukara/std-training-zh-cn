@@ -33,15 +33,23 @@ let foo = 1;
 
 ## 项目仿真
 
-某些项目可以用 [Wokwi][wokwi] 仿真。寻找书中的指示来确认可以仿真的项目。仿真有两种方法实现：
-- 使用 wokwi.com：直接在浏览器中执行构建、编辑代码。
-- 使用 [Wokwi VS Code 扩展][wokwi-vscode]：用 VS Code 来编辑项目、执行构建。用 Wokwi VS Code 扩展对生成的二进制文件进行仿真。
-    - 这种方法需要一些[安装][wokwi-installation]
-    - 这种方法假定项目是在 debug 模式下构建的
-    - 这种方法允许[调试项目][wokwi-debug]
+某些项目可以使用 [Wokwi][wokwi] 进行模拟，或者至少部分模拟。以下是支持 Wokwi 模拟的项目列表：
+- `intro/hello-world`
+- `intro/http-client`
+- `advanced/i2c-sensor-reading`
+- `advanced/i2c-driver`
+- `advanced/button-interrupt`
+
+在开始任何模拟项目之前，你需要[安装扩展][wokwi-installation]。要模拟一个项目：
+
+1. 按下 F1，选择 `Wokwi: Select Config File`，然后选择你要模拟的项目的 `wokwi.toml` 文件。
+   1. 编辑对应的 `wokwi.toml` 文件，以模拟练习部分或解答部分。
+2. 以 `debug` 模式构建你的项目。
+3. 再次按下 F1，然后选择 `Wokwi: Start Simulator`。
+
+你也可以[调试项目][wokwi-debug]。
 
 [wokwi]: https://wokwi.com/
-[wokwi-vscode]: https://docs.wokwi.com/vscode/getting-started
 [wokwi-installation]: https://docs.wokwi.com/vscode/getting-started#installation
 [wokwi-debug]: https://docs.wokwi.com/vscode/debugging
 

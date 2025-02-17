@@ -54,7 +54,7 @@ ESP_IDF_TOOLS_INSTALL_DIR = { value = "global" } # 添加这一行
 
 ```toml
 [toolchain]
-channel = "nightly-2024-06-30" # 修改这一行
+channel = "nightly-2025-01-01" # 修改这一行
 ```
 
 ✅ 在 `hello-world` 目录中用下面的命令来运行项目：
