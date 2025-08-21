@@ -1,0 +1,1501 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Embedded Rust on Espressif 简体中文版</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Ferrous Systems&#x27; Embedded Rust on Espressif training material">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="01_intro.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="02_0_preparations.html"><strong aria-hidden="true">2.</strong> 准备工作</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="02_1_hardware.html"><strong aria-hidden="true">2.1.</strong> 硬件</a></li><li class="chapter-item expanded "><a href="02_2_software.html"><strong aria-hidden="true">2.2.</strong> 软件</a></li><li class="chapter-item expanded "><a href="02_3_repository.html"><strong aria-hidden="true">2.3.</strong> 教程仓库</a></li><li class="chapter-item expanded "><a href="02_4_hello_board.html"><strong aria-hidden="true">2.4.</strong> Hello, board!</a></li></ol></li><li class="chapter-item expanded "><a href="03_0_intro_workshop.html"><strong aria-hidden="true">3.</strong> 入门教程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03_1_project_orga.html"><strong aria-hidden="true">3.1.</strong> 项目结构</a></li><li class="chapter-item expanded "><a href="03_2_cargo_generate.html"><strong aria-hidden="true">3.2.</strong> 创建新项目</a></li><li class="chapter-item expanded "><a href="03_3_1_http_https_client.html"><strong aria-hidden="true">3.3.</strong> HTTP 和 HTTPS 客户端</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03_3_2_http_client.html"><strong aria-hidden="true">3.3.1.</strong> HTTP 客户端</a></li><li class="chapter-item expanded "><a href="03_3_3_https_client.html"><strong aria-hidden="true">3.3.2.</strong> HTTPS 客户端</a></li></ol></li><li class="chapter-item expanded "><a href="03_4_http_server.html"><strong aria-hidden="true">3.4.</strong> 简单的 HTTP 服务器</a></li><li class="chapter-item expanded "><a href="03_5_0_mqtt.html"><strong aria-hidden="true">3.5.</strong> 基于 MQTT 的 IoT</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03_5_1_mqtt.html"><strong aria-hidden="true">3.5.1.</strong> MQTT 是如何工作的</a></li><li class="chapter-item expanded "><a href="03_5_2_mqtt.html"><strong aria-hidden="true">3.5.2.</strong> MQTT 练习：发送消息</a></li><li class="chapter-item expanded "><a href="03_5_3_mqtt.html"><strong aria-hidden="true">3.5.3.</strong> MQTT 练习：接收 LED 命令</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="04_0_advanced_workshop.html"><strong aria-hidden="true">4.</strong> 进阶教程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04_2_low_level_io.html"><strong aria-hidden="true">4.1.</strong> 底层 I/O</a></li><li class="chapter-item expanded "><a href="04_3_0_i2c.html"><strong aria-hidden="true">4.2.</strong> I2C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04_3_1_i2c.html"><strong aria-hidden="true">4.2.1.</strong> 读取传感器</a></li><li class="chapter-item expanded "><a href="04_3_2_i2c.html"><strong aria-hidden="true">4.2.2.</strong> 编写驱动 - 简单版</a></li><li class="chapter-item expanded "><a href="04_3_3_i2c.html"><strong aria-hidden="true">4.2.3.</strong> 编写驱动 - 困难版</a></li></ol></li><li class="chapter-item expanded "><a href="04_4_0_interrupts.html"><strong aria-hidden="true">4.3.</strong> 中断</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04_4_1_interrupts.html"><strong aria-hidden="true">4.3.1.</strong> 基本的中断处理程序</a></li><li class="chapter-item expanded "><a href="04_4_2_interrupts.html"><strong aria-hidden="true">4.3.2.</strong> 随机 LED 颜色</a></li><li class="chapter-item expanded "><a href="04_4_3_interrupts.html"><strong aria-hidden="true">4.3.3.</strong> 解答</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="05_reference.html"><strong aria-hidden="true">5.</strong> 参考资料</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust on Espressif 简体中文版</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Narukara/std-training-zh-cn" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p style="text-align:center;"><img src="./assets/esp-logo-black.svg" width="50%"></p>
+<h1 id="引言"><a class="header" href="#引言">引言</a></h1>
+<h2 id="本材料的内容"><a class="header" href="#本材料的内容">本材料的内容</a></h2>
+<p>这里是 Ferrous Systems 的 <em>Embedded Rust on Espressif</em> 培训材料，分为两个部分：入门和进阶。入门部分将向你介绍嵌入式开发的基础知识，以及如何使开发板与外界交互——对命令做出反应，并发送传感器数据。</p>
+<p>进阶部分将深入探讨中断处理、低级外设访问和编写你自己的驱动程序等主题。</p>
+<p>你可以加入 Matrix 上的 <a href="https://matrix.to/#/#esp-rs:matrix.org">esp-rs 社区</a> 来探讨任何技术问题！社区对所有人开放。</p>
+<blockquote>
+<p>⚠️ 本书使用 <code>std</code> 生态系统（<code>esp-idf-hal</code>、<code>esp-idf-sys</code>、<code>esp-idf-svc</code>），这些 crate 由社区维护，未得到 Espressif 官方支持。</p>
+<p>Espressif 官方支持使用 <a href="https://github.com/esp-rs/esp-hal"><code>esp-hal</code></a> 的 <code>no_std</code> 开发方式。对于官方支持的开发方式的相应教程，请参阅 <a href="https://docs.espressif.com/projects/rust/no_std-training/"><code>no_std</code> training</a>。</p>
+</blockquote>
+<h2 id="翻译"><a class="header" href="#翻译">翻译</a></h2>
+<p>本书已由慷慨的志愿者参与翻译。如果你希望在此处列出你的译本，请（向英文原版仓库）提交 PR。</p>
+<ul>
+<li><a href="https://esp-rs.github.io/std-training/">English</a>（<a href="https://github.com/esp-rs/std-training/">仓库</a>）</li>
+</ul>
+<h2 id="开发板"><a class="header" href="#开发板">开发板</a></h2>
+<p>本书要求使用 <a href="https://github.com/esp-rs/esp-rust-board">Rust ESP 开发板</a><sup class="footnote-reference"><a href="#note">1</a></sup>——不支持像 QEMU 这样的模拟器。</p>
+<p>电路板的设计、图片、引脚布局和原理图也可以在此仓库中找到。</p>
+<p>如果你订阅了其中一项培训，乐鑫将直接为你提供一块开发板。</p>
+<p>我们的重点主要在 <a href="https://www.espressif.com/en/products/socs/esp32-c3">ESP32-C3</a> 平台，一个基于 <a href="https://riscv.org/"><code>RISC-V</code></a> 的，具有强大物联网功能的微控制器，集成 Wi-Fi 和 Bluetooth 5 (LE) 功能，以及适用于复杂应用的大容量 RAM 和 Flash。 本教程的大部分内容也适用于 Espressif 使用的其他架构（<code>Xtensa</code>），特别是 <a href="https://www.espressif.com/en/products/socs/esp32-s3">ESP32-S3</a>。 对于底层访问，原理上是一样的，但实际的硬件访问会各有不同——请根据需要参阅技术参考手册（<a href="https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_en.pdf">C3</a>，<a href="https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_en.pdf">S3</a>）或<a href="https://www.espressif.com/en/support/documents/technical-documents">其他可用的技术文档</a>。</p>
+<h2 id="rust-知识"><a class="header" href="#rust-知识">Rust 知识</a></h2>
+<ul>
+<li>基本的 Rust 知识：<a href="https://doc.rust-lang.org/book/">The Rust Book</a> 第 1 到第 6 章，第4章“所有权”不需要完全理解。</li>
+<li><a href="https://esp-rs.github.io/book/">The Rust on ESP Book</a> 不是必须的，但是强烈推荐。因为它能帮助你理解 Rust on ESP 生态系统和许多将在本教程中讨论到的概念。</li>
+</ul>
+<div class="footnote-definition" id="note"><sup class="footnote-definition-label">1</sup>
+<p>也可以使用 <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/hw-reference/esp32c3/user-guide-devkitc-02.html">ESP32-C3-DevKitC-02</a> 学习入门部分，但并不推荐。使用本书要求的硬件学起来更简单。</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="准备工作"><a class="header" href="#准备工作">准备工作</a></h1>
+<p>本章包含了有关教程材料、所需硬件的信息，以及一个安装指南。</p>
+<h2 id="本书使用的图标和格式"><a class="header" href="#本书使用的图标和格式">本书使用的图标和格式</a></h2>
+<p>本书使用图标来标记书中不同种类的信息：</p>
+<ul>
+<li>✅ 需要动手尝试。</li>
+<li>⚠️ 警告和需要特别关注的细节。</li>
+<li>🔎 深入某个主题的知识，但不需要了解这些知识即可继续阅读。</li>
+<li>💡 在练习中可能对你有帮助的提示</li>
+</ul>
+<blockquote>
+<p>注释示例：像这样的注释包含了有用的信息</p>
+</blockquote>
+<h2 id="代码注释"><a class="header" href="#代码注释">代码注释</a></h2>
+<p>在某些 Rust 源文件里，有类似这样的 anchor 注释：</p>
+<pre><code class="language-rust ignore">// ANCHOR: test
+let foo = 1;
+...
+// ANCHOR_END: test
+</code></pre>
+<p>你可以忽略 Anchor 注释，它们只是用于把包含的代码导入到本书中。详见 <a href="https://rust-lang.github.io/mdBook/format/mdbook.html#including-portions-of-a-file"><code>mdBook</code> 文档</a></p>
+<h2 id="需要的硬件"><a class="header" href="#需要的硬件">需要的硬件</a></h2>
+<ul>
+<li><a href="https://github.com/esp-rs/esp-rust-board">Rust ESP 开发板</a>：可以在 Mouser、Aliexpress 上购买。<a href="https://github.com/esp-rs/esp-rust-board#where-to-buy">完整的供应商名单</a>。</li>
+<li>用于连接开发板和 PC 的 USB-C 线缆。</li>
+<li>联入互联网的 Wi-Fi 接入点。</li>
+</ul>
+<blockquote>
+<p>不需要额外的调试器硬件。</p>
+</blockquote>
+<h2 id="项目仿真"><a class="header" href="#项目仿真">项目仿真</a></h2>
+<p>某些项目可以使用 <a href="https://wokwi.com/">Wokwi</a> 进行模拟，或者至少部分模拟。以下是支持 Wokwi 模拟的项目列表：</p>
+<ul>
+<li><code>intro/hello-world</code></li>
+<li><code>intro/http-client</code></li>
+<li><code>advanced/i2c-sensor-reading</code></li>
+<li><code>advanced/i2c-driver</code></li>
+<li><code>advanced/button-interrupt</code></li>
+</ul>
+<p>在开始任何模拟项目之前，你需要<a href="https://docs.wokwi.com/vscode/getting-started#installation">安装扩展</a>。要模拟一个项目：</p>
+<ol>
+<li>按下 F1，选择 <code>Wokwi: Select Config File</code>，然后选择你要模拟的项目的 <code>wokwi.toml</code> 文件。
+<ol>
+<li>编辑对应的 <code>wokwi.toml</code> 文件，以模拟练习部分或解答部分。</li>
+</ol>
+</li>
+<li>以 <code>debug</code> 模式构建你的项目。</li>
+<li>再次按下 F1，然后选择 <code>Wokwi: Start Simulator</code>。</li>
+</ol>
+<p>你也可以<a href="https://docs.wokwi.com/vscode/debugging">调试项目</a>。</p>
+<h2 id="确保有一个可用的开发环境"><a class="header" href="#确保有一个可用的开发环境">确保有一个可用的开发环境</a></h2>
+<!-- TODO: Update this comments -->
+<p>⚠️ 如果你正在参加由 Ferrous Systems 开展的培训，我们强烈建议你至少提前一个工作日按照本章中的说明为培训做好准备。如果你遇到任何问题或需要任何类型的支持，请<a href="https://ferrous-systems.com/contact/">联系我们</a>。</p>
+<p>⚠️ 如果你正在使用 <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/hw-reference/esp32c3/user-guide-devkitc-02.html">ESP32-C3-DevKitC-02</a>，一些引脚和从机地址会有所不同，因为两块板子不完全相同。这与 <a href="/advanced/i2c-sensor-reading/examples">advanced/i2c-sensor-reading/</a> 和 <a href="/advanced/i2c-driver/src/">advanced/i2c-driver/</a> 中的解答有关，其中用于 ESP32-C3-DevKitC-02 的引脚和从机地址已被注释。</p>
+<h2 id="配套材料"><a class="header" href="#配套材料">配套材料</a></h2>
+<ul>
+<li><a href="https://esp-rs.github.io/book/introduction.html">官方 esp-rs book</a> </li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="检查硬件"><a class="header" href="#检查硬件">检查硬件</a></h1>
+<p>将 Espressif Rust 开发板连接到你的电脑。确认一个红色的小 LED 被点亮了。</p>
+<p>开发板应当通过 USB 提供了一个 UART 串口：</p>
+<p><strong>Windows</strong>：一个 USB 串行设备（COM 端口），在设备管理器的“端口”部分。</p>
+<p><strong>Linux</strong>：<code>lsusb</code> 下的一个 USB 设备。
+这个设备的 VID（Vendor ID）为 <code>303a</code>，PID（Product ID）为 <code>1001</code>——<code>lsusb</code> 的输出中会省略 <code>0x</code> 前缀：</p>
+<pre><code class="language-console">$ lsusb | grep USB
+Bus 006 Device 035: ID 303a:1001 Espressif USB JTAG/serial debug unit
+</code></pre>
+<p>另一个查看设备，以及相关权限和端口的方法是检查 <code>/by-id</code> 目录：</p>
+<pre><code class="language-console">$ ls -l /dev/serial/by-id
+lrwxrwxrwx 1 root root .... usb-Espressif_USB_JTAG_serial_debug_unit_60:55:F9:C0:27:18-if00 -&gt; ../../ttyACM0
+</code></pre>
+<blockquote>
+<p>如果你在使用 ESP32-C3-DevKitC-02，使用 <code>$ ls /dev/ttyUSB*</code> 命令</p>
+</blockquote>
+<p><strong>macOS</strong>：此设备将显示为 <code>system_profiler</code> 中 USB 树的一部分：</p>
+<pre><code class="language-console">$ system_profiler SPUSBDataType | grep -A 11 &quot;USB JTAG&quot;
+
+USB JTAG/serial debug unit:
+
+  Product ID: 0x1001
+  Vendor ID: 0x303a
+  (...)
+</code></pre>
+<p>此设备还将作为 <code>tty.usbmodem</code> 设备显示在 <code>/dev</code> 目录中：</p>
+<pre><code class="language-console">$ ls /dev/tty.usbmodem*
+/dev/tty.usbmodem0
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="软件"><a class="header" href="#软件">软件</a></h1>
+<p>按照以下步骤完成 ESP32-C3 平台工具的默认安装。</p>
+<p>🔎 如果想要自定义安装（例如，从源码构建组件，或者添加对 <code>Xtensa</code> 目标的支持），请参阅 <em>Rust on ESP</em> 一书的 <a href="https://esp-rs.github.io/book/installation/index.html">Rust on ESP targets</a> 章节。</p>
+<h2 id="rust-工具链"><a class="header" href="#rust-工具链">Rust 工具链</a></h2>
+<p>✅ 如果你的电脑上还没有安装 Rust，从 <a href="https://rustup.rs/">https://rustup.rs/</a> 获取它</p>
+<p>此外，对于 ESP32-C3，目前需要 Rust 工具链的 <a href="https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust"><em>nightly</em> 版本</a>。本教程中我们将使用 <code>nightly-2024-06-30</code> 版本。</p>
+<p>✅ 用以下命令安装 <em>nightly</em> Rust，并添加对目标架构的支持：</p>
+<pre><code class="language-console">rustup toolchain install nightly-2024-06-30 --component rust-src
+</code></pre>
+<p>🔎 Rust 能够交叉编译到任何支持的目标架构（参见 <code>rustup 目标列表</code>）。默认情况下，仅会安装本机的架构。
+从 2022 年 1 月起，如果要编译到 <code>Xtensa</code> 架构（不是本材料的一部分），需要一个 Rust 编译器的分支。</p>
+<h2 id="espressif-工具链"><a class="header" href="#espressif-工具链">Espressif 工具链</a></h2>
+<p>需要几个工具：</p>
+<ul>
+<li><a href="https://github.com/esp-rs/espflash/tree/main/cargo-espflash"><code>cargo-espflash</code></a> - 上传固件到微控制器，打开串口监视器，Cargo 集成</li>
+<li><a href="https://github.com/esp-rs/espflash/tree/main/espflash"><code>espflash</code></a> - 上传固件到微控制器，打开串口监视器</li>
+<li><a href="https://github.com/esp-rs/embuild/tree/master/ldproxy"><code>ldproxy</code></a> - Espressif 构建工具链的依赖</li>
+</ul>
+<p>✅ 使用下面的指令安装他们：</p>
+<pre><code class="language-console">cargo install cargo-espflash espflash ldproxy
+</code></pre>
+<p>⚠️ 本书中列出的 <code>espflash</code> 和 <code>cargo-espflash</code> 命令假定版本 &gt;= 2</p>
+<h2 id="工具链依赖项"><a class="header" href="#工具链依赖项">工具链依赖项</a></h2>
+<h3 id="debianubuntu"><a class="header" href="#debianubuntu">Debian/Ubuntu</a></h3>
+<pre><code class="language-console">sudo apt install llvm-dev libclang-dev clang libudev-dev libuv1-dev pkgconf python3-venv python-is-python3
+</code></pre>
+<h3 id="macos"><a class="header" href="#macos"><code>macOS</code></a></h3>
+<p>当使用 Homebrew 包管理器时，这也是我们推荐的方式：</p>
+<pre><code class="language-console">brew install llvm libuv
+</code></pre>
+<h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
+<ul>
+<li>
+<p>Python 3 是必需的依赖项，它预装在 macOS 和大部分桌面 Linux 发行版上。<strong>Python 2</strong> 和指向它的 <code>virtualenv</code> 附加组件可能导致构建出现问题。</p>
+</li>
+<li>
+<p>报错 <code>failed to run custom build command for libudev-sys vX.X.X</code> 或 <code>esp-idf-sys vX.X.X</code>：</p>
+<p>在撰写本文时，可以通过以下方法解决：</p>
+<ol>
+<li>运行这一行命令：</li>
+</ol>
+<p><code>apt-get update \ &amp;&amp; apt-get install -y vim nano git curl gcc ninja-build cmake libudev-dev python3 python3-pip libusb-1.0-0 libssl-dev \ pkg-config libtinfo5</code></p>
+<ol start="2">
+<li>
+<p>重启终端。</p>
+</li>
+<li>
+<p>如果不起作用，尝试 <code>cargo clean</code>，删除 <code>~/.espressif</code> 目录（对于 Windows，是 <code>%USERPROFILE%\.espressif</code>），然后重新构建你的项目。</p>
+</li>
+<li>
+<p>在 Ubuntu 上，可能需要将内核更改为 <code>5.19</code>。运行 <code>uname -r</code> 以获取你的内核版本。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="docker"><a class="header" href="#docker">Docker</a></h2>
+<p>另一种可选的环境是使用 Docker。本仓库包含一个 <code>Dockerfile</code>，
+其中包含用于安装 Rust 工具链（和所有依赖的包）的指令。<strong>此虚拟化环境旨在
+为 Espressif 目标编译二进制文件，在容器内烧录二进制文件是不可行的</strong>。因此，有两种选择：</p>
+<ul>
+<li>在主机系统上执行烧写命令，例如 <code>cargo-espflash</code>。 如果采用这个选项，建议开启两个终端：
+<ul>
+<li>一个在容器内，用于编译项目</li>
+<li>一个在主机上，用 <code>cargo-espflash</code> 子命令来烧写程序</li>
+</ul>
+</li>
+<li>在容器内使用 <a href="https://github.com/esp-rs/esp-web-flash-server"><code>web-flash</code></a> crate 来烧写程序。容器已经包含了 <code>web-flash</code>。烧写 <a href="./02_4_hello_board.html"><code>hardware-check</code> 项目</a> 的命令是：
+<pre><code class="language-console">web-flash --chip esp32c3 target/riscv32imc-esp-espidf/debug/hardware-check
+</code></pre>
+</li>
+</ul>
+<p>✅ 为你的操作系统安装 <a href="https://docs.docker.com/get-docker/"><code>Docker</code></a>。</p>
+<p>✅ 获取 Docker 镜像： 有两种方法来获取 Docker 镜像：</p>
+<ul>
+<li>用 <code>Dockerfile</code> 构建镜像：
+<pre><code class="language-console">docker image build --tag rust-std-training --file .devcontainer/Dockerfile .
+</code></pre>
+构建镜像需要一段时间，具体取决于操作系统和硬件（20-30 分钟）。</li>
+<li>从 <a href="https://hub.docker.com/r/espressif/rust-std-training">Dockerhub</a> 下载：
+<pre><code class="language-console">docker pull espressif/rust-std-training
+</code></pre>
+</li>
+</ul>
+<p>✅ 启动新的 Docker 容器：</p>
+<ul>
+<li>对于本地 Docker 镜像：
+<pre><code class="language-console">docker run --mount type=bind,source=&quot;$(pwd)&quot;,target=/workspace,consistency=cached -it rust-std-training /bin/bash
+</code></pre>
+</li>
+<li>对于从 Docker Hub 下载的：
+<pre><code class="language-console">docker run --mount type=bind,source=&quot;$(pwd)&quot;,target=/workspace,consistency=cached -it espressif/rust-std-training:latest /bin/bash
+</code></pre>
+</li>
+</ul>
+<p>这将在 Docker 容器中启动一个交互式 shell。
+它还将本地存储库挂载到容器内名为 <code>/workspace</code> 的文件夹中。对主机系统上项目的更改会反映在容器内，反之亦然。</p>
+<h2 id="附加软件"><a class="header" href="#附加软件">附加软件</a></h2>
+<h3 id="vs-code"><a class="header" href="#vs-code">VS Code</a></h3>
+<p><a href="https://code.visualstudio.com/">VS Code</a> 是一个具有良好 Rust 支持的编辑器，在大多数平台上可用。
+使用 VS Code 时，我们推荐安装以下扩展：</p>
+<ul>
+<li><a href="https://rust-analyzer.github.io/"><code>Rust Analyzer</code></a> 提供代码补全和跳转等</li>
+<li><code>Even Better TOML</code> 用于编辑基于 TOML 的配置文件</li>
+</ul>
+<p>还有一些适用于高级用法的扩展</p>
+<ul>
+<li><a href="https://github.com/vadimcn/vscode-lldb"><code>lldb</code></a> 基于 LLDB 的本机调试器扩展</li>
+<li><a href="https://github.com/serayuzgur/crates"><code>crates</code></a> 帮助管理 Rust 依赖项</li>
+</ul>
+<h3 id="vs-code-和-dev-container"><a class="header" href="#vs-code-和-dev-container">VS Code 和 Dev container</a></h3>
+<p>有助于在 Docker 容器内开发的一个 VS Code 扩展是 <a href="https://github.com/Microsoft/vscode-remote-release"><code>Remote Containers</code></a>。
+它使用与 <a href="02_2_software.html#docker">Docker 配置</a>相同的 Dockerfile，构建镜像并从 VS Code 中建立连接。
+安装扩展后，VS Code 会识别 <code>.devcontainer</code> 文件夹中的配置。使用 <code>Remote Containers - Reopen in Container</code> 命令将 VS Code 连接到容器。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="教程仓库"><a class="header" href="#教程仓库">教程仓库</a></h1>
+<p>完整的材料可以在 <a href="https://github.com/esp-rs/std-training">https://github.com/esp-rs/std-training</a> 找到。</p>
+<p>✅ 克隆并进入教程仓库：</p>
+<pre><code class="language-console">git clone &quot;https://github.com/esp-rs/std-training.git&quot;
+cd std-training
+</code></pre>
+<p>❗ Windows 用户可能会遇到<a href="https://docs.esp-rs.org/book/troubleshooting/index.html#long-path-names">长路径名问题</a>。</p>
+<h2 id="仓库内容"><a class="header" href="#仓库内容">仓库内容</a></h2>
+<ul>
+<li><code>advanced/</code> - 进阶教程的代码示例和练习</li>
+<li><code>book/</code> - 本书的 markdown 源码</li>
+<li><code>common/</code> - 入门和进阶教程共用的代码</li>
+<li><code>common/lib/</code> - 基础 crates</li>
+<li><code>intro/</code> - 入门教程的代码示例和练习</li>
+</ul>
+<h2 id="关于配置的说明"><a class="header" href="#关于配置的说明">关于配置的说明</a></h2>
+<p>比起将证书或其他敏感信息直接放在源代码中，在本教程中，我们会使用 <a href="https://github.com/jamesmunns/toml-cfg"><code>toml-cfg</code></a> 作为一种更方便、更安全的替代方法。配置信息会存储在相应包的根目录中名为 <code>cfg.toml</code> 的文件中</p>
+<p>该配置中只包含一个与包同名（<code>Cargo.toml</code> 中的 <code>name = &quot;your-package&quot;</code>）的 section 标题，具体配置因项目而异：</p>
+<pre><code class="language-toml">[your-package]
+user = &quot;example&quot;
+password = &quot;h4ckm3&quot;
+</code></pre>
+<p>❗ 如果你把 <code>cfg.toml</code> 复制到了另一个项目，记得将标题改为 <code>[另一个包的 name]</code>。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-board"><a class="header" href="#hello-board">Hello, Board!</a></h1>
+<p>现在我们已准备好进行一致性检查了！</p>
+<p>✅ 将开发板的 USB-C 口连接到电脑，进入项目仓库中的 <code>hardware-check</code> 目录：</p>
+<pre><code class="language-console">cd intro/hardware-check
+</code></pre>
+<p>为了测试 Wi-Fi 连接，你需要提供你的网络名称（SSID）和密码（PSK）。这些凭据存储在专用的 <code>cfg.toml</code> 文件中（已被 <code>.gitignore</code> 忽略），以防因共享源代码或执行 pull request 而意外泄露。项目里已经提供了一个例子。</p>
+<p>✅ 将 <code>cfg.toml.example</code> 复制到 <code>cfg.toml</code>（在同一目录中），将实际的 SSID 和 PSK 写入其中：</p>
+<blockquote>
+<p>⚠️ <a href="https://www.espressif.com/en/news/ESP32-C3_Wi-Fi_Certified#:%7E:text=ESP32%2DC3%20is%20a%20safe,wide%20range%20of%20IoT%20applications">ESP32-C3 不支持 5 GHz 频段</a>，你需要确保你使用的 Wi-Fi 具有可用的 2.4 GHz 频段。</p>
+</blockquote>
+<pre><code class="language-console">$ cp cfg.toml.example cfg.toml
+$ $EDITOR cfg.toml
+$ cat cfg.toml
+
+[hardware-check]
+wifi_ssid = &quot;Your Wifi name&quot;
+wifi_psk = &quot;Your Wifi password&quot;
+</code></pre>
+<p>✅ 构建、烧写并监视（monitor）这个项目:</p>
+<pre><code class="language-console">$ cargo run
+
+Serial port: /dev/SERIAL_DEVICE
+Connecting...
+
+Chip type:         ESP32-C3 (revision 3)
+(...)
+Compiling hardware-check v0.1.0
+Finished release [optimized] target(s) in 1.78s
+
+[00:00:45] ########################################     418/418     segment 0x10000
+
+Flashing has completed!
+(...)
+rst:0x1 (POWERON),boot:0xc (SPI_FAST_FLASH_BOOT)
+(...)
+(...)
+(...)
+I (4427) wifi::wifi: Wifi connected!
+</code></pre>
+<blockquote>
+<p>🔎 如果成功运行了 <code>cargo run</code>，你可以通过 <code>ctrl+C</code> 退出。</p>
+</blockquote>
+<blockquote>
+<p>🔎 <code>cargo run</code> 被<a href="https://github.com/esp-rs/std-training/blob/main/intro/hardware-check/.cargo/config.toml#L6">配置为使用 <code>espflash</code></a> 作为<a href="https://doc.rust-lang.org/cargo/reference/config.html#target">自定义 runner</a>。以下方法也会得到相同的输出：</p>
+<ul>
+<li>使用 <code>cargo-espflash</code>：<code>cargo espflash flash --release --monitor</code></li>
+<li>用 <code>espflash</code> 构建项目并烧写：<code>cargo build --release &amp;&amp; espflash target/riscv32imc-esp-espidf/release/hardware-check</code>
+为方便起见，这个改动已经应用于本教程的所有项目。</li>
+</ul>
+</blockquote>
+<p>板上的 LED 应在启动时变为黄色，然后根据是否成功建立 Wi-fi 连接，变为红色（错误），或交替闪烁绿色和蓝色（成功）。如果出现 Wi-fi 错误，诊断消息也会显示在下面，例如：</p>
+<pre><code class="language-console">Error: could not connect to Wi-Fi network: ESP_ERR_TIMEOUT
+</code></pre>
+<blockquote>
+<p>⚠️ 如果你的网络名或密码不正确，也会得到 <code>ESP_ERR_TIMEOUT</code>。所以请仔细检查它们。</p>
+</blockquote>
+<h2 id="关于构建烧写和监视的额外信息"><a class="header" href="#关于构建烧写和监视的额外信息">关于构建、烧写和监视的额外信息</a></h2>
+<p>如果想尝试在不烧写的情况下构建，可以运行：</p>
+<pre><code class="language-console">cargo build
+</code></pre>
+<p>也可以使用以下命令监视设备而不重新烧写程序：</p>
+<pre><code class="language-console">espflash monitor
+</code></pre>
+<h2 id="troubleshooting-1"><a class="header" href="#troubleshooting-1">Troubleshooting</a></h2>
+<h3 id="构建错误"><a class="header" href="#构建错误">构建错误</a></h3>
+<pre><code class="language-console">error[E0463]: can't find crate for `core`
+= note: the `riscv32imc-esp-espidf` target may not be installed
+</code></pre>
+<p>这说明你在尝试用 <code>stable</code> Rust 构建——你需要使用 <code>nightly</code>。
+这个错误信息有一些误导性——这个目标无法安装。它需要使用 <code>build-std</code> 从源码构建，这是一个仅在 nightly 版本可用的特性。</p>
+<hr />
+<pre><code class="language-console">error: cannot find macro `llvm_asm` in this scope
+</code></pre>
+<p>你使用的 nightly 版本不兼容——用 <code>rust-toolchain.toml</code> 或 <code>cargo override</code> 配置一个合适的。</p>
+<hr />
+<pre><code class="language-console">CMake Error at .../Modules/CMakeDetermineSystem.cmake:129 (message):
+</code></pre>
+<p>你的 Espressif 工具链可能被损坏了。删除它，然后重新构建来触发新的下载：</p>
+<pre><code class="language-console">rm -rf ~/.espressif
+</code></pre>
+<p>在 Windows 上，删除 <code>%USERPROFILE%\.espressif</code> 文件夹。</p>
+<hr />
+<pre><code class="language-console">Serial port: /dev/tty.usbserial-110
+Connecting...
+
+Unable to connect, retrying with extra delay...
+Unable to connect, retrying with default delay...
+Unable to connect, retrying with extra delay...
+Error: espflash::connection_failed
+
+× Error while connecting to device
+╰─▶ Failed to connect to the device
+help: Ensure that the device is connected and the reset and boot pins are not being held down
+</code></pre>
+<p>无法通过 USB-C 线缆连接到开发板。典型的连接错误如上面所示。</p>
+<p>解决方法：</p>
+<ol>
+<li>按住板子上的 boot 按钮，启动烧写命令，开始烧写后松开按钮</li>
+<li>使用集线器（hub）</li>
+</ol>
+<p><a href="https://georgik.rocks/unable-to-flash-esp32-with-these-usb-c-cables/">来源</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="入门教程"><a class="header" href="#入门教程">入门教程</a></h1>
+<p>入门教程包含基础的嵌入式开发教学。
+在此教程的结尾，我们将能够与外界环境交互，包括与板上的传感器通讯。入门教程的内容包括：</p>
+<ul>
+<li>项目概览</li>
+<li>用 <code>cargo-generate</code> 生成一个项目。</li>
+<li>编写一个 HTTP 客户端。</li>
+<li>编写一个 HTTP 服务器。</li>
+<li>编写一个 MQTT 客户端，它能够：
+<ul>
+<li>发布传感器数据</li>
+<li>通过订阅的 topic 接收命令。</li>
+</ul>
+</li>
+</ul>
+<h2 id="准备工作-1"><a class="header" href="#准备工作-1">准备工作</a></h2>
+<p>请阅读<a href="./02_0_preparations.html">准备工作</a>章节，为本教程做好准备。</p>
+<h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>
+<p>如果你不熟悉嵌入式编程，请阅读我们的<a href="./05_reference.html">参考资料</a>，我们在那里以简单易懂的方式解释了一些术语。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="项目结构"><a class="header" href="#项目结构">项目结构</a></h1>
+<h2 id="esp-rs-crate"><a class="header" href="#esp-rs-crate"><code>esp-rs</code> Crate</a></h2>
+<p>不像大多数其他嵌入式平台，Espressif 支持 Rust 标准库。其中最值得关注的是，你可以任意使用大小可变的集合，例如 <code>Vec</code> 或 <code>HashMap</code>，以及基于 <code>Box</code> 的通用堆存储。你还可以自由地创建新线程，并使用 <code>Arc</code> 和 <code>Mutex</code> 等同步原语在它们之间安全地共享数据。
+尽管如此，内存在嵌入式系统上仍然是一种稀缺资源，因此需要注意不要耗尽它——尤其是，使用线程的代价可能会很高。</p>
+<p>Espressif 的开源物联网开发框架 <a href="https://github.com/espressif/esp-idf">ESP-IDF</a> 提供了 Wi-Fi、HTTP 客户端/服务器、MQTT、OTA 更新、日志记录等服务。esp-idf 主要是用 C 编写的，因此将它以规范的、分离的 crate 的形式提供给 Rust：</p>
+<ul>
+<li>一个 <code>sys</code> crate 提供了实际的 <code>unsafe</code> 绑定（<a href="https://github.com/esp-rs/esp-idf-sys">esp-idf-sys</a>）</li>
+<li>一个高级的 crate 提供了安全易用的 Rust 抽象（<a href="https://github.com/esp-rs/esp-idf-svc/">esp-idf-svc</a>）</li>
+</ul>
+<p>最后一部分是底层硬件访问，仍以分离的形式提供：</p>
+<ul>
+<li><a href="https://github.com/esp-rs/esp-idf-hal">esp-idf-hal</a> 实现了硬件无关的 <a href="https://github.com/rust-embedded/embedded-hal">embedded-hal</a> traits，例如模数转换、数字 I/O 引脚、SPI 通信。正如它的名字所暗示的，它依赖于 ESP-IDF。</li>
+<li>如果需要直接操作寄存器，<a href="https://github.com/esp-rs/esp-pacs/tree/main/esp32c3">esp32c3</a> 提供由 <a href="https://github.com/rust-embedded/svd2rust"><code>svd2rust</code></a> 生成的外设访问 crate。</li>
+</ul>
+<p>Rust on ESP Book 的 <a href="https://esp-rs.github.io/book/overview/using-the-standard-library.html">ecosystem 章节</a> 提供了更多信息。</p>
+<h3 id="构建工具链"><a class="header" href="#构建工具链">构建工具链</a></h3>
+<p>🔎 作为项目构建的一部分，<code>esp-idf-sys</code> 会下载基于 C 的 Espressif 工具链 <a href="https://github.com/espressif/esp-idf">ESP-IDF</a>。下载位置是可配置的，为了节省硬盘空间和下载时间，本教程中的所有示例和练习都被设置为使用一个单一的<code>全局</code>工具链，安装在 <code>~/.espressif</code> 中（对于 Windows，是<code>%USERPROFILE%\.espressif</code>）。 关于其他可选的配置，请参阅 <code>esp-idf-sys</code> 的 <a href="https://github.com/esp-rs/esp-idf-sys#configuration">README</a> 中的 <code>ESP_IDF_TOOLS_INSTALL_DIR</code> 参数。</p>
+<h2 id="package-布局"><a class="header" href="#package-布局">Package 布局</a></h2>
+<p>与使用 <code>cargo new</code> 创建的常规 Rust 项目相比，我们还需要一些额外的文件和参数。本教程中的示例和练习都已经配置好，要创建新项目，建议使用基于 <a href="./03_2_cargo_generate.html"><code>cargo-generate</code></a> 向导的方法。</p>
+<p>🔎 本页的其余部分是可选知识，在你希望更改项目的某些方面时可以派上用场。</p>
+<p>必须设置一些<a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#build-dependencies">构建依赖项</a>：</p>
+<pre><code class="language-toml">[build-dependencies]
+embuild = &quot;=0.31.2&quot;
+anyhow = &quot;=1.0.71&quot;
+</code></pre>
+<h3 id="额外的配置文件"><a class="header" href="#额外的配置文件">额外的配置文件</a></h3>
+<ul>
+<li><code>build.rs</code> - <a href="https://doc.rust-lang.org/cargo/reference/build-scripts.html">Cargo 构建脚本</a>。这里设置构建所需的环境变量。</li>
+<li><code>.cargo/config.toml</code> - 设置目标架构、自定义 runner 来烧写和监视设备、控制构建细节。如果有需要的话，可以在此处覆盖 <code>ESP_IDF_TOOLS_INSTALL_DIR</code>。</li>
+<li><code>sdkconfig.defaults</code> - 覆盖 ESP-IDF 的特定参数，例如堆栈大小、日志级别等。</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="创建新项目"><a class="header" href="#创建新项目">创建新项目</a></h1>
+<p>现在让我们用 <a href="https://github.com/cargo-generate/cargo-generate"><code>cargo-generate</code></a> （一个通用的项目生成向导）来配置我们的第一个项目。</p>
+<p>关于生成项目的更多信息，请参阅 The Rust on ESP Book 的<a href="https://narukara.github.io/rust-on-esp-book-zh-cn/writing-your-own-application/index.html">编写自己的应用</a>章节。</p>
+<blockquote>
+<p>本教程中的其他大多数练习都已经提供了项目框架，不需要使用 <code>cargo-generate</code>。</p>
+</blockquote>
+<p>✅ 安装 <code>cargo-generate</code>：</p>
+<pre><code class="language-console">cargo install cargo-generate
+</code></pre>
+<p>✅ 进入 <code>intro</code> 目录并运行 <code>cargo generate</code>，使用 <a href="https://github.com/esp-rs/esp-idf-template"><code>esp-idf</code> 模板</a>：</p>
+<pre><code class="language-console">cd intro
+cargo generate esp-rs/esp-idf-template cargo
+</code></pre>
+<p><a href="https://github.com/esp-rs/esp-idf-template#generate-the-project"><code>cargo-generate</code> 将提示有关新项目的详细信息</a>。当在多个选项中进行选择时，可以使用光标向上/向下，并使用回车键确定。</p>
+<p>你看到的第一条消息会是：
+<code>⚠️Unable to load config file: /home/$USER/.cargo/cargo-generate.toml</code>。出现这个错误是因为没有偏好的配置文件。但这不是必须的，你可以忽略这个警告。</p>
+<p>🔎 你可以创建一个 <a href="https://cargo-generate.github.io/cargo-generate/favorites.html">偏好的配置文件</a>，放在 <code>$CARGO_HOME/cargo-generate</code>。可以使用 <code>-c, --config &lt;config-file&gt;</code> 覆盖它。</p>
+<blockquote>
+<p>如果误操作了，按下 <code>Ctrl+C</code> 然后重新开始。</p>
+</blockquote>
+<p>✅ 配置你的项目：</p>
+<p>（这些选项可能以不同的顺序出现）</p>
+<ul>
+<li>Project Name: <code>hello-world</code></li>
+<li>MCU: <code>esp32c3</code></li>
+<li>Configure advanced template options?: <code>false</code></li>
+</ul>
+<p>🔎 <code>.cargo/config.toml</code> 包含你的 package 的本地设置（<a href="https://doc.rust-lang.org/cargo/reference/config.html">全部设置列表</a>）。
+<code>Cargo.toml</code> 包含依赖项，<code>Cargo.lock</code> 会<a href="https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html">导入所有依赖项</a>。</p>
+<p>可选，但是推荐：为了节省硬盘空间和下载时间，把<a href="https://github.com/esp-rs/esp-idf-sys#esp_idf_tools_install_dir-esp_idf_tools_install_dir">工具链路径设置为全局（global）</a>。否则每一个新项目/工作空间都会安装一个自己的工具链实例：</p>
+<p>✅ 打开 <code>hello-world/.cargo/config.toml</code> 并添加下面几行到 <code>[env]</code> section 的底部。保持其他内容不变。</p>
+<pre><code class="language-toml">[env]
+# ...
+ESP_IDF_TOOLS_INSTALL_DIR = { value = &quot;global&quot; } # 添加这一行
+</code></pre>
+<p>✅ 打开 <code>hello-world/rust-toolchain.toml</code> 并将文件修改为如下所示：</p>
+<pre><code class="language-toml">[toolchain]
+channel = &quot;nightly-2025-01-01&quot; # 修改这一行
+</code></pre>
+<p>✅ 在 <code>hello-world</code> 目录中用下面的命令来运行项目：</p>
+<pre><code class="language-console">cd hello-world
+cargo run
+</code></pre>
+<p>✅ 输出的最后几行应当如下所示：</p>
+<pre><code class="language-console">(...)
+I (268) cpu_start: Starting scheduler.
+Hello, world!
+</code></pre>
+<h2 id="额外的任务"><a class="header" href="#额外的任务">额外的任务</a></h2>
+<ul>
+<li>如果 <code>main</code> 函数退出了，你只能通过复位微控制器来再次启动它。如果在其末尾放置一个死循环会怎么样？下载一个死循环程序来验证你的猜想。</li>
+<li>你能想出一种办法来避免你看到的现象吗？（提示<sup class="footnote-reference"><a href="#hint">1</a></sup>）</li>
+</ul>
+<h2 id="troubleshooting-2"><a class="header" href="#troubleshooting-2">Troubleshooting</a></h2>
+<ul>
+<li>如果 <code>cargo run</code> 卡在了 <code>Connecting...</code> 上，可能是因为有另一个监视进程在运行（例如，在刚刚的 <code>hardware-check</code> 中打开的）。尝试找到并终止它。如果还是不行，尝试重新连接板子的 USB 线缆。</li>
+<li><code>⛔ Git Error: authentication required</code>：你的 git 可能配置为将 <code>https</code> Github URL 替换成 <code>ssh</code>。检查全局 <code>~/.git/config</code> 中的 <code>insteadOf</code> 部分并禁用它们。</li>
+</ul>
+<div class="footnote-definition" id="hint"><sup class="footnote-definition-label">1</sup>
+<p>通过在循环中<code>休眠</code>而不是忙等待，将控制权交还给底层操作系统。（使用 <code>std::thread::sleep</code>）</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="http-和-https-客户端"><a class="header" href="#http-和-https-客户端">HTTP 和 HTTPS 客户端</a></h1>
+<p>在本练习中，我们将编写一个小型客户端，通过 HTTP 连接到互联网以获取数据。然后我们将其升级为 HTTPS 客户端。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="http-客户端"><a class="header" href="#http-客户端">HTTP 客户端</a></h1>
+<p>本练习的目标是编写一个能够连接网站的小型 HTTP 客户端。</p>
+<h2 id="配置"><a class="header" href="#配置">配置</a></h2>
+<p>✅ 进入 <code>intro/http-client</code> 目录。</p>
+<p>✅ 打开 <code>intro/http-client</code> 中已准备好的项目框架。</p>
+<p>✅ 将你的<a href="02_4_hello_board.html">网络凭据</a>加到 <code>cfg.toml</code> 中，就像在硬件测试中做的那样。</p>
+<p>✅ 用下面的命令打开此项目的文档：</p>
+<pre><code class="language-console">cargo doc --open
+</code></pre>
+<p><code>intro/http-client/examples/http_client.rs</code> 包含解答。你可以用下面的命令运行它：</p>
+<pre><code class="language-console">cargo run --example http_client
+</code></pre>
+<h2 id="建立连接"><a class="header" href="#建立连接">建立连接</a></h2>
+<p>默认只能使用未加密的 HTTP，这限制了我们能连接到的主机。因此我们将使用 <code>http://neverssl.com/</code>。</p>
+<p>在 ESP-IDF 中，HTTP 客户端连接由 <code>esp-idf-svc</code> crate 中的 <code>http::client::EspHttpClient</code> 管理。它实现了 <code>embedded-svc</code> 中的 <code>http::client::Client</code> trait，定义了 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">HTTP 请求方法</a>（如 <code>GET</code> 或 <code>POST</code>）使用的函数。现在正是查看你用 <code>cargo doc --open</code> 打开的文档的好时机，查看其中 <code>esp_idf_svc::http::client::EspHttpConnection</code> 和 <code>embedded_svc::http::client::Client</code> 相关的内容，以及可以使用的实例化方法。</p>
+<p>✅ 用默认配置创建一个 <code>EspHttpConnection</code>。到文档里找一个合适的构造方法。</p>
+<p>✅ 从刚刚创建的 connection 里获取一个 client。</p>
+<p>在 client 上调用 HTTP 函数（例如 <code>get(url)</code>）会返回一个 <code>embedded_svc::http::client::Request</code>。你需要提交（submit）它来表示 client 在发送请求附带的选项。</p>
+<p><code>get</code> 函数使用 <a href="https://doc.rust-lang.org/std/convert/trait.AsRef.html">as_ref()</a>。这意味着该函数可以接受任何实现 <code>AsRef&lt;str&gt;</code> trait 的类型，即任何可以调用 <code>.as_ref()</code> 产生 <code>&amp;str</code> 的类型，而不是仅限于某种特定类型，例如 <code>String</code> 或 <code>&amp;str</code>。这适用于 <code>String</code> 和 <code>&amp;str</code>，也适用于包含前两种类型的 <code>Cow&lt;str&gt;</code> 枚举类型。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let request = client.request(Method::Get, url.as_ref(), &amp;headers)?;
+<span class="boring">}
+</span></code></pre></pre>
+<p>成功的响应具有 <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">2xx 范围内的状态码</a>。紧随其后的是网站的原始 html。</p>
+<p>✅ 检验连接是否成功。</p>
+<p>✅ 如果状态码不在 2xx 范围内，返回一个错误。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match status {
+        200..=299 =&gt; {
+        }
+        _ =&gt; bail!(&quot;Unexpected response code: {}&quot;, status),
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>状态码错误可以用 <a href="https://docs.rs/anyhow/latest/anyhow/index.html">Anyhow</a> crate 返回。<code>Anyhow</code> 常被用于简化应用程序中的错误处理，它提供了一个通用的 <code>anyhow::Result&lt;T&gt;</code>，将成功（<code>Ok</code>）情况包装在 T 中，而且无需指定 Err 类型，只要求你返回的每个错误都实现了 <code>std::error::Error</code>。</p>
+<p>✅ 使用 <code>Read::read(&amp;mut reader,&amp;mut buf)</code> 将接收到的数据逐块地读取到 <code>u8</code> 缓冲区中。<code>Read::read</code> 会返回读取的字节数——当这个值为 <code>0</code> 时就完成了读取。</p>
+<p>✅ 报告读取的总字节数。</p>
+<p>✅ 把接收到的数据记录到控制台上。
+💡 响应数据以字节的形式存储在缓冲区内，所以你可能需要<a href="https://doc.rust-lang.org/std/str/fn.from_utf8.html">一个方法</a>来把字节转换为 <code>&amp;str</code>。</p>
+<h2 id="额外的任务-1"><a class="header" href="#额外的任务-1">额外的任务</a></h2>
+<p>✅ 在 match 分支里分别处理 3xx、4xx 和 5xx 状态码</p>
+<p>✅ 编写一个自定义的 <code>Error</code> 枚举来表示这些错误。为这个错误实现 <code>std::error::Error</code> trait。</p>
+<h2 id="troubleshooting-3"><a class="header" href="#troubleshooting-3">Troubleshooting</a></h2>
+<ul>
+<li><code>missing WiFi name/password</code>：确保你已根据 <code>cfg.toml.example</code> 配置了 <code>cfg.toml</code>。一个常见的问题是包名和配置中的 section 名称不匹配。</li>
+</ul>
+<pre><code class="language-toml"># Cargo.toml
+#...
+[package]
+name = &quot;http-client&quot;
+#...
+
+# cfg.toml
+[http-client]
+wifi_ssid = &quot;...&quot;
+wifi_psk = &quot;...&quot;
+</code></pre>
+<ul>
+<li><code>Guru Meditation Error: Core 0 panic'ed (Load access fault). Exception was unhandled.</code>
+这可能是由你的代码中的 <code>.unwrap()</code> 引起的。试试用问号运算符替代它们。</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="https-客户端"><a class="header" href="#https-客户端">HTTPS 客户端</a></h1>
+<p>现在让我们更改 HTTP 客户端源代码，使它也适用于加密连接。</p>
+<p><code>intro/http-client/examples/http_client.rs</code> 包含解答。你可以用下面的命令运行它：</p>
+<pre><code class="language-console">cargo run --example https_client
+</code></pre>
+<p>创建一个自定义的客户端配置，由此使用启用了证书的<code>esp_idf_svc::http::client::EspHttpConnection</code>，而其他值保持默认。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let connection = EspHttpConnection::new(&amp;Configuration {
+        use_global_ca_store: true,
+        crt_bundle_attach: Some(esp_idf_svc::sys::esp_crt_bundle_attach),
+        ..Default::default()
+    })?;
+<span class="boring">}
+</span></code></pre></pre>
+<p>✅ 用新的配置初始化 HTTP 客户端，通过下载一些 <code>https</code> 资源来验证 HTTPS 是否正常工作，例如 <code>https://espressif.com/</code>。下载的内容会在控制台中以原始 HTML 的形式显示出来。</p>
+<h2 id="troubleshooting与上一节相同"><a class="header" href="#troubleshooting与上一节相同">Troubleshooting（与上一节相同）</a></h2>
+<ul>
+<li><code>missing WiFi name/password</code>：确保你已根据 <code>cfg.toml.example</code> 配置了 <code>cfg.toml</code>。一个常见的问题是包名和配置中的 section 名称不匹配。</li>
+</ul>
+<pre><code class="language-toml"># Cargo.toml
+#...
+[package]
+name = &quot;http-client&quot;
+#...
+
+# cfg.toml
+[http-client]
+wifi_ssid = &quot;...&quot;
+wifi_psk = &quot;...&quot;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="简单的-http-服务器"><a class="header" href="#简单的-http-服务器">简单的 HTTP 服务器</a></h1>
+<p>现在让我们把开发板变成一个微型网络服务器，在收到 <code>GET</code> 请求后，它会提供来自内部温度传感器的数据。</p>
+<h2 id="配置-1"><a class="header" href="#配置-1">配置</a></h2>
+<p><code>intro/http-server/</code> 中有已准备好的项目框架。它会建立 Wi-Fi 连接，但你需要将其配置为使用 <code>cfg.toml</code> 中的网络凭据。</p>
+<p><code>intro/http-server/examples/https-server.rs</code> 包含一个解答。你可以用下面的命令运行它：</p>
+<pre><code class="language-console">cargo run --example http_server
+</code></pre>
+<h2 id="处理请求"><a class="header" href="#处理请求">处理请求</a></h2>
+<p>为了用浏览器访问开发板，你需要知道板子的 IP 地址。</p>
+<p>✅ 运行 <code>intro/http-server</code> 中的框架代码。输出应该包含板子的 IP 地址，类似这样：</p>
+<pre><code class="language-console">I (3862) esp_netif_handlers: sta ip: 192.168.178.54, mask: ...
+...
+Server awaiting connection
+</code></pre>
+<p><code>sta ip</code> 指的是 Wi-Fi 术语站点（station），代表连接到接入点（access point）的接口。这就是你需要输入浏览器的地址（或其他 HTTP 客户端，如 <code>curl</code>）。</p>
+<blockquote>
+<p>🔎 ESP-IDF 会尝试在本地网络中注册主机名 <code>espressif</code>，因此使用 <code>http://espressif/</code> 代替 <code>http://&lt;sta ip&gt;/</code> 通常也可以。</p>
+<p>你可以通过设置 <code>sdkconfig.defaults</code> 中的 <code>CONFIG_LWIP_LOCAL_HOSTNAME</code> 来更改主机名，例如 <code>CONFIG_LWIP_LOCAL_HOSTNAME=&quot;esp32c3&quot;</code>。</p>
+</blockquote>
+<p>向客户端发送 HTTP 数据包括：</p>
+<ul>
+<li>创建一个 <code>EspHttpServer</code> 实例</li>
+<li>在主函数中循环，这样它就不会终止——终止会导致服务器离开作用域然后关闭</li>
+<li>为需要提供内容的每个路径设置单独的请求处理（<code>handler</code>）函数。任何未配置的路径都会产生 <code>404</code> 错误。这些处理函数以 Rust 闭包的形式内联实现，如下所示：</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>server.fn_handler(path, Method::Get, |request| {
+    // ...
+    // 构造一个响应
+    let mut response = request.into_ok_response()?;
+    // 写入期望的数据
+    response.write_all(&amp;some_buf)?;
+    // 如果完成了处理，处理函数期望一个 `Completion` 作为结果
+    // 这是通过它实现的：
+    Ok(())
+});
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>✅ 使用默认的 <code>esp_idf_svc::http::server::Configuration</code> 创建一个 <code>EspHttpServer</code> 实例。默认配置将使它自动监听 80 端口。</p>
+<p>✅ 验证与 <code>http://&lt;sta ip&gt;/</code> 的连接是否会产生 <code>404</code>（not found）错误，表明 <code>This URI does not exist</code>。</p>
+<p>✅ 为根路径（<code>&quot;/&quot;</code>）编写请求处理函数。处理函数会在 <code>http://&lt;sta ip&gt;/</code> 上发送问候消息，使用已提供的 <code>index_html()</code> 函数来生成 HTML 字符串。</p>
+<h2 id="动态数据"><a class="header" href="#动态数据">动态数据</a></h2>
+<p>我们还可以向客户端发送动态信息。该框架包含一个已配置好的 <code>temp_sensor</code>，用于测量开发板的内部温度。</p>
+<p>✅ 在 <code>http://&lt;sta ip&gt;/temperature</code> 上编写第二个请求处理函数，用于报告芯片的温度。使用已提供的 <code>temperature(val: f32)</code> 函数来生成 HTML 字符串。
+💡 如果要发送响应字符串，需要通过 <code>a_string.as_bytes()</code> 将其转换为 <code>&amp;[u8]</code> slice。
+💡 温度传感器需要独占（可变）访问。将它作为有所有权的值传递给请求处理函数是行不通的（因为它会在第一次调用后被丢弃）——你可以通过把处理函数变成 <code>move ||</code> 闭包来解决这个问题。将传感器包裹在 <code>Arc&lt;Mutex&lt;_&gt;&gt;</code> 中，将此 <code>Arc</code> 的一个 <code>clone()</code> 保留在主函数中，并将另一个移动到闭包中。</p>
+<h2 id="troubleshooting-4"><a class="header" href="#troubleshooting-4">Troubleshooting</a></h2>
+<ul>
+<li><code>httpd_txrx: httpd_resp_send_err</code> 可以通过重启解决。如果不起作用，可以使用 <code>cargo clean</code>。</li>
+<li>确保你的电脑和开发板使用的是相同的 Wi-Fi 网络。</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基于-mqtt-的-iot"><a class="header" href="#基于-mqtt-的-iot">基于 MQTT 的 IoT</a></h1>
+<p>在本节练习中，我们将学习 MQTT 的工作原理，然后编写一个能够通过 MQTT 发送和接收数据的应用。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mqtt-是如何工作的"><a class="header" href="#mqtt-是如何工作的">MQTT 是如何工作的</a></h1>
+<p>⚠️ 本节练习需要一个 MQTT 服务器。如果你参加了 Ferrous Systems 的培训，培训中将会提供一个登录凭证，用于访问 Espressif 运营的服务器。否则，你可以使用 <a href="https://test.mosquitto.org/">https://test.mosquitto.org/</a> 中列出的 MQTT 服务器，或者在本地安装一个。</p>
+<!-- Test with HiveMQ or any other free server? -->
+<p>作为入门教程的收尾，让我们向开发板添加一些 <a href="https://en.wikipedia.org/wiki/Internet_of_things">IoT</a> 功能。
+我们的目标是让板子发送实时更新的传感器值，而无需像使用 HTTP 服务器时那样反复查询。此外，还可以让板子接收命令，更改 LED 的颜色。</p>
+<p>这些内容可以使用<a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">发布-订阅架构</a>进行建模。多个客户端在特定的频道/主题上发布消息，同时可以订阅这些主题，来接收其他设备发布的消息。这些消息的分发由消息代理（broker）协调——在本例中，就是 MQTT 服务器。</p>
+<h2 id="mqtt-消息"><a class="header" href="#mqtt-消息">MQTT 消息</a></h2>
+<p>MQTT 消息由两部分组成——主题（topic）和 payload。</p>
+<p>主题的作用与电子邮件中的主题，或文件柜上的标签相同。而 payload 包含实际的数据。payload 数据的格式没有规定，最常见的是 JSON。</p>
+<p>🔎 最新版本的 MQTT 标准（MQTT 5）支持内容的类型元数据。
+发送 MQTT 消息时，需要指定一个<a href="https://en.wikipedia.org/wiki/MQTT#Quality_of_service">服务质量（QoS）</a>，表示这个消息会被传输：</p>
+<ul>
+<li>最多一次。</li>
+<li>至少一次。</li>
+<li>恰好一次。</li>
+</ul>
+<p>对于本练习，选择哪种服务质量并不重要。</p>
+<h2 id="mqtt-主题"><a class="header" href="#mqtt-主题">MQTT 主题</a></h2>
+<p>MQTT 主题是表示层次结构的 UTF-8 字符串，各个层次由斜杠 <code>/</code> 分隔。支持前导斜杠，但不推荐。这里是一些例子：</p>
+<pre><code class="language-code">home/garage/temperature
+beacons/bicycle/position
+home/alarm/enable
+home/front door/lock
+</code></pre>
+<p>在这里，一个传感器会定期发布车库温度（home/garage/temperature），并广播给每个订阅者。自行车信标发布 GPS 坐标也是一样（beacons/bicycle/position）。<code>alarm</code> 和 <code>lock</code> 主题用于向特定设备发送命令。不过，其他订阅者也可以监听这些命令，这对于审计可能会很有用。</p>
+<p>🔎 以 <code>$</code> 开头的主题是保留的，用于消息代理内部的统计功能。通常，这种主题将以 <code>$SYS</code> 开头。客户端不能向这些主题发布消息。</p>
+<p>⚠️ 由于所有本教程的参与者会共享同一个 MQTT 服务器，因此需要采取一些措施来防止串扰。本练习的框架会为每一个签出的仓库，生成一个唯一且随机的 ID（采用 <code>UUID v4</code> 格式）。你也可以<a href="https://www.uuidgenerator.net/version4">在线手动生成一个</a>。在电脑和开发板之间传输消息时，你的 UUID 应该用作主题的前导部分。大致上类似于这种模式：</p>
+<pre><code class="language-code">6188eec9-6d3a-4eac-996f-ac4ab13f312d/sensor_data/temperature
+6188eec9-6d3a-4eac-996f-ac4ab13f312d/command/board_led
+</code></pre>
+<h2 id="订阅主题"><a class="header" href="#订阅主题">订阅主题</a></h2>
+<p>客户端发送订阅消息以表示他们希望接收某些主题下的消息。通配符的支持是可选的。通配符可以用于匹配单个或多个层次。</p>
+<ul>
+<li><code>home/garage/temperature</code> - 只订阅这个特定的主题</li>
+<li><code>home/#</code> - 井号是多级通配符，因此它订阅了以 <code>home/</code> 开头的所有主题。<code>home/garage/temperature</code>、<code>home/front door/lock</code> 和 <code>home/alarm/enable</code> 都会匹配上，但 <code>beacons/bicycle/position</code> 不会。多级通配符必须放在订阅字符串的末尾。</li>
+<li><code>home/+/temperature</code> - 加号是单级通配符，这里订阅了 <code>home/garage/temperature</code>, <code>home/cellar/temperature</code> 等。</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mqtt-练习发送消息"><a class="header" href="#mqtt-练习发送消息">MQTT 练习：发送消息</a></h1>
+<h2 id="配置-2"><a class="header" href="#配置-2">配置</a></h2>
+<p>✅ 进入 <code>intro/mqtt/exercise</code> 目录。</p>
+<p>✅ 打开 <code>intro/mqtt/exercise</code> 中准备好的项目框架。</p>
+<p>✅ <code>intro/mqtt/host_client</code> 中有一个在主机上运行的程序，它可以模拟第二个客户端。用 <code>cargo run</code> 在单独的终端中运行它。下面是有关主机客户端的更多信息。</p>
+<p>这个客户端也会生成随机的 RGB 颜色，并把它们发布到一个主题下。
+<strong>这只与练习的第二部分相关</strong>。</p>
+<p>⚠️ 与 HTTP 练习类似，你需要在 <code>cfg.toml</code> 中为<strong>两个程序</strong>配置连接凭证。除了 Wi-Fi 凭证，还需要添加 MQTT 服务器的信息。查看 <code>cfg.toml.example</code> 来了解需要的设置。请记住 <code>cfg.toml</code> 文件中括号里的名称就是 <code>Cargo.toml</code> 中的包名。</p>
+<p>练习的结构如下图所示。在这一部分中，我们将重点关注温度主题。</p>
+<p><img src="./assets/mqtt_structure.svg" alt="example_client_broker_board" /></p>
+<p><code>intro/mqtt/exercise/solution/solution_publ.rs</code> 包含解答。你可以用下面的命令运行它：</p>
+<pre><code class="language-console">cargo run --example solution_publ
+</code></pre>
+<h2 id="任务"><a class="header" href="#任务">任务</a></h2>
+<p>✅ 用默认配置和空的处理程序（handler）闭包创建一个 <code>EspMqttClient</code>。</p>
+<p>✅ 在 <code>hello_topic</code> 主题下，给消息代理发送一个空的消息。 使用 <code>hello_topic(uuid)</code> 函数生成适当范围的主题。</p>
+<p>✅ 将一个客户端连接上消息代理，让它输出收到的消息，以此来验证是否发布成功。<code>host_client</code> 已经实现了这个操作。在 ESP Rust 开发板上运行程序之前，在另一个终端里启动 <code>host_client</code>。
+<code>host_client</code> 应当输出类似这样的信息：</p>
+<pre><code class="language-console">Setting new color: rgb(1,196,156)
+Setting new color: rgb(182,190,128)
+Board says hi!
+</code></pre>
+<p>✅ 在主函数末尾的循环里，在 <code>temperature_data_topic(uuid)</code> 主题下每秒发布板子的温度。用 <code>host_client</code> 来进行验证：</p>
+<pre><code class="language-console">Setting new color: rgb(218,157,124)
+Board temperature: 33.29°C
+Setting new color: rgb(45,88,22)
+Board temperature: 33.32°C
+</code></pre>
+<h2 id="建立连接-1"><a class="header" href="#建立连接-1">建立连接</a></h2>
+<p>连接由 <code>esp_idf_svc::mqtt::client::EspMqttClient</code> 实例管理。
+使用以下内容构造它：</p>
+<ul>
+<li>消息代理的 URL，如果需要的话，还包含连接凭据</li>
+<li><code>esp_idf_svc::mqtt::client::MqttClientConfiguration</code> 类型的配置信息</li>
+<li>与 HTTP 服务器练习类似的处理程序闭包</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>let mut client = EspMqttClient::new(broker_url,
+    &amp;mqtt_config,
+    move |message_event| {
+        // ... 你的处理程序代码，暂时留空
+        // 我们会在本章的后面添加功能
+    })?;
+
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="相关工具--crates"><a class="header" href="#相关工具--crates">相关工具 &amp; crates</a></h2>
+<p>为了记录板子发送的传感器值，<code>intro/mqtt/host_client</code> 下提供了一个辅助客户端，它会订阅温度主题。</p>
+<p><code>mqtt_messages</code> crate（在 <code>common/lib</code>）支持处理消息、订阅和主题：</p>
+<h3 id="用于生成主题字符串的函数"><a class="header" href="#用于生成主题字符串的函数">用于生成主题字符串的函数</a></h3>
+<ul>
+<li><code>color_topic(uuid)</code> - 创建一个用于给板子发送颜色的主题。</li>
+</ul>
+<!-- - `cmd_topic_fragment(uuid)` - creates the leading part of a "command" topic (the `a-uuid/command/` part in `a-uuid/command/board_led`) -->
+<ul>
+<li><code>hello_topic(uuid)</code> - 用于初步验证连接成功的主题</li>
+<li><code>temperature_data_topic(uuid)</code> - 创建完整的温度主题字符串</li>
+</ul>
+<h3 id="编码和解码消息-payload"><a class="header" href="#编码和解码消息-payload">编码和解码消息 payload</a></h3>
+<p>板子的温度 <code>f32</code> 用 <code>temp.to_be_bytes()</code> 转换成“大端序”的 4 个字节。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 温度
+let temperature_data = &amp;temp.to_be_bytes() as &amp;[u8]; // 板子上
+let decoded_temperature = f32::from_be_bytes(temperature_data); // 电脑上
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="发布--订阅"><a class="header" href="#发布--订阅">发布 &amp; 订阅</a></h2>
+<p><code>EspMqttClient</code> 也负责在指定主题下发布消息。
+发布函数 <code>publish</code> 包含一个 <code>retain</code> 参数，指示此消息是否需要发送给在发布之后才连接上的客户端。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let publish_topic = /* ... */;
+let payload: &amp;[u8] = /* ... */ ;
+client.publish(publish_topic, QoS::AtLeastOnce, false, payload)?;
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="troubleshooting-5"><a class="header" href="#troubleshooting-5">Troubleshooting</a></h2>
+<ul>
+<li>构建示例客户端时出现 <code>error: expected expression, found .</code>：将你的 stable Rust 更新到 1.58 或更新的版本</li>
+<li>没有显示 MQTT 消息？确保所有客户端（板子和电脑）使用的是相同的 UUID（你可以在日志输出中看见它）</li>
+<li>确保 <code>cfg.toml</code> 文件被正确配置。<code>example-client</code> 在程序的开始处有一个 <code>dbg!()</code> 输出，显示 <code>mqtt</code> 配置。它应当会输出你的 <code>cfg.toml</code> 文件内容。</li>
+<li>运行主机客户端时出现 <code>error: expected expression, found .</code>：用 <code>rustup update</code> 就可以解决</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mqtt-练习接收-led-命令"><a class="header" href="#mqtt-练习接收-led-命令">MQTT 练习：接收 LED 命令</a></h1>
+<p>✅ 订阅 <code>color_topic(uuid)</code> 主题</p>
+<p>✅ 在单独的终端里运行 <code>host_client</code>。<code>host_client</code> 大约每秒会发布一个开发板 LED 的颜色 <code>color</code>。</p>
+<p>✅ 通过记录从这个主题收到的信息，来验证订阅是否有效。</p>
+<p>✅ 对 LED 命令作出响应：用 <code>led.set_pixel(/* 收到的颜色 */)</code> 函数把新收到的颜色设置到板子上。</p>
+<p><code>intro/mqtt/exercise/solution/solution_publ_rcv.rs</code> 包含解答。你可以用下面的命令运行它：</p>
+<pre><code class="language-console">cargo run --example solution_publ_rcv
+</code></pre>
+<h3 id="编码和解码消息-payload-1"><a class="header" href="#编码和解码消息-payload-1">编码和解码消息 payload</a></h3>
+<p>开发板 LED 命令包含三个字节，分别表示红、绿、蓝。</p>
+<ul>
+<li><code>enum ColorData</code> 包含一个主题 <code>color_topic(uuid)</code> 和 <code>BoardLed</code></li>
+<li>可以使用 <code>try_from()</code> 来转换 <code>EspMqttMessage</code> 的 <code>data()</code> 字段。首先需要用 <code>let message_data: &amp;[u8] = &amp;message.data();</code> 将消息强制转换为 slice</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// RGB LED 命令
+
+if let Ok(ColorData::BoardLed(color)) = ColorData::try_from(message_data) { /* 在这里设置新的颜色 */ }
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="发布--订阅-1"><a class="header" href="#发布--订阅-1">发布 &amp; 订阅</a></h2>
+<p><code>EspMqttClient</code> 不止负责发布消息，也用于订阅主题。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let subscribe_topic = /* ... */;
+client.subscribe(subscribe_topic, QoS::AtLeastOnce)
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="处理收到的消息"><a class="header" href="#处理收到的消息">处理收到的消息</a></h2>
+<p>处理函数闭包里的 <code>message_event</code> 参数的类型是 <code>EspMqttEvent</code>，它有一个 <code>payload()</code> 方法，用于访问 <code>EventPayload</code>。
+由于我们只对接收成功的消息感兴趣：</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let mut client =
+        EspMqttClient::new_cb(
+            &amp;broker_url,
+            &amp;mqtt_config,
+            move |message_event| match message_event.payload() {
+                Received { data, details, .. } =&gt; process_message(data, details, &amp;mut led),
+                Error(e) =&gt; warn!(&quot;Received error from MQTT: {:?}&quot;, e),
+                _ =&gt; info!(&quot;Received from MQTT: {:?}&quot;, message_event.payload()),
+            },
+        )?;
+<span class="boring">}
+</span></code></pre></pre>
+<p>在处理函数中，我们将会处理 <code>Complete</code> 消息。</p>
+<p>💡 使用 Rust Analyzer 来生成缺失的 match 分支，或者匹配所有其他类型，输出一个 <code>info!()</code>。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn process_message(data: &amp;[u8], details: Details, led: &amp;mut WS2812RMT) {
+    match details {
+        Complete =&gt; {
+            info!(&quot;{:?}&quot;, data);
+            let message_data: &amp;[u8] = data;
+            if let Ok(ColorData::BoardLed(color)) = ColorData::try_from(message_data) {
+                info!(&quot;{}&quot;, color);
+                if let Err(e) = led.set_pixel(color) {
+                    error!(&quot;Could not set board LED: {:?}&quot;, e)
+                };
+            }
+        }
+        _ =&gt; {}
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>💡 用 logger 来查看接收到的东西，例如：<code>info!(&quot;{}&quot;, color);</code> 或 <code>dbg!(color)</code>。</p>
+<h2 id="额外的任务-2"><a class="header" href="#额外的任务-2">额外的任务</a></h2>
+<h3 id="实现具有分层主题的-mqtt"><a class="header" href="#实现具有分层主题的-mqtt">实现具有分层主题的 MQTT</a></h3>
+<p>✅ 如果你已经完成了所有其他工作，可以考虑实现这个任务。我们不提供完整的解答，因为这是用于测试你自己能走多远。</p>
+<p>检查 <code>common/lib/mqtt-messages</code>：</p>
+<p>✅ 使用分层主题的 MQTT 实现相同的功能。订阅所有的“命令”消息，在 <code>cmd_topic_fragment(uuid)</code> 后面加一个 <code>#</code> 通配符。</p>
+<p>✅ 用 <code>enum Command</code> 代替 <code>enum ColorData</code>。<code>enum Command</code> 表示所有可能的命令（这里仅有 <code>BoardLed</code>）。</p>
+<p>✅ <code>RawCommandData</code> 存储了消息主题的最后一部分（例如 <code>a-uuid/command/board_led</code> 中的 <code>board_led</code>）。可以用 <code>try_from</code> 将其转换为 <code>Command</code>。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// RGB LED 命令
+let raw = RawCommandData {
+    path: command,
+    data: message.data(),
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>检查 <code>host-client</code>:</p>
+<p>✅ 你需要将 <code>color</code> 替换成 <code>command</code>。例如：</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let command = Command::BoardLed(color)
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="其他任务"><a class="header" href="#其他任务">其他任务</a></h3>
+<p>✅ 利用 <a href="https://docs.serde.rs/serde_json/"><code>serde_json</code></a> 将消息数据编码/解码为 JSON。</p>
+<p>✅ 从主机客户端上发送一些带有大量 payload 的消息，并在微控制器上处理它们。大体积的消息将会分部分传递，而不是使用 <code>Details::Complete</code>：</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>InitialChunk(chunk_info) =&gt; { /* 第一块 */},
+SubsequentChunk(chunk_data) =&gt; { /* 所有后续块 */ }
+<span class="boring">}
+</span></code></pre></pre>
+<p>💡 不需要根据消息 ID 来区分收到的块，因为在任意时刻，最多只有一条消息正在传输。</p>
+<h2 id="troubleshooting-6"><a class="header" href="#troubleshooting-6">Troubleshooting</a></h2>
+<!-- DELETE this section? its the same as 3.5.2 -->
+<ul>
+<li>构建示例客户端时出现 error: expected expression, found .：将你的 stable Rust 更新到 1.58 或更新的版本</li>
+<li>没有显示 MQTT 消息？确保所有客户端（板子和电脑）使用的是相同的 UUID（你可以在日志输出中看见它）</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="进阶教程"><a class="header" href="#进阶教程">进阶教程</a></h1>
+<p>在进阶教程中，我们将深入探讨嵌入式和/或贴近硬件的主题，尤其是关注较底层的 I/O。与入门部分不同，我们不会只使用较高级别的抽象，它们隐藏了引脚配置之类的东西。相反，我们将学习如何自己配置它们。我们还将学习如何直接写入寄存器，以及，如何先找出要用哪些寄存器。我们将在练习中讨论所有权问题和内存安全问题。</p>
+<p>这部分包含三个练习：</p>
+<p>在第一个练习中，你将学习如何处理按键中断。在第二个练习中，你将通过 I²C 总线从传感器读取数据。在使用了我们准备的驱动程序之后，你将学习如何编写你自己的驱动程序。这是一项必要的技能，因为制造商通常不提供 Rust 驱动程序。</p>
+<h2 id="准备工作-2"><a class="header" href="#准备工作-2">准备工作</a></h2>
+<p>请阅读<a href="./02_0_preparations.html">准备工作</a>章节，为本教程做好准备。</p>
+<h2 id="参考资料-1"><a class="header" href="#参考资料-1">参考资料</a></h2>
+<p>如果你不熟悉嵌入式编程，请阅读我们的<a href="./05_reference.html">参考资料</a>，我们在那里以简单易懂的方式解释了一些术语。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="底层-io如何操作寄存器"><a class="header" href="#底层-io如何操作寄存器">底层 I/O：如何操作寄存器</a></h1>
+<p>有<a href="https://esp-rs.github.io/book/overview/index.html">两种方法为 ESP32-C3 编写固件</a>：</p>
+<ul>
+<li>一种是裸机编程，仅使用 <code>[no_std]</code> Rust。</li>
+<li>另一种是使用 <code>[std]</code> Rust 以及 ESP-IDF 的 C 绑定。</li>
+</ul>
+<blockquote>
+<p><a href="https://docs.rust-embedded.org/book/intro/no-std.html"><code>[no_std]</code> Rust</a> 是指不使用标准库的 Rust——仅使用<a href="https://doc.rust-lang.org/core/">核心库</a>，它是<a href="https://doc.rust-lang.org/std/">标准库</a>的子集，不依赖于操作系统。</p>
+</blockquote>
+<h2 id="生态系统是什么样的"><a class="header" href="#生态系统是什么样的">生态系统是什么样的？</a></h2>
+<h3 id="std-rust-和-esp-idf"><a class="header" href="#std-rust-和-esp-idf"><code>[std]</code> Rust 和 ESP-IDF</a></h3>
+<p>这种方式依赖于 ESP-IDF 的 C 绑定。通过这种方式，我们可以使用 Rust 的标准库，因为我们可以使用操作系统：ESP-IDF 基于 <a href="https://www.freertos.org/">FreeRTOS</a>。能够使用标准库带来了很多好处：我们可以使用所有类型，无论它们是在栈上分配的还是在堆上分配的。我们可以使用线程、互斥量和其他同步原语。</p>
+<p>ESP-IDF 主要是用 C 编写的，因此将它以规范的、分离的 crate 的形式提供给 Rust：</p>
+<ul>
+<li>一个 <code>sys</code> crate 提供了实际的 <code>unsafe</code> 绑定（<a href="https://github.com/esp-rs/esp-idf-sys">esp-idf-sys</a>）</li>
+<li>一个高级的 crate 提供了安全易用的 Rust 抽象（<a href="https://github.com/esp-rs/esp-idf-svc/">esp-idf-svc</a>）</li>
+</ul>
+<p>最后一部分是底层硬件访问，仍以分离的形式提供：</p>
+<ul>
+<li><a href="https://github.com/esp-rs/esp-idf-hal"><code>esp-idf-hal</code></a> 实现了硬件无关的 <a href="https://github.com/rust-embedded/embedded-hal"><code>embedded-hal</code></a> traits，例如模数转换、数字 I/O 引脚、SPI 通信。正如它的名字所暗示的，它依赖于 ESP-IDF。</li>
+</ul>
+<p><em>The Rust on ESP Book</em> 的 <a href="https://esp-rs.github.io/book/overview/using-the-standard-library.html">ecosystem 章节</a> 提供了更多信息。</p>
+<p>如果你想使用 Rust，这就是目前在 Espressif 芯片上提供了最大可能性的开发方式。<strong>本教程中的所有内容都基于这种方法。</strong></p>
+<p>我们将在中断练习中研究，在此生态系统中如何直接将值写入寄存器。</p>
+<h3 id="no_std-的-rust-裸机编程"><a class="header" href="#no_std-的-rust-裸机编程"><code>[no_std]</code> 的 Rust 裸机编程</a></h3>
+<p>顾名思义，裸机就是不使用操作系统。正因为如此，我们无法使用依赖于操作系统的语言特性。核心库是标准库的一个子集，它不包括堆分配类型和线程等功能。仅使用核心库的代码标有 <code>#[no_std]</code>。<code>#[no_std]</code> 代码总能在 <code>std</code> 环境下运行，反之则不然。
+在 Rust 中，从寄存器到代码的映射是这样工作的：</p>
+<p>设备上的寄存器及其字段由<a href="http://www.disca.upv.es/aperles/arm_cortex_m3/curset/CMSIS/Documentation/SVD/html/index.html">系统视图描述（System View Description，SVD）文件</a>提供。<a href="https://docs.rs/svd2rust/latest/svd2rust/"><code>svd2rust</code></a> 用于从这些 SVD 文件生成外设访问 crate（Peripheral Access Crate，PAC）。PAC 为特定型号微控制器中的各个内存映射寄存器提供了一个很薄的封装。</p>
+<p>虽然可以单独使用 PAC 编写固件，但这可能不安全或不太方便，因为它只提供了对微控制器外设的最基本的访问。所以还有另一层封装，即硬件抽象层（Hardware Abstraction Layer，HAL）。HAL 为芯片提供了更加用户友好的 API，并且通常实现了 <a href="https://github.com/rust-embedded/embedded-hal"><code>embedded-hal</code></a> 中定义的通用 trait。</p>
+<p>微控制器通常焊接到一些 PCB 板上，这决定了每个引脚的连接情况。因此可以为给定的电路板编写板级支持 crate（Board Support Crate，BSC，也称为板级支持包或 BSP）。这提供了另一个抽象层，例如，可以为板上的各种传感器和 LED 提供 API——用户无需知道微控制器上的哪些引脚连接到这些传感器或 LED。</p>
+<p>我们将用这种方法编写部分传感器的驱动程序，因为驱动程序应该与平台无关。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="i²c"><a class="header" href="#i²c">I²C</a></h1>
+<h2 id="简介"><a class="header" href="#简介">简介</a></h2>
+<p>集成电路总线（Inter-Integrated Circuit）是一种串行协议（通常缩写为 I²C 或 I2C），它允许多个外围芯片（slave）与一个或多个控制器芯片（master）进行通信。多个设备可以连接到同一条 I²C 总线，并且可以通过指定其 I²C 地址将消息发送到特定设备。该协议需要两根信号线，只能用于设备内的短距离通信。</p>
+<p>其中一根信号线用于数据（SDA），另一根用于时钟信号（SCL）。默认情况下，线路被总线上某处的电阻拉高。总线上的任何设备（甚至同时有多个设备）可以“拉低”一条或两条信号线。这意味着如果两个设备同时尝试在总线上通信，电路并不会发生损坏——只有发送的消息会损坏（并且可以检测到）。</p>
+<p>I²C <em>事务</em>由一条或多条<em>消息</em>组成。每条<em>消息</em>都包含一个<em>起始信号</em>、一些<em>字</em>，最后是一个<em>结束信号</em>（如果有后续消息，则为另一个<em>起始信号</em>）。每个字都是八位，后面跟着一个 ACK（0）或 NACK（1）位，由接收方发送，以指示是否正确接收和理解该字。第一个字指示此消息的目标设备的 7 位地址，以及表示要从设备读取还是写入的位。如果总线上没有具有此地址的设备，第一个字后面自然会得到一个 NACK（因为没有设备将 SDA 线驱动为低电平以生成 ACK 位），于是你就可以知道此设备不存在。</p>
+<p>SCL 上的时钟频率通常为 400 kHz，但也支持更慢和更快的速度（标准速度为 100 kHz-400 kHz-1 MHz）。在我们的练习中，将配置为 400 kHz（<code>&lt;MasterConfig as Default&gt;::default().baudrate(400.kHz().into())</code>）。</p>
+<p>要从 EEPROM 设备读取三个字节，通信序列将类似于：</p>
+<table><thead><tr><th>步骤</th><th>控制器发送</th><th>外设发送</th></tr></thead><tbody>
+<tr><td>1.</td><td>起始信号</td><td></td></tr>
+<tr><td>2.</td><td>设备地址 + 写</td><td></td></tr>
+<tr><td>3.</td><td></td><td>ACK</td></tr>
+<tr><td>4.</td><td>高位 EEPROM 地址字节</td><td></td></tr>
+<tr><td>5.</td><td></td><td>ACK</td></tr>
+<tr><td>6.</td><td>低位 EEPROM 地址字节</td><td></td></tr>
+<tr><td>7.</td><td></td><td>ACK</td></tr>
+<tr><td>8.</td><td>起始信号</td><td></td></tr>
+<tr><td>9.</td><td>设备地址 + 读</td><td></td></tr>
+<tr><td>10.</td><td></td><td>ACK</td></tr>
+<tr><td>11.</td><td></td><td>EEPROM 地址上的数据字节</td></tr>
+<tr><td>12.</td><td>ACK</td><td></td></tr>
+<tr><td>13.</td><td></td><td>EEPROM 地址 +1 上的数据字节</td></tr>
+<tr><td>14.</td><td>ACK</td><td></td></tr>
+<tr><td>15.</td><td></td><td>EEPROM 地址 +2 上的数据字节</td></tr>
+<tr><td>16.</td><td>NAK（即结束读取）</td><td></td></tr>
+<tr><td>17.</td><td>结束信号</td><td></td></tr>
+</tbody></table>
+<h3 id="i²c-信号图"><a class="header" href="#i²c-信号图">I²C 信号图</a></h3>
+<p style="text-align:center;"><img src="./assets/I2C_data_transfer.svg" width="100%"></p>
+<p>I²C 总线上的数据传输时序图：</p>
+<ul>
+<li>S - 起始条件</li>
+<li>P - 结束条件</li>
+<li>B<sub>1</sub> 到 B<sub>N</sub> - 传输一位数据</li>
+<li>当 SCL 为低电平（蓝色）时允许 SDA 电平变化，否则将生成起始或结束条件。</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/I%C2%B2C">来源和更多细节：Wikipedia</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="i²c-传感器读取练习"><a class="header" href="#i²c-传感器读取练习">I²C 传感器读取练习</a></h2>
+<p>在本练习中，我们将学习如何读取 I²C 总线上的传感器。</p>
+<p>Rust ESP 开发板上有<a href="https://github.com/esp-rs/esp-rust-board#i2c-peripherals">两个可以通过 I²C 总线读取的传感器</a>：</p>
+<table><thead><tr><th>外设</th><th>型号</th><th>参考资料</th><th>Crate</th><th>地址</th></tr></thead><tbody>
+<tr><td>IMU</td><td>ICM-42670-P</td><td><a href="https://invensense.tdk.com/wp-content/uploads/2021/07/DS-000451-ICM-42670-P-v1.0.pdf">Datasheet</a></td><td><a href="https://crates.io/crates/icm42670">Link</a></td><td>0x68</td></tr>
+<tr><td>温湿度</td><td>SHTC3</td><td><a href="https://datasheetspdf.com/pdf-file/1372109/Sensirion/SHTC3/1">Datasheet</a></td><td><a href="https://crates.io/crates/shtcx">Link</a></td><td>0x70</td></tr>
+</tbody></table>
+<p>任务是使用 <a href="https://crates.io/">crates.io</a> 的现有驱动程序通过 I²C 读取温湿度传感器。之后，使用 <a href="https://crates.io/crates/shared-bus"><code>shared-bus</code></a> 通过同一 I²C 总线读取第二个传感器。</p>
+<h3 id="第一部分读取温湿度"><a class="header" href="#第一部分读取温湿度">第一部分：读取温湿度</a></h3>
+<p>创建温湿度传感器 SHTC3 的实例，每 600 毫秒读取并打印湿度和温度值。</p>
+<p><code>i2c-sensor-reading/examples/part_1.rs</code> 包含第一部分的解答。要运行第一部分的解答：</p>
+<pre><code class="language-console">cargo run --example part_1
+</code></pre>
+<p><code>i2c-sensor-reading/src/main.rs</code> 包含代码框架，其中已经包含了第一部分所需的导入语句。</p>
+<h4 id="步骤"><a class="header" href="#步骤">步骤：</a></h4>
+<p>✅ 进入 <code>i2c-sensor-reading/</code> 目录，使用以下命令打开相关文档：</p>
+<pre><code class="language-console">cargo doc --open
+</code></pre>
+<p>✅ 定义两个引脚，一个作为 SDA，一个作为 SCL。</p>
+<table><thead><tr><th>信号</th><th>GPIO</th></tr></thead><tbody>
+<tr><td>SDA</td><td>GPIO10</td></tr>
+<tr><td>SCL</td><td>GPIO8</td></tr>
+</tbody></table>
+<p>✅ 借助刚刚生成的文档，创建一个 I²C 外设的实例。频率使用 400 kHz。</p>
+<p>✅ 使用驱动 crate <code>shtcx</code>，创建一个 SHTC3 传感器实例，将 I²C 实例传递给它们。查看文档以获取指导。</p>
+<p>✅ 要检查传感器是否被正确寻址，可以读取它的设备 ID 并打印该值。</p>
+<h4 id="期望的输出"><a class="header" href="#期望的输出">期望的输出：</a></h4>
+<pre><code class="language-console">Device ID SHTC3: 71
+</code></pre>
+<p>✅ 进行测量，读取传感器值并打印出来。查看文档以获取有关传感器的方法的指导。</p>
+<h4 id="期望的输出-1"><a class="header" href="#期望的输出-1">期望的输出：</a></h4>
+<pre><code class="language-console">TEMP: [当地温度] °C
+HUM: [当地湿度] %
+</code></pre>
+<p>❗ 一些传感器在测量和读取结果之间需要一点时间。
+❗ 注意数值单位！</p>
+<p>💡 有一些方法可以将传感器值转换为所需的单位。</p>
+<h3 id="第二部分读取加速度计数据"><a class="header" href="#第二部分读取加速度计数据">第二部分：读取加速度计数据</a></h3>
+<p>使用总线管理器，驱动第二个传感器。读出它的值并打印两个传感器的值。</p>
+<p>从第一部分你自己的解答开始。或者也可以从第一部分提供的部分解答开始：<code>i2c-sensor-reading/examples/part_1.rs</code>。</p>
+<p><code>i2c-sensor-reading/examples/part_2.rs</code> 包含第二部分的解答。如果你需要帮助，可以参考它。要运行它，使用:</p>
+<pre><code class="language-console">cargo run --example part_2
+</code></pre>
+<h4 id="步骤-1"><a class="header" href="#步骤-1">步骤</a></h4>
+<p>✅ 导入 ICM42670p 的驱动 crate。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use icm42670::{Address, Icm42670, PowerMode as imuPowerMode};
+<span class="boring">}
+</span></code></pre></pre>
+<p>✅ 创建传感器的实例。</p>
+<p>✅ 为什么将同一个 I²C 实例传递给两个传感器不管用，尽管它们都在同一个 I²C 总线上？</p>
+<details>
+  <summary>解答</summary>
+<p>这是一个所有权问题。内存中的每个位置都需要归某物所有。如果我们将 I²C 总线传递给 SHTC3，则该传感器拥有 I²C 总线。且它不能再由另一个传感器拥有，借用也是不可能的，因为 I²C 总线需要可变，两个传感器都需要能够改变它。我们通过引入总线管理器来解决这个问题，该管理器创建多个 I²C 总线的代理。这些代理可以由相应的传感器拥有。</p>
+</details>
+<p>✅ 导入总线管理器 crate。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use shared_bus::BusManagerSimple;
+<span class="boring">}
+</span></code></pre></pre>
+<p>✅ 创建一个简单的总线管理器的实例。创建两个代理，并用它们代替原来的 I²C 实例传递给传感器。</p>
+<p>✅ 从两个传感器读取并打印设备 ID。</p>
+<h4 id="期望的输出-2"><a class="header" href="#期望的输出-2">期望的输出：</a></h4>
+<pre><code class="language-console">Device ID SHTC3: 71
+Device ID ICM42670p: 96
+</code></pre>
+<p>✅ 在低噪声模式下启动 ICM42670p。</p>
+<p>✅ 读取陀螺仪传感器值，并将它们与温度和湿度值一起打印，精确到小数点后两位。</p>
+<h4 id="期望的输出-3"><a class="header" href="#期望的输出-3">期望的输出：</a></h4>
+<pre><code class="language-console">GYRO: X: 0.00 Y: 0.00 Z: 0:00
+TEMP: [当地温度] °C
+HUM: [当地湿度] %
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="i²c-驱动练习---简单版"><a class="header" href="#i²c-驱动练习---简单版">I²C 驱动练习 - 简单版</a></h1>
+<p>我们将不会编写整个驱动程序，只会做第一步：驱动程序编写的 <code>hello world</code>，即读取传感器的设备 ID。这个版本被标记为简单，因为我们解释了代码片段，你只需将它们复制粘贴到正确的位置即可。如果你缺少 Rust 或嵌入式领域的经验，或者如果你觉得困难版本太难，请使用此版本。两个版本使用的是相同的文件。</p>
+<p><code>i2c-driver/src/icm42670p.rs</code> 是一个非常基础的 I²C IMU 传感器驱动的填空版本。任务是补全这个文件，使得运行 <code>main.rs</code> 可以记录驱动的设备 ID。</p>
+<p><code>i2c-driver/src/icm42670p_solution.rs</code> 提供本练习的解答。如果要运行它，需要更改 <code>main.rs</code> 和 <code>lib.rs</code> 中的导入语句。导入语句已经存在，你只需要注释掉当前的导入语句，并取消注释标记为解答的几行。</p>
+<h2 id="驱动"><a class="header" href="#驱动">驱动</a></h2>
+<h3 id="传感器实例"><a class="header" href="#传感器实例">传感器实例</a></h3>
+<p>要使用外设传感器，首先要获取它的一个实例。传感器被表示成一个结构体，包含其地址和 I²C 总线对象。这是使用 <a href="https://docs.rs/embedded-hal/latest/embedded_hal/"><code>embedded-hal</code></a> crate 中定义的 trait 来实现的。该结构体是公有的，因为我们需要从这个 crate 外访问它，但它的字段是私有的。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug)]
+pub struct ICM42670P&lt;I2C&gt; {
+    // The concrete I²C device implementation.
+    i2c: I2C,
+
+    // Device address
+    address: DeviceAddr,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们添加一个 <code>impl</code> 块，包含可以在传感器实例上使用的所有方法。它还定义了错误处理。在这个块中，我们还实现了一个实例化方法。（与结构体类似）方法也可以是公有的或私有的。这个方法需要从外部访问，所以它被标记为 <code>pub</code>。请注意，以这种方式编写的传感器实例会获取 I²C 总线的所有权。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;I2C, E&gt; ICM42670P&lt;I2C&gt;
+where
+    I2C: i2c::WriteRead&lt;Error = E&gt; + i2c::Write&lt;Error = E&gt;,
+{
+    /// Creates a new instance of the sensor, taking ownership of the i2c peripheral.
+    pub fn new(i2c: I2C, address: DeviceAddr) -&gt; Result&lt;Self, E&gt; {
+        Ok(Self { i2c, address })
+    }
+// ...
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="设备地址"><a class="header" href="#设备地址">设备地址</a></h3>
+<ul>
+<li>设备的地址在代码中可用：</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub enum DeviceAddr {
+    /// 0x68
+    AD0 = 0b110_1000,
+    /// 0x69
+    AD1 = 0b110_1001,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>这个 I²C 设备有两个可能的地址——<code>0x68</code> 和 <code>0x69</code>。
+我们通过向设备上的 <code>AP_AD0</code> 引脚施加 <code>0V</code> 或 <code>3.3V</code> 来告诉设备我们希望它使用哪一个地址。如果我们施加 <code>0V</code>，它会监听地址 <code>0x68</code>。如果我们施加 <code>3.3V</code>，它会监听地址 <code>0x69</code>。因此，可以将引脚 <code>AD_AD0</code> 视为一位输入，用于设置设备地址的最低位。
+<a href="https://invensense.tdk.com/wp-content/uploads/2021/07/DS-000451-ICM-42670-P-v1.0.pdf">数据手册的 9.3 节</a>提供了更多信息</li>
+</ul>
+<h3 id="寄存器的表示"><a class="header" href="#寄存器的表示">寄存器的表示</a></h3>
+<p>传感器的寄存器表示为枚举。每个变体都将寄存器的地址作为值。<code>Register</code> 类型实现了一种提供变体地址的方法。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone, Copy)]
+pub enum Register {
+    WhoAmI = 0x75,
+}
+
+impl Register {
+    fn address(&amp;self) -&gt; u8 {
+        *self as u8
+    }
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="read_register-和-write_register"><a class="header" href="#read_register-和-write_register"><code>read_register()</code> 和 <code>write_register()</code></a></h3>
+<p>基于 <code>embedded-hal</code> crate 提供的方法，我们定义了 <em>读取</em> 和 <em>写入</em> 的方法。它们将作为更具体的方法的基础，并作为一个抽象层，用于适配具有 8 位寄存器的传感器。请注意 <code>read_register()</code> 方法是基于 <code>write_read()</code> 方法实现的。其原因在于 I²C 协议的特点：我们首先需要在 I²C 总线上写一个命令来指定我们要读取哪个寄存器。这些辅助方法可以保持私有，因为我们不需要从这个 crate 外访问它们。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;I2C, E&gt; ICM42670P&lt;I2C&gt;
+where
+    I2C: i2c::WriteRead&lt;Error = E&gt; + i2c::Write&lt;Error = E&gt;,
+{
+    /// Creates a new instance of the sensor, taking ownership of the i2c peripheral.
+    pub fn new(i2c: I2C, address: DeviceAddr) -&gt; Result&lt;Self, E&gt; {
+        Ok(Self { i2c, address })
+    }
+    // ...
+    /// Writes into a register
+    // This method is not public as it is only needed inside this file.
+    #[allow(unused)]
+    fn write_register(&amp;mut self, register: Register, value: u8) -&gt; Result&lt;(), E&gt; {
+        let byte = value;
+        self.i2c
+            .write(self.address as u8, &amp;[register.address(), byte])
+    }
+
+    /// Reads a register using a `write_read` method.
+    // This method is not public as it is only needed inside this file.
+    fn read_register(&amp;mut self, register: Register) -&gt; Result&lt;u8, E&gt; {
+        let mut data = [0];
+        self.i2c
+            .write_read(self.address as u8, &amp;[register.address()], &amp;mut data)?;
+        Ok(u8::from_le_bytes(data))
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>✅ 实现一个公有方法来读取地址为 <code>0x75</code> 的 <code>WhoAmI</code> 寄存器。使用上面的 <code>read_register()</code> 方法。</p>
+<p>✅ 可选：实现更多方法来向驱动程序添加功能。在<a href="https://invensense.tdk.com/wp-content/uploads/2021/07/DS-000451-ICM-42670-P-v1.0.pdf">文档</a>中查阅相应寄存器及其地址。💡 一些点子：</p>
+<ul>
+<li>启用陀螺仪传感器或加速度计</li>
+<li>启动测量</li>
+<li>读取测得数据</li>
+</ul>
+<h3 id="-有关外设寄存器的一般信息"><a class="header" href="#-有关外设寄存器的一般信息">🔎 有关外设寄存器的一般信息</a></h3>
+<p>寄存器可以有不同的含义，本质上，它们是<strong>一个可以存储值的位置</strong>。</p>
+<p>在这个特定的上下文中，我们使用的是一个外部设备（因为它是一个传感器，即使与主控芯片在同一块 PCB 上）。它可通过 I2C 寻址，我们在读取和写入其寄存器的地址。每个地址都标识了唯一的一个位置，其中包含了一些信息。在这种情况下，我们想要的是包含当前温度的位置的地址。</p>
+<p>如果你想尝试从这个传感器获取其他有趣的数据，可以在<a href="https://invensense.tdk.com/wp-content/uploads/2021/07/DS-000451-ICM-42670-P-v1.0.pdf">第 14 节</a>中找到 ICM-42670 的寄存器表。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="i²c-驱动练习---困难版"><a class="header" href="#i²c-驱动练习---困难版">I²C 驱动练习 - 困难版</a></h1>
+<p>我们将不会编写整个驱动程序，只会做第一步：驱动程序编写的 <code>hello world</code>，即读取传感器的设备 ID。这个版本被标记为困难，因为你需要自己编写方法的内容，并在 <a href="https://docs.rs/embedded-hal/latest/embedded_hal/"><code>embedded-hal</code></a> 和数据手册里自己查找信息。两个版本使用的是相同的文件。</p>
+<p><code>i2c-driver/src/icm42670p.rs</code> 是一个非常基础的 I²C IMU 传感器驱动的填空版本。任务是补全这个文件，使得运行 <code>main.rs</code> 可以记录驱动的设备 ID。</p>
+<p><code>i2c-driver/src/icm42670p_solution.rs</code> 提供本练习的解答。如果要运行它，需要更改 <code>main.rs</code> 和 <code>lib.rs</code> 中的导入语句。导入语句已经存在，你只需要注释掉当前的导入语句，并取消注释标记为解答的几行。</p>
+<h2 id="驱动-api"><a class="header" href="#驱动-api">驱动 API</a></h2>
+<h3 id="传感器实例-1"><a class="header" href="#传感器实例-1">传感器实例</a></h3>
+<p>✅ 创建一个结构体来表示传感器。它有两个字段，一个表示传感器的设备地址，另一个表示 <code>I²C</code> 总线。这是使用 <code>embedded-hal</code> crate 中定义的 trait 来实现的。该结构体是公有的，因为我们需要从这个 crate 外访问它，但它的字段是私有的。</p>
+<p>✅ 在 <code>impl</code> 块里实现一个实例化方法。这个方法需要从外部访问，所以它被标记为 <code>pub</code>。这个方法获取 I²C 总线的所有权，然后创建前面定义的结构体的实例。</p>
+<h4 id="设备地址-1"><a class="header" href="#设备地址-1">设备地址</a></h4>
+<p>✅ 这个 I²C 设备有两个可能的地址，在<a href="https://invensense.tdk.com/wp-content/uploads/2021/07/DS-000451-ICM-42670-P-v1.0.pdf">数据手册的 9.3 节</a>里找到它们。</p>
+<p>🔎  我们通过向设备上的 <code>AP_AD0</code> 引脚施加 <code>0V</code> 或 <code>3.3V</code> 来告诉设备我们希望它使用哪一个地址。如果我们施加 <code>0V</code>，它会监听地址 <code>0x68</code>。如果我们施加 <code>3.3V</code>，它会监听地址 <code>0x69</code>。因此，可以将引脚 <code>AD_AD0</code> 视为一位输入，用于设置设备地址的最低位。</p>
+<p>✅ 创建一个枚举来表示两种地址。变体的值需要用二进制表示。</p>
+<h3 id="寄存器的表示-1"><a class="header" href="#寄存器的表示-1">寄存器的表示</a></h3>
+<p>✅ 创建一个枚举来表示传感器的寄存器。每个变体都将寄存器的地址作为它的值。目前，我们只需要 <code>WhoAmI</code> 寄存器。到数据手册里查找它的地址。</p>
+<p>✅ 实现一个方法，用于将变体的地址以 <code>u8</code> 的形式提供出来。</p>
+<h3 id="read_register-和-write_register-1"><a class="header" href="#read_register-和-write_register-1"><code>read_register()</code> 和 <code>write_register()</code></a></h3>
+<p>✅ 查看 <code>embedded-hal</code> 中的 <code>write</code> 和 <code>write_read</code> 函数。为什么是 <code>write_read</code> 而不是简单的 <code>read</code>？</p>
+<Details>
+    <Summary>解答</Summary>
+原因在于 I²C 协议的特性。我们需要先在 I²C 总线上写一个命令，来指定我们想要读取哪个寄存器。
+</Details>
+<p>✅ 给传感器实例定义 <code>read_register</code> 和 <code>write_register</code> 方法。使用 <code>embedded-hal</code> crate 提供的方法。它们将作为更具体的方法的基础，并作为一个抽象层，用于适配具有 8 位寄存器的传感器。这意味着，读取和写入的数据都是无符号8位的整数。这些辅助方法可以保持私有，因为我们不需要从这个 crate 外访问它们。</p>
+<p>✅ 实现一个公有方法来读取地址为 <code>0x75</code> 的 <code>WhoAmI</code> 寄存器。使用上面的 <code>read_register()</code> 方法。</p>
+<p>✅ 可选：实现更多方法来向驱动程序添加功能。在<a href="https://invensense.tdk.com/wp-content/uploads/2021/07/DS-000451-ICM-42670-P-v1.0.pdf">文档</a>中查阅相应寄存器及其地址。💡 一些点子：</p>
+<ul>
+<li>启用陀螺仪传感器或加速度计</li>
+<li>启动测量</li>
+<li>读取测得数据</li>
+</ul>
+<h3 id="-有关外设寄存器的一般信息-1"><a class="header" href="#-有关外设寄存器的一般信息-1">🔎 有关外设寄存器的一般信息</a></h3>
+<ul>
+<li>寄存器事实上就是少量的存储空间，可由处理器直接访问。这个传感器上的寄存器是 8 位的。</li>
+<li>可以通过地址访问这些寄存器</li>
+<li>在数据手册的第 14 节，有<a href="https://invensense.tdk.com/wp-content/uploads/2021/07/DS-000451-ICM-42670-P-v1.0.pdf">寄存器表</a>。</li>
+<li>为了得到一个由 MSB（最高有效位）和 LSB（最低有效位）组合而成的 16 位数，可以将 MSB 值移位，然后或上 LSB 值。</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let GYRO_DATA_X: i16 = ((GYRO_DATA_X1 as i16) &lt;&lt; 8) | GYRO_DATA_X0 as i16;
+<span class="boring">}
+</span></code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="中断"><a class="header" href="#中断">中断</a></h1>
+<p>中断就是请求处理器中断当前执行的代码，以便及时处理某些事件。如果中断请求被接受，处理器就会暂停当前的活动，保存其状态，然后执行一个称作中断处理程序（interrupt handler）的函数，来处理某事件。中断常被硬件设备用于指示需要及时关注的电气或物理状态，例如，按钮被按下。</p>
+<p>中断处理程序可能随时被调用，这为嵌入式 Rust 带来了一些挑战：需要有静态分配的、可变的内存，中断处理程序和主程序都可以引用它，而且这段内存必须随时是可用的。</p>
+<h2 id="unsafe--块"><a class="header" href="#unsafe--块"><code>unsafe {}</code> 块：</a></h2>
+<p>此代码包含许多的 <a href="https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html"><code>unsafe {}</code> 块</a>。一般来说，<code>unsafe</code> 并不意味着所包含的代码不是内存安全的，而是意味着 Rust 无法在这个地方做出安全保证，并且程序员有责任确保内存安全。例如，调用 C 绑定本身就是不安全的，因为 Rust 无法为底层的 C 代码提供任何安全保证。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="编写中断处理程序"><a class="header" href="#编写中断处理程序">编写中断处理程序</a></h1>
+<p>本练习的目标是处理按下 <code>BOOT</code> 按钮时触发的中断。</p>
+<p><code>advanced/button-interrupt/src/main.rs</code> 中包含本练习的代码框架。</p>
+<p><code>advanced/button-interrupt/examples/solution.rs</code> 包含本练习的解答。可以用以下命令运行：</p>
+<pre><code class="language-console">cargo run --example solution
+</code></pre>
+<h2 id="-任务"><a class="header" href="#-任务">✅ 任务</a></h2>
+<ol>
+<li>用 <code>PinDriver</code> 结构体和以下设置来配置 <a href="https://github.com/esp-rs/esp-rust-board#ios">BOOT 按钮</a>（GPIO9）：
+<ul>
+<li>输入模式</li>
+<li>上拉</li>
+<li>上升沿触发中断</li>
+</ul>
+</li>
+<li>实例化一个新的通知（notification）和 notifier
+<ul>
+<li>查看 <code>hal::task::notification</code> 文档</li>
+</ul>
+</li>
+<li>在 <code>unsafe</code> 块中，创建一个订阅（subscription）及其回调函数
+<ul>
+<li>查看 <code>PinDriver::subscribe</code> 和 <code>task::notify_and_yield</code></li>
+<li><code>unsafe</code> 的原因是：
+<ul>
+<li>回调函数会运行在 <a href="https://en.wikipedia.org/wiki/Interrupt_handler">ISR（中断服务函数）</a>中，所以我们需要避免调用任何可能阻塞的函数，包括 STD， <code>libc</code> 或 FreeRTOS API（少数允许的除外）。</li>
+<li>回调闭包会从环境中捕获东西，你可以使用其中的静态变量。捕获的变量需要具有比订阅（subscription）更长的生命周期。你也可以使用非静态变量，但这需要额外小心，更多细节请参阅 <code>esp_idf_hal::gpio::PinDriver::subscribe_nonstatic</code> 文档。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在循环中，使能中断，并等待通知（notification）
+<ul>
+<li>应在每次收到通知后，使能中断（在非 ISR 上下文中）</li>
+<li><code>esp_idf_svc::hal::delay::BLOCK</code> 可以用于等待</li>
+</ul>
+</li>
+<li>运行程序，按下 <code>BOOT</code> 按钮，看看效果如何！</li>
+</ol>
+<p>🔎 在本练习中，我们使用通知（notification），它只会提供最新的值。
+因此如果在读取通知的值之前，中断被多次触发，你只能得到最新的值。
+另一方面，队列允许接收多个值。更多详细信息请参阅 <code>esp_idf_hal::task::queue::Queue</code>。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="按钮随机设置-led-颜色"><a class="header" href="#按钮随机设置-led-颜色">按钮随机设置 LED 颜色</a></h1>
+<p>✅ 修改代码，使 RGB LED 灯在每次按下按钮时变为随机颜色。如果一段时间内未按下按钮，LED 不应熄灭或改变颜色。</p>
+<p>你可以在先前的代码上继续修改，或者从 <code>advanced/button-interrupt/src/main.rs</code> 开始着手。</p>
+<p><code>advanced/button-interrupt/examples/solution.rs</code> 包含本练习的解答。可以用以下命令运行：</p>
+<pre><code class="language-console">cargo run --example solution_led
+</code></pre>
+<h2 id="-帮助信息"><a class="header" href="#-帮助信息">💡 帮助信息</a></h2>
+<ul>
+<li>必要的 crate 都已经导入，你可以用 <code>cargo --doc --open</code> 查看 LED 的帮助文档。</li>
+<li>LED 的型号是 WS2812RMT。</li>
+<li>这是一个可编程的 RGB LED。这意味着不存在单独的，用于设置红、绿、蓝的引脚。我们需要实例化它，然后才能发送 <code>RGB8</code> 类型的值给它。</li>
+<li>这个板子有硬件随机数生成器，可以用 <code>esp_random()</code> 调用它。</li>
+<li>从 Rust 的角度来看，调用 <code>esp-idf-svc::sys</code> 中的一些函数是 unsafe 的，并且需要 <code>unsafe()</code> 块。不过你可以假设这些功能可以安全使用，不需要其他保护措施。</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="分步解答"><a class="header" href="#分步解答">分步解答</a></h1>
+<ol>
+<li>
+<p>初始化 LED 外设并以任意颜色值启动它，看看它是否正常工作。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span> let mut led = WS2812RMT::new(peripherals.pins.gpio2, peripherals.rmt.channel0)?;
+
+ led.set_pixel(RGB8::new(20, 0, 20)).unwrap(); // Remove this line after you tried it once
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>只在按钮按下后点亮 LED。可以在按钮按下信息后添加这行代码来实现：</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>led.set_pixel(arbitrary_color)?;
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>调用 <code>esp_random()</code> 来生成随机 RGB 颜色值。</p>
+<ul>
+<li>这个函数是 <code>unsafe</code> 的。</li>
+<li>它会生成 <code>u32</code>，因此需要将它转换成 <code>u8</code>。</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>unsafe {
+//...
+1 =&gt; {
+    let r = esp_random() as u8;
+    let g = esp_random() as u8;
+    let b = esp_random() as u8;
+
+    let color = RGB8::new(r, g, b);
+    led.set_pixel(color)?;
+
+    },
+_ =&gt; {},
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><strong>可选</strong>：如果你想在其他地方重用这些代码，可以考虑将其放入一个函数中。这也允许我们确认具体哪些代码需要用 <code>unsafe</code> 块包裹。</p>
+</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ...
+    loop {
+        // Enable interrupt and wait for new notificaton
+        button.enable_interrupt()?;
+        notification.wait(esp_idf_svc::hal::delay::BLOCK);
+        println!(&quot;Button pressed!&quot;);
+        // Generates random rgb values and sets them in the led.
+        random_light(&amp;mut led);
+    }
+
+// ...
+fn random_light(led: &amp;mut WS2812RMT) {
+    let mut color = RGB8::new(0, 0, 0);
+    unsafe {
+        let r = esp_random() as u8;
+        let g = esp_random() as u8;
+        let b = esp_random() as u8;
+
+        color = RGB8::new(r, g, b);
+    }
+
+    led.set_pixel(color).unwrap();
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="参考资料-2"><a class="header" href="#参考资料-2">参考资料</a></h1>
+<h2 id="gpio"><a class="header" href="#gpio">GPIO</a></h2>
+<p>GPIO 是通用输入输出（General Purpose Input Output）的缩写。 GPIO 是数字（有时也是模拟）信号引脚，可用作其他系统或设备的接口。每个引脚可以处于多种状态，且在上电或系统复位时进入默认状态（通常是无害的状态，例如数字输入）。然后我们可以编写软件，将它们更改为我们需要的状态。</p>
+<p>下面将介绍几个与 GPIO 相关的概念：</p>
+<h3 id="引脚配置"><a class="header" href="#引脚配置">引脚配置</a></h3>
+<p>GPIO 可以通过多种方式进行配置。可用的选项可能会根据芯片的设计而有所不同，但通常包括：</p>
+<p>浮空：浮空引脚既不连接 VCC，也不连接地。它的电平只取决于外部施加的电压。需要注意的是，引脚应从外部拉低或拉高，因为如果引脚电平高于“低电压阈值”（<code>Vtl</code>），但低于“高电压阈值”（<code>Vth</code>），持续超过几微秒，可能会导致 CMOS 硅器件（例如微控制器）无法正常工作。</p>
+<p>推挽输出：配置为推挽输出的引脚，可以将其驱动为高电平（即将其连接到 VCC），或将其驱动为低电平（即将其接地）。这对于 LED、蜂鸣器或其他耗电量较小的设备很有用。</p>
+<p>开漏输出：开漏输出的引脚可以在“断路”和“接地”之间切换。通常会外接电阻将线路弱上拉至 VCC。这种类型的输出旨在允许多个设备连接在一起——如果连接到这条线路的任一设备将其驱动为低电平，则整条线路为低电平。如果两个或多个设备同时将其驱动为低电平，也不会发生损坏（地与地连接是安全的）。如果所有设备都没有将其驱动为低电平，则默认情况下电阻会将其拉高。</p>
+<p>浮空输入：引脚上施加外部电压，可以在软件中读取为 <code>1</code>（如果电压高于某个阈值）或 <code>0</code>（如果低于阈值）。前述“浮空”状态的注意事项也适用于这个状态。</p>
+<p>上拉输入：与浮空输入类似，不同之处在于存在一个内部的上拉电阻，它会在没有外部驱动器将线路下拉至地时，将线路弱上拉至 VCC。这对于读取按钮和其他开关的状态很有用，可以节省一个外部电阻。</p>
+<h3 id="高有效低有效"><a class="header" href="#高有效低有效">高有效/低有效</a></h3>
+<p>数字信号有两种状态：“高”和“低”。这通常由信号与地之间的电压差来表示。哪种电平代表哪种状态是可以任意选定的，因此“高”和“低”都可以被定义为有效状态。</p>
+<p>例如：一个高有效的引脚，在逻辑有效时应当是高电平。一个低有效的引脚，在逻辑无效时才是高电平。</p>
+<p>在嵌入式 Rust 的抽象中，我们看到的是逻辑状态，而不是电平。所以如果有一个连接 LED 的低有效的引脚，你需要将其设置为无效状态才能点亮 LED。</p>
+<h3 id="片选"><a class="header" href="#片选">片选</a></h3>
+<p>片选是发送给一个设备的二进制信号，可以部分或全部地，打开或关闭该设备。它通常是连接到 GPIO 的一条信号线，常用于允许多个设备连接到同一 SPI 总线上 —— 每个设备仅在其片选线处于有效状态时监听总线。</p>
+<h3 id="bit-banging"><a class="header" href="#bit-banging">Bit Banging</a></h3>
+<p>对于 I2C 或 SPI 等协议，我们通常使用 MCU 内的外设将我们想要传输的数据转换为信号。在某些情况下，例如，如果 MCU 不支持该协议，或者想要使用非标准形式的协议，则需要编写一个程序来手动将数据转换为信号。这称为 Bit Banging。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+    </body>
+</html>
