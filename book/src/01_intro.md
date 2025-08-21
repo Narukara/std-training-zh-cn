@@ -12,7 +12,7 @@
 
 > ⚠️ 本书使用 `std` 生态系统（`esp-idf-hal`、`esp-idf-sys`、`esp-idf-svc`），这些 crate 由社区维护，未得到 Espressif 官方支持。
 >
-> Espressif 官方支持使用 [`esp-hal`][esp-hal] 的 `no_std` 方式。如需使用官方支持方式的对应培训，请参阅 [`no_std` 培训][no-std-training]。
+> Espressif 官方支持使用 [`esp-hal`][esp-hal] 的 `no_std` 开发方式。对于官方支持的开发方式的相应教程，请参阅 [`no_std` training][no-std-training]。
 
 [esp-hal]: https://github.com/esp-rs/esp-hal
 [no-std-training]: https://docs.espressif.com/projects/rust/no_std-training/
