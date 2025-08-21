@@ -10,6 +10,13 @@
 
 你可以加入 Matrix 上的 [esp-rs 社区](https://matrix.to/#/#esp-rs:matrix.org) 来探讨任何技术问题！社区对所有人开放。
 
+> ⚠️ 本书使用 `std` 生态系统（`esp-idf-hal`、`esp-idf-sys`、`esp-idf-svc`），这些 crate 由社区维护，未得到 Espressif 官方支持。
+>
+> Espressif 官方支持使用 [`esp-hal`][esp-hal] 的 `no_std` 开发方式。对于官方支持的开发方式的相应教程，请参阅 [`no_std` training][no-std-training]。
+
+[esp-hal]: https://github.com/esp-rs/esp-hal
+[no-std-training]: https://docs.espressif.com/projects/rust/no_std-training/
+
 ## 翻译
 
 本书已由慷慨的志愿者参与翻译。如果你希望在此处列出你的译本，请（向英文原版仓库）提交 PR。
