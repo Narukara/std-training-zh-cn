@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>HTTP 客户端 - Embedded Rust on Espressif 简体中文版</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Ferrous Systems&#x27; Embedded Rust on Espressif training material">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="01_intro.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="02_0_preparations.html"><strong aria-hidden="true">2.</strong> 准备工作</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="02_1_hardware.html"><strong aria-hidden="true">2.1.</strong> 硬件</a></li><li class="chapter-item expanded "><a href="02_2_software.html"><strong aria-hidden="true">2.2.</strong> 软件</a></li><li class="chapter-item expanded "><a href="02_3_repository.html"><strong aria-hidden="true">2.3.</strong> 教程仓库</a></li><li class="chapter-item expanded "><a href="02_4_hello_board.html"><strong aria-hidden="true">2.4.</strong> Hello, board!</a></li></ol></li><li class="chapter-item expanded "><a href="03_0_intro_workshop.html"><strong aria-hidden="true">3.</strong> 入门教程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03_1_project_orga.html"><strong aria-hidden="true">3.1.</strong> 项目结构</a></li><li class="chapter-item expanded "><a href="03_2_cargo_generate.html"><strong aria-hidden="true">3.2.</strong> 创建新项目</a></li><li class="chapter-item expanded "><a href="03_3_1_http_https_client.html"><strong aria-hidden="true">3.3.</strong> HTTP 和 HTTPS 客户端</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03_3_2_http_client.html" class="active"><strong aria-hidden="true">3.3.1.</strong> HTTP 客户端</a></li><li class="chapter-item expanded "><a href="03_3_3_https_client.html"><strong aria-hidden="true">3.3.2.</strong> HTTPS 客户端</a></li></ol></li><li class="chapter-item expanded "><a href="03_4_http_server.html"><strong aria-hidden="true">3.4.</strong> 简单的 HTTP 服务器</a></li><li class="chapter-item expanded "><a href="03_5_0_mqtt.html"><strong aria-hidden="true">3.5.</strong> 基于 MQTT 的 IoT</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03_5_1_mqtt.html"><strong aria-hidden="true">3.5.1.</strong> MQTT 是如何工作的</a></li><li class="chapter-item expanded "><a href="03_5_2_mqtt.html"><strong aria-hidden="true">3.5.2.</strong> MQTT 练习：发送消息</a></li><li class="chapter-item expanded "><a href="03_5_3_mqtt.html"><strong aria-hidden="true">3.5.3.</strong> MQTT 练习：接收 LED 命令</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="04_0_advanced_workshop.html"><strong aria-hidden="true">4.</strong> 进阶教程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04_2_low_level_io.html"><strong aria-hidden="true">4.1.</strong> 底层 I/O</a></li><li class="chapter-item expanded "><a href="04_3_0_i2c.html"><strong aria-hidden="true">4.2.</strong> I2C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04_3_1_i2c.html"><strong aria-hidden="true">4.2.1.</strong> 读取传感器</a></li><li class="chapter-item expanded "><a href="04_3_2_i2c.html"><strong aria-hidden="true">4.2.2.</strong> 编写驱动 - 简单版</a></li><li class="chapter-item expanded "><a href="04_3_3_i2c.html"><strong aria-hidden="true">4.2.3.</strong> 编写驱动 - 困难版</a></li></ol></li><li class="chapter-item expanded "><a href="04_4_0_interrupts.html"><strong aria-hidden="true">4.3.</strong> 中断</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04_4_1_interrupts.html"><strong aria-hidden="true">4.3.1.</strong> 基本的中断处理程序</a></li><li class="chapter-item expanded "><a href="04_4_2_interrupts.html"><strong aria-hidden="true">4.3.2.</strong> 随机 LED 颜色</a></li><li class="chapter-item expanded "><a href="04_4_3_interrupts.html"><strong aria-hidden="true">4.3.3.</strong> 解答</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="05_reference.html"><strong aria-hidden="true">5.</strong> 参考资料</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust on Espressif 简体中文版</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Narukara/std-training-zh-cn" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="http-客户端"><a class="header" href="#http-客户端">HTTP 客户端</a></h1>
+<p>本练习的目标是编写一个能够连接网站的小型 HTTP 客户端。</p>
+<h2 id="配置"><a class="header" href="#配置">配置</a></h2>
+<p>✅ 进入 <code>intro/http-client</code> 目录。</p>
+<p>✅ 打开 <code>intro/http-client</code> 中已准备好的项目框架。</p>
+<p>✅ 将你的<a href="02_4_hello_board.html">网络凭据</a>加到 <code>cfg.toml</code> 中，就像在硬件测试中做的那样。</p>
+<p>✅ 用下面的命令打开此项目的文档：</p>
+<pre><code class="language-console">cargo doc --open
+</code></pre>
+<p><code>intro/http-client/examples/http_client.rs</code> 包含解答。你可以用下面的命令运行它：</p>
+<pre><code class="language-console">cargo run --example http_client
+</code></pre>
+<h2 id="建立连接"><a class="header" href="#建立连接">建立连接</a></h2>
+<p>默认只能使用未加密的 HTTP，这限制了我们能连接到的主机。因此我们将使用 <code>http://neverssl.com/</code>。</p>
+<p>在 ESP-IDF 中，HTTP 客户端连接由 <code>esp-idf-svc</code> crate 中的 <code>http::client::EspHttpClient</code> 管理。它实现了 <code>embedded-svc</code> 中的 <code>http::client::Client</code> trait，定义了 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">HTTP 请求方法</a>（如 <code>GET</code> 或 <code>POST</code>）使用的函数。现在正是查看你用 <code>cargo doc --open</code> 打开的文档的好时机，查看其中 <code>esp_idf_svc::http::client::EspHttpConnection</code> 和 <code>embedded_svc::http::client::Client</code> 相关的内容，以及可以使用的实例化方法。</p>
+<p>✅ 用默认配置创建一个 <code>EspHttpConnection</code>。到文档里找一个合适的构造方法。</p>
+<p>✅ 从刚刚创建的 connection 里获取一个 client。</p>
+<p>在 client 上调用 HTTP 函数（例如 <code>get(url)</code>）会返回一个 <code>embedded_svc::http::client::Request</code>。你需要提交（submit）它来表示 client 在发送请求附带的选项。</p>
+<p><code>get</code> 函数使用 <a href="https://doc.rust-lang.org/std/convert/trait.AsRef.html">as_ref()</a>。这意味着该函数可以接受任何实现 <code>AsRef&lt;str&gt;</code> trait 的类型，即任何可以调用 <code>.as_ref()</code> 产生 <code>&amp;str</code> 的类型，而不是仅限于某种特定类型，例如 <code>String</code> 或 <code>&amp;str</code>。这适用于 <code>String</code> 和 <code>&amp;str</code>，也适用于包含前两种类型的 <code>Cow&lt;str&gt;</code> 枚举类型。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let request = client.request(Method::Get, url.as_ref(), &amp;headers)?;
+<span class="boring">}
+</span></code></pre></pre>
+<p>成功的响应具有 <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">2xx 范围内的状态码</a>。紧随其后的是网站的原始 html。</p>
+<p>✅ 检验连接是否成功。</p>
+<p>✅ 如果状态码不在 2xx 范围内，返回一个错误。</p>
+<pre><pre class="playground"><code class="language-rust edition2021">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match status {
+        200..=299 =&gt; {
+        }
+        _ =&gt; bail!(&quot;Unexpected response code: {}&quot;, status),
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>状态码错误可以用 <a href="https://docs.rs/anyhow/latest/anyhow/index.html">Anyhow</a> crate 返回。<code>Anyhow</code> 常被用于简化应用程序中的错误处理，它提供了一个通用的 <code>anyhow::Result&lt;T&gt;</code>，将成功（<code>Ok</code>）情况包装在 T 中，而且无需指定 Err 类型，只要求你返回的每个错误都实现了 <code>std::error::Error</code>。</p>
+<p>✅ 使用 <code>Read::read(&amp;mut reader,&amp;mut buf)</code> 将接收到的数据逐块地读取到 <code>u8</code> 缓冲区中。<code>Read::read</code> 会返回读取的字节数——当这个值为 <code>0</code> 时就完成了读取。</p>
+<p>✅ 报告读取的总字节数。</p>
+<p>✅ 把接收到的数据记录到控制台上。
+💡 响应数据以字节的形式存储在缓冲区内，所以你可能需要<a href="https://doc.rust-lang.org/std/str/fn.from_utf8.html">一个方法</a>来把字节转换为 <code>&amp;str</code>。</p>
+<h2 id="额外的任务"><a class="header" href="#额外的任务">额外的任务</a></h2>
+<p>✅ 在 match 分支里分别处理 3xx、4xx 和 5xx 状态码</p>
+<p>✅ 编写一个自定义的 <code>Error</code> 枚举来表示这些错误。为这个错误实现 <code>std::error::Error</code> trait。</p>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<ul>
+<li><code>missing WiFi name/password</code>：确保你已根据 <code>cfg.toml.example</code> 配置了 <code>cfg.toml</code>。一个常见的问题是包名和配置中的 section 名称不匹配。</li>
+</ul>
+<pre><code class="language-toml"># Cargo.toml
+#...
+[package]
+name = &quot;http-client&quot;
+#...
+
+# cfg.toml
+[http-client]
+wifi_ssid = &quot;...&quot;
+wifi_psk = &quot;...&quot;
+</code></pre>
+<ul>
+<li><code>Guru Meditation Error: Core 0 panic'ed (Load access fault). Exception was unhandled.</code>
+这可能是由你的代码中的 <code>.unwrap()</code> 引起的。试试用问号运算符替代它们。</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="03_3_1_http_https_client.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="03_3_3_https_client.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="03_3_1_http_https_client.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="03_3_3_https_client.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
